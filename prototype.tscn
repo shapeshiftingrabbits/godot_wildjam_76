@@ -1,15 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=6 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Texture2D" uid="uid://bt043n8scsipo" path="res://icon.svg" id="1_aq8cg"]
+[ext_resource type="Script" path="res://scripts/move.gd" id="1_xoidt"]
+[ext_resource type="Texture2D" uid="uid://bb76chblox1qy" path="res://textures/grassMid.png" id="3_we4ca"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6eaqc"]
+radius = 37.0
+height = 74.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24u1r"]
+size = Vector2(1100, 74)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(73, 580)
+script = ExtResource("1_xoidt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CapsuleShape2D_6eaqc")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_aq8cg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 644)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(540, 37)
+shape = SubResource("RectangleShape2D_24u1r")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture_repeat = 2
+position = Vector2(539.5, 36)
+scale = Vector2(15.742, 1.1)
+texture = ExtResource("3_we4ca")
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 70)
