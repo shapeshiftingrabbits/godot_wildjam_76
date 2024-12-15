@@ -4,6 +4,7 @@ class_name AnnounceCommands
 
 @onready var instructions: Instructions = %Instructions
 @onready var timer: Timer = $Timer
+@onready var check_player_movement: CheckPlayerMovement = $"../CheckPlayerMovement"
 
 
 func start_game():
@@ -12,6 +13,7 @@ func start_game():
 
 
 func _on_timer_timeout() -> void:
+	#print(check_player_movement.is_player_frozen())
 	instructions.swap_command()
 
 

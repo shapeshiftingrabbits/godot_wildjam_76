@@ -1,12 +1,16 @@
 extends CharacterBody2D
 
-
+class_name Player
 const SPEED = 300.0
 @export var JUMP_VELOCITY: float = -800.0
 
+var is_control_on: bool = true
 
 
 func _physics_process(delta: float) -> void:
+	if !is_control_on:
+		return
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
