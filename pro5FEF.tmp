@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=18 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Texture2D" uid="uid://bt043n8scsipo" path="res://icon.svg" id="1_aq8cg"]
 [ext_resource type="Script" path="res://scripts/move.gd" id="1_xoidt"]
@@ -24,10 +24,7 @@ size = Vector2(60, 720)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71hhf"]
 size = Vector2(2160, 80)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xdvd"]
-size = Vector2(20, 60)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_saorr"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_or7rr"]
 size = Vector2(20, 60)
 
 [node name="Node2D" type="Node2D"]
@@ -71,41 +68,41 @@ texture = ExtResource("3_we4ca")
 region_enabled = true
 region_rect = Rect2(0, 0, 70, 70)
 
-[node name="DetectFinishLineReached" type="Node" parent="."]
-script = ExtResource("6_to2lt")
-
-[node name="FinishLineArea2D" type="Area2D" parent="DetectFinishLineReached"]
+[node name="FinishLineArea2D" type="Area2D" parent="."]
 position = Vector2(1013, 572)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectFinishLineReached/FinishLineArea2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLineArea2D"]
 scale = Vector2(-4.61429, -2.53186)
-shape = SubResource("RectangleShape2D_7xdvd")
+shape = SubResource("RectangleShape2D_or7rr")
 
-[node name="LollipopBaseBrown" type="Sprite2D" parent="DetectFinishLineReached/FinishLineArea2D"]
+[node name="LollipopBaseBrown" type="Sprite2D" parent="FinishLineArea2D"]
 position = Vector2(-2, 34)
 texture = ExtResource("6_1swtq")
 
-[node name="LollipopFruitGreen" type="Sprite2D" parent="DetectFinishLineReached/FinishLineArea2D"]
+[node name="LollipopFruitGreen" type="Sprite2D" parent="FinishLineArea2D"]
 position = Vector2(-2, -37)
 texture = ExtResource("7_60v0s")
 
-[node name="DetectStartingLineReached" type="Node" parent="."]
-script = ExtResource("8_ouh8i")
-
-[node name="StartingLineArea2D" type="Area2D" parent="DetectStartingLineReached"]
+[node name="StartingLineArea2D" type="Area2D" parent="."]
 position = Vector2(207, 570)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectStartingLineReached/StartingLineArea2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartingLineArea2D"]
 scale = Vector2(-4.61429, -2.53186)
-shape = SubResource("RectangleShape2D_saorr")
+shape = SubResource("RectangleShape2D_or7rr")
 
-[node name="LollipopBaseBrown" type="Sprite2D" parent="DetectStartingLineReached/StartingLineArea2D"]
+[node name="LollipopBaseBrown" type="Sprite2D" parent="StartingLineArea2D"]
 position = Vector2(-2, 34)
 texture = ExtResource("6_1swtq")
 
-[node name="LollipopFruitGreen" type="Sprite2D" parent="DetectStartingLineReached/StartingLineArea2D"]
+[node name="LollipopFruitGreen" type="Sprite2D" parent="StartingLineArea2D"]
 position = Vector2(-2, -37)
 texture = ExtResource("7_bwe1x")
+
+[node name="DetectFinishLineReached" type="Node" parent="."]
+script = ExtResource("6_to2lt")
+
+[node name="DetectStartingLineReached" type="Node" parent="."]
+script = ExtResource("8_ouh8i")
 
 [node name="Control" type="Control" parent="."]
 custom_minimum_size = Vector2(1080, 720)
@@ -128,7 +125,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 
 [node name="Instructions" type="VBoxContainer" parent="Control/PanelContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -170,8 +166,6 @@ script = ExtResource("13_d88ly")
 [node name="Timer" type="Timer" parent="AnnounceCommands"]
 wait_time = 2.0
 
-[connection signal="finished_line_reached" from="DetectFinishLineReached" to="AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
-[connection signal="body_entered" from="DetectFinishLineReached/FinishLineArea2D" to="DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
-[connection signal="entered_play_area" from="DetectStartingLineReached" to="AnnounceCommands" method="_on_detect_starting_line_reached_entered_play_area"]
-[connection signal="body_entered" from="DetectStartingLineReached/StartingLineArea2D" to="DetectStartingLineReached" method="_on_starting_line_area_2d_body_entered"]
+[connection signal="body_entered" from="FinishLineArea2D" to="DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
+[connection signal="body_entered" from="StartingLineArea2D" to="DetectStartingLineReached" method="_on_starting_line_area_2d_body_entered"]
 [connection signal="timeout" from="AnnounceCommands/Timer" to="AnnounceCommands" method="_on_timer_timeout"]
