@@ -1,11 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=17 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Texture2D" uid="uid://bt043n8scsipo" path="res://icon.svg" id="1_aq8cg"]
 [ext_resource type="Script" path="res://scripts/move.gd" id="1_xoidt"]
 [ext_resource type="Texture2D" uid="uid://bb76chblox1qy" path="res://textures/grassMid.png" id="3_we4ca"]
 [ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="4_7quu1"]
 [ext_resource type="Texture2D" uid="uid://xhvgmbx5lfvs" path="res://textures/grassCenter.png" id="4_hv57n"]
+[ext_resource type="Texture2D" uid="uid://cd053hfja0sbd" path="res://textures/lollipopBaseBrown.png" id="6_1swtq"]
 [ext_resource type="Script" path="res://scripts/detect_finish_line_reached.gd" id="6_to2lt"]
+[ext_resource type="Texture2D" uid="uid://c1s74jb6f2sxq" path="res://textures/lollipopFruitGreen.png" id="7_60v0s"]
+[ext_resource type="Texture2D" uid="uid://c4rub87ujlihk" path="res://textures/lollipopFruitYellow.png" id="7_bwe1x"]
+[ext_resource type="Texture2D" uid="uid://csn7lhln11087" path="res://textures/flagGreen2.png" id="8_06u38"]
+[ext_resource type="Script" path="res://scripts/detect_starting_line_reached.gd" id="8_ouh8i"]
+[ext_resource type="Script" path="res://scripts/instructions.gd" id="8_sdu8k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6eaqc"]
 radius = 37.0
@@ -62,16 +68,96 @@ region_enabled = true
 region_rect = Rect2(0, 0, 70, 70)
 
 [node name="FinishLineArea2D" type="Area2D" parent="."]
-position = Vector2(1048, 609)
-
-[node name="FlagRed" type="Sprite2D" parent="FinishLineArea2D"]
-texture = ExtResource("4_7quu1")
+position = Vector2(1013, 572)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLineArea2D"]
 scale = Vector2(-4.61429, -2.53186)
 shape = SubResource("RectangleShape2D_or7rr")
 
+[node name="LollipopBaseBrown" type="Sprite2D" parent="FinishLineArea2D"]
+position = Vector2(-2, 34)
+texture = ExtResource("6_1swtq")
+
+[node name="LollipopFruitGreen" type="Sprite2D" parent="FinishLineArea2D"]
+position = Vector2(-2, -37)
+texture = ExtResource("7_60v0s")
+
+[node name="StartingLineArea2D" type="Area2D" parent="."]
+position = Vector2(207, 570)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartingLineArea2D"]
+scale = Vector2(-4.61429, -2.53186)
+shape = SubResource("RectangleShape2D_or7rr")
+
+[node name="LollipopBaseBrown" type="Sprite2D" parent="StartingLineArea2D"]
+position = Vector2(-2, 34)
+texture = ExtResource("6_1swtq")
+
+[node name="LollipopFruitGreen" type="Sprite2D" parent="StartingLineArea2D"]
+position = Vector2(-2, -37)
+texture = ExtResource("7_bwe1x")
+
 [node name="DetectFinishLineReached" type="Node" parent="."]
 script = ExtResource("6_to2lt")
 
+[node name="DetectStartingLineReached" type="Node" parent="."]
+script = ExtResource("8_ouh8i")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(1080, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 2.0
+offset_bottom = 146.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Instructions" type="VBoxContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+script = ExtResource("8_sdu8k")
+
+[node name="GoInstruction" type="HBoxContainer" parent="Control/PanelContainer/Instructions"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="Control/PanelContainer/Instructions/GoInstruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Go !"
+
+[node name="TextureRect" type="TextureRect" parent="Control/PanelContainer/Instructions/GoInstruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("8_06u38")
+
+[node name="StopInstruction" type="HBoxContainer" parent="Control/PanelContainer/Instructions"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="Control/PanelContainer/Instructions/StopInstruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stop!"
+
+[node name="TextureRect" type="TextureRect" parent="Control/PanelContainer/Instructions/StopInstruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("4_7quu1")
+
 [connection signal="body_entered" from="FinishLineArea2D" to="DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
+[connection signal="body_entered" from="StartingLineArea2D" to="DetectStartingLineReached" method="_on_starting_line_area_2d_body_entered"]
