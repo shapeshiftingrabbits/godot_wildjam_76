@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bb76chblox1qy" path="res://textures/grassMid.png" id="3_we4ca"]
 [ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="4_7quu1"]
 [ext_resource type="Texture2D" uid="uid://xhvgmbx5lfvs" path="res://textures/grassCenter.png" id="4_hv57n"]
-[ext_resource type="Texture2D" uid="uid://35n1dsp0rogv" path="res://pokerMad.png" id="4_u55yo"]
+[ext_resource type="Texture2D" uid="uid://35n1dsp0rogv" path="res://textures/pokerMad.png" id="4_u55yo"]
 [ext_resource type="Texture2D" uid="uid://cd053hfja0sbd" path="res://textures/lollipopBaseBrown.png" id="6_1swtq"]
 [ext_resource type="Script" path="res://scripts/detect_finish_line_reached.gd" id="6_to2lt"]
 [ext_resource type="Texture2D" uid="uid://c1s74jb6f2sxq" path="res://textures/lollipopFruitGreen.png" id="7_60v0s"]
