@@ -24,14 +24,14 @@ shape = SubResource("CapsuleShape2D_6eaqc")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_aq8cg")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="FloorStaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 644)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorStaticBody2D"]
 position = Vector2(540, 37)
 shape = SubResource("RectangleShape2D_24u1r")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="FloorStaticBody2D"]
 texture_repeat = 2
 position = Vector2(539.5, 36)
 scale = Vector2(15.742, 1.1)
