@@ -1,15 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=10 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Texture2D" uid="uid://bt043n8scsipo" path="res://icon.svg" id="1_aq8cg"]
 [ext_resource type="Script" path="res://scripts/move.gd" id="1_xoidt"]
 [ext_resource type="Texture2D" uid="uid://bb76chblox1qy" path="res://textures/grassMid.png" id="3_we4ca"]
+[ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="4_7quu1"]
+[ext_resource type="Texture2D" uid="uid://xhvgmbx5lfvs" path="res://textures/grassCenter.png" id="4_hv57n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6eaqc"]
 radius = 37.0
 height = 74.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24u1r"]
-size = Vector2(1100, 74)
+size = Vector2(60, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71hhf"]
+size = Vector2(2160, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_or7rr"]
+size = Vector2(20, 60)
 
 [node name="Node2D" type="Node2D"]
 
@@ -24,17 +32,40 @@ shape = SubResource("CapsuleShape2D_6eaqc")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_aq8cg")
 
+[node name="WallStaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallStaticBody2D"]
+shape = SubResource("RectangleShape2D_24u1r")
+
+[node name="Sprite2D" type="Sprite2D" parent="WallStaticBody2D"]
+texture_repeat = 2
+scale = Vector2(1, 25)
+texture = ExtResource("4_hv57n")
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 70)
+
 [node name="FloorStaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 644)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorStaticBody2D"]
-position = Vector2(540, 37)
-shape = SubResource("RectangleShape2D_24u1r")
+position = Vector2(539.5, 35.5)
+shape = SubResource("RectangleShape2D_71hhf")
 
 [node name="Sprite2D" type="Sprite2D" parent="FloorStaticBody2D"]
 texture_repeat = 2
 position = Vector2(539.5, 36)
-scale = Vector2(15.742, 1.1)
+scale = Vector2(25.6411, 1.1)
 texture = ExtResource("3_we4ca")
 region_enabled = true
 region_rect = Rect2(0, 0, 70, 70)
+
+[node name="FinishLineArea2D" type="Area2D" parent="."]
+position = Vector2(1048, 609)
+
+[node name="FlagRed" type="Sprite2D" parent="FinishLineArea2D"]
+texture = ExtResource("4_7quu1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLineArea2D"]
+scale = Vector2(-4.61429, -2.53186)
+shape = SubResource("RectangleShape2D_or7rr")
