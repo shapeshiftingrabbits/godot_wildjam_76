@@ -21,6 +21,10 @@ window/size/viewport_height=720
 window/size/resizable=false
 window/stretch/mode="viewport"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
+
 [input]
 
 move_left={
