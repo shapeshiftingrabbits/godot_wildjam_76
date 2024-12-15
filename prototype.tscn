@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=11 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Texture2D" uid="uid://bt043n8scsipo" path="res://icon.svg" id="1_aq8cg"]
 [ext_resource type="Script" path="res://scripts/move.gd" id="1_xoidt"]
 [ext_resource type="Texture2D" uid="uid://bb76chblox1qy" path="res://textures/grassMid.png" id="3_we4ca"]
 [ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="4_7quu1"]
 [ext_resource type="Texture2D" uid="uid://xhvgmbx5lfvs" path="res://textures/grassCenter.png" id="4_hv57n"]
+[ext_resource type="Script" path="res://scripts/detect_finish_line_reached.gd" id="6_to2lt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6eaqc"]
 radius = 37.0
@@ -21,7 +22,7 @@ size = Vector2(20, 60)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(73, 580)
 script = ExtResource("1_xoidt")
 
@@ -69,3 +70,8 @@ texture = ExtResource("4_7quu1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLineArea2D"]
 scale = Vector2(-4.61429, -2.53186)
 shape = SubResource("RectangleShape2D_or7rr")
+
+[node name="DetectFinishLineReached" type="Node" parent="."]
+script = ExtResource("6_to2lt")
+
+[connection signal="body_entered" from="FinishLineArea2D" to="DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
