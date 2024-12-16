@@ -3,6 +3,7 @@ extends Node
 class_name MoveCharacterBack
 
 signal player_is_moved_back
+signal end_move_back
 
 @export var jump_time: float = 1.0
 @onready var sprite_2d: Sprite2D = $"../Sprite2D"
@@ -18,10 +19,10 @@ func _on_check_player_movement_player_has_moved() -> void:
 	player_is_moved_back.emit()
 	await get_tree().create_timer(jump_time).timeout
 	turn_off()
+	end_move_back.emit()
 
 
 func turn_on():
-	sprite_2d.rotate(PI)
 	has_been_thrown_in_air = false
 	is_moving_back = true
 	player.is_control_on = false
@@ -31,7 +32,6 @@ func turn_on():
 func turn_off():
 	is_moving_back = false
 	player.is_control_on = true
-	sprite_2d.rotate(-PI)
 	pass
 
 

@@ -1,7 +1,14 @@
 extends CharacterBody2D
 
+
 class_name Player
+
+signal running
+signal stopped
+signal jumping
+
 const SPEED = 300.0
+
 @export var JUMP_VELOCITY: float = -800.0
 
 var is_control_on: bool = true
