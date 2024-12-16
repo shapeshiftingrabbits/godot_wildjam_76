@@ -7,13 +7,14 @@ class_name AnnounceCommands
 @onready var state_chart: StateChart = $"../StateChart"
 
 
-
 func _on_detect_starting_line_reached_entered_play_area() -> void:
 	start_game()
+
 
 func start_game():
 	state_chart.send_event(&"started")
 	timer.start()
+
 
 func _on_timer_timeout() -> void:
 	state_chart.send_event(&"next")

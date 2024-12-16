@@ -30,5 +30,5 @@ func _on_stop_state_state_entered() -> void:
 	warning_instruction.hide()
 
 
-func _on_idle_state_state_entered() -> void:
+func _on_ended_state_state_entered() -> void:
 	hide()

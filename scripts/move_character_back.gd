@@ -6,7 +6,6 @@ signal player_is_moved_back
 signal end_move_back
 
 @export var jump_time: float = 1.0
-@onready var sprite_2d: Sprite2D = $"../Sprite2D"
 
 @onready var player: Player = $".."
 

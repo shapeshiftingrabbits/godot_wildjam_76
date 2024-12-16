@@ -193,9 +193,6 @@ script = ExtResource("1_xoidt")
 position = Vector2(0, 15)
 shape = SubResource("RectangleShape2D_qrfrj")
 
-[node name="MoveCharacterBack" type="Node" parent="Player"]
-script = ExtResource("3_0cdfv")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 libraries = {
 "": SubResource("AnimationLibrary_djn3v")
@@ -218,6 +215,12 @@ clip_children = 1
 position = Vector2(1, 4)
 scale = Vector2(96, 120)
 texture = SubResource("CanvasTexture_qxxqq")
+
+[node name="CheckPlayerMovement" type="Node" parent="Player"]
+script = ExtResource("14_yfcr8")
+
+[node name="MoveCharacterBack" type="Node" parent="Player"]
+script = ExtResource("3_0cdfv")
 
 [node name="HandleCharacterOrientation" type="Node" parent="Player"]
 script = ExtResource("4_kanht")
@@ -317,9 +320,6 @@ script = ExtResource("20_nrba1")
 to = NodePath("../../ShovedBack")
 guard = ExtResource("9_gs72s")
 delay_in_seconds = "0.0"
-
-[node name="CheckPlayerMovement" type="Node" parent="Player"]
-script = ExtResource("14_yfcr8")
 
 [node name="Punisher" type="Sprite2D" parent="."]
 position = Vector2(73, 1068)
@@ -476,16 +476,18 @@ size_flags_horizontal = 8
 texture = ExtResource("14_ijdch")
 
 [node name="StateChartDebugger" parent="Level2/HUD" instance=ExtResource("1_2xc5i")]
-visible = false
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
-offset_left = -18.0
+offset_left = 1680.0
+offset_top = 16.0
+offset_right = 1980.0
+offset_bottom = 16.0
 grow_horizontal = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-initial_node_to_watch = NodePath("../../../Player/StateChart")
+initial_node_to_watch = NodePath("../../StateChart")
 
 [node name="TriggerEnteredLevel" type="Area2D" parent="Level2"]
 position = Vector2(126, 985)
@@ -588,6 +590,12 @@ delay_in_seconds = "0.0"
 [node name="GoState" type="Node" parent="Level2/StateChart/CompoundState"]
 script = ExtResource("19_257rj")
 
+[node name="ToEndState" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../EndedState")
+event = &"ended"
+delay_in_seconds = "0.0"
+
 [node name="ToIdleState" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
 script = ExtResource("20_nrba1")
 to = NodePath("../../IdleState")
@@ -602,6 +610,12 @@ delay_in_seconds = "0.0"
 
 [node name="WarningState" type="Node" parent="Level2/StateChart/CompoundState"]
 script = ExtResource("19_257rj")
+
+[node name="ToEndState" type="Node" parent="Level2/StateChart/CompoundState/WarningState"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../EndedState")
+event = &"ended"
+delay_in_seconds = "0.0"
 
 [node name="ToStopTransition" type="Node" parent="Level2/StateChart/CompoundState/WarningState"]
 script = ExtResource("20_nrba1")
@@ -626,7 +640,7 @@ delay_in_seconds = "0.0"
 
 [node name="ToEndState" type="Node" parent="Level2/StateChart/CompoundState/StopState"]
 script = ExtResource("20_nrba1")
-to = NodePath("../../IdleState")
+to = NodePath("../../EndedState")
 event = &"ended"
 delay_in_seconds = "0.0"
 
@@ -634,12 +648,12 @@ delay_in_seconds = "0.0"
 script = ExtResource("19_257rj")
 
 [connection signal="pressed" from="Button" to="Camera2D" method="_on_button_pressed"]
+[connection signal="player_has_moved" from="Player/CheckPlayerMovement" to="Player/MoveCharacterBack" method="_on_check_player_movement_player_has_moved"]
 [connection signal="end_move_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_end_move_back"]
 [connection signal="player_is_moved_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_player_is_moved_back"]
 [connection signal="player_is_moved_back" from="Player/MoveCharacterBack" to="Punisher" method="_on_move_character_back_player_is_moved_back"]
 [connection signal="state_physics_processing" from="Player/StateChart/CompoundState/Walk" to="Player/HandleCharacterOrientation" method="_on_walk_state_physics_processing"]
 [connection signal="state_physics_processing" from="Player/StateChart/CompoundState/Jump" to="Player/HandleCharacterOrientation" method="_on_jump_state_physics_processing"]
-[connection signal="player_has_moved" from="Player/CheckPlayerMovement" to="Player/MoveCharacterBack" method="_on_check_player_movement_player_has_moved"]
 [connection signal="body_entered" from="Level1/TriggerMoveToNextLevel" to="Level1/TriggerMoveToNextLevel/MoveToNextLevel" method="_on_trigger_move_to_next_level_body_entered"]
 [connection signal="body_exited" from="Level1/TriggerMoveToNextLevel" to="Camera2D" method="_on_trigger_move_to_next_level_body_exited"]
 [connection signal="body_entered" from="Level2/TriggerEnteredLevel" to="Level2/TriggerEnteredLevel/PlayerArrivedInLevel" method="_on_trigger_entered_level_body_entered"]
@@ -652,3 +666,5 @@ script = ExtResource("19_257rj")
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState" to="Level2/HUD/PanelContainer/Instructions" method="_on_go_state_state_entered"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/WarningState" to="Level2/HUD/PanelContainer/Instructions" method="_on_warning_state_state_entered"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/StopState" to="Level2/HUD/PanelContainer/Instructions" method="_on_stop_state_state_entered"]
+[connection signal="state_physics_processing" from="Level2/StateChart/CompoundState/StopState" to="Player/CheckPlayerMovement" method="_on_stop_state_state_physics_processing"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/HUD/PanelContainer/Instructions" method="_on_ended_state_state_entered"]
