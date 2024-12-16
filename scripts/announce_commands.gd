@@ -4,7 +4,6 @@ class_name AnnounceCommands
 
 @onready var instructions: Instructions = %Instructions
 @onready var timer: Timer = $Timer
-@onready var check_player_movement: CheckPlayerMovement = $"../CheckPlayerMovement"
 @onready var state_chart: StateChart = $"../StateChart"
 
 
@@ -22,4 +21,4 @@ func _on_timer_timeout() -> void:
 
 func _on_detect_finish_line_reached_finished_line_reached() -> void:
 	timer.stop()
-	state_chart.send_event(&"idled")
+	state_chart.send_event(&"ended")

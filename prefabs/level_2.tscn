@@ -1,0 +1,285 @@
+[gd_scene load_steps=24 format=3 uid="uid://4a61uivwi7wm"]
+
+[ext_resource type="Script" path="res://scripts/instructions.gd" id="1_akimj"]
+[ext_resource type="Texture2D" uid="uid://csn7lhln11087" path="res://textures/flagGreen2.png" id="2_3y8s5"]
+[ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="3_8toib"]
+[ext_resource type="Texture2D" uid="uid://biqwgtxxx2ee5" path="res://textures/flagYellow.png" id="4_tgp7u"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="5_46ovg"]
+[ext_resource type="Script" path="res://scripts/player_arrived_in_level.gd" id="6_v0tqd"]
+[ext_resource type="Texture2D" uid="uid://cd053hfja0sbd" path="res://textures/lollipopBaseBrown.png" id="7_rvpxo"]
+[ext_resource type="Texture2D" uid="uid://c4rub87ujlihk" path="res://textures/lollipopFruitYellow.png" id="8_5iy1h"]
+[ext_resource type="Script" path="res://scripts/detect_starting_line_reached.gd" id="9_hn0pf"]
+[ext_resource type="Texture2D" uid="uid://c1s74jb6f2sxq" path="res://textures/lollipopFruitGreen.png" id="10_gsmnv"]
+[ext_resource type="Script" path="res://scripts/detect_finish_line_reached.gd" id="11_w1lvj"]
+[ext_resource type="Texture2D" uid="uid://bb76chblox1qy" path="res://textures/grassMid.png" id="12_bo3hm"]
+[ext_resource type="Texture2D" uid="uid://xhvgmbx5lfvs" path="res://textures/grassCenter.png" id="13_scuhw"]
+[ext_resource type="Script" path="res://scripts/announce_commands.gd" id="14_3ls88"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="15_p3hr2"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="16_3o8ud"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="17_ive1c"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="18_g6a8h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k56t8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_saorr"]
+size = Vector2(18.8854, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xdvd"]
+size = Vector2(20, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71hhf"]
+size = Vector2(2160, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dviuj"]
+size = Vector2(40, 1080)
+
+[node name="Level2" type="Node2D"]
+visible = false
+position = Vector2(1917, 0)
+
+[node name="HUD" type="Control" parent="."]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1992.0
+offset_top = 1.0
+offset_right = -72.0
+offset_bottom = 1081.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 1867.0
+offset_top = 80.0
+offset_right = 2067.0
+offset_bottom = 298.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Instructions" type="VBoxContainer" parent="HUD/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+script = ExtResource("1_akimj")
+
+[node name="GoInstruction" type="HBoxContainer" parent="HUD/PanelContainer/Instructions"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="HUD/PanelContainer/Instructions/GoInstruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Go !"
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PanelContainer/Instructions/GoInstruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("2_3y8s5")
+
+[node name="StopInstruction" type="HBoxContainer" parent="HUD/PanelContainer/Instructions"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="HUD/PanelContainer/Instructions/StopInstruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stop!"
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PanelContainer/Instructions/StopInstruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("3_8toib")
+
+[node name="WarningInstruction" type="HBoxContainer" parent="HUD/PanelContainer/Instructions"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="HUD/PanelContainer/Instructions/WarningInstruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Prepare to stop
+"
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PanelContainer/Instructions/WarningInstruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("4_tgp7u")
+
+[node name="StateChartDebugger" parent="HUD" instance=ExtResource("5_46ovg")]
+visible = false
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+offset_left = -18.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+initial_node_to_watch = NodePath("../../../Player/StateChart")
+
+[node name="TriggerEnteredLevel" type="Area2D" parent="."]
+position = Vector2(126, 985)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerEnteredLevel"]
+shape = SubResource("RectangleShape2D_k56t8")
+
+[node name="PlayerArrivedInLevel" type="Node" parent="TriggerEnteredLevel" node_paths=PackedStringArray("target_collider")]
+script = ExtResource("6_v0tqd")
+target_collider = NodePath("")
+
+[node name="StartingLineArea2D" type="Area2D" parent="."]
+position = Vector2(419, 918)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartingLineArea2D"]
+position = Vector2(44, -3)
+rotation = 3.14159
+scale = Vector2(4.61429, 2.53186)
+shape = SubResource("RectangleShape2D_saorr")
+
+[node name="LollipopBaseBrown" type="Sprite2D" parent="StartingLineArea2D"]
+position = Vector2(-2, 34)
+texture = ExtResource("7_rvpxo")
+
+[node name="LollipopFruitGreen" type="Sprite2D" parent="StartingLineArea2D"]
+position = Vector2(-2, -37)
+texture = ExtResource("8_5iy1h")
+
+[node name="DetectStartingLineReached" type="Node" parent="StartingLineArea2D"]
+script = ExtResource("9_hn0pf")
+
+[node name="FinishLineArea2D" type="Area2D" parent="."]
+position = Vector2(1326, 916)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLineArea2D"]
+position = Vector2(39, -3)
+scale = Vector2(-4.61429, -2.53186)
+shape = SubResource("RectangleShape2D_7xdvd")
+
+[node name="LollipopBaseBrown" type="Sprite2D" parent="FinishLineArea2D"]
+position = Vector2(-2, 34)
+texture = ExtResource("7_rvpxo")
+
+[node name="LollipopFruitGreen" type="Sprite2D" parent="FinishLineArea2D"]
+position = Vector2(-2, -37)
+texture = ExtResource("10_gsmnv")
+
+[node name="DetectFinishLineReached" type="Node" parent="FinishLineArea2D"]
+script = ExtResource("11_w1lvj")
+
+[node name="FloorStaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(417, 1000)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorStaticBody2D"]
+position = Vector2(538, 38)
+shape = SubResource("RectangleShape2D_71hhf")
+
+[node name="Sprite2D" type="Sprite2D" parent="FloorStaticBody2D"]
+texture_repeat = 2
+position = Vector2(540, 37)
+scale = Vector2(27.972, 1.2)
+texture = ExtResource("12_bo3hm")
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 70)
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1920, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_dviuj")
+
+[node name="Sprite2D" type="Sprite2D" parent="RightWall"]
+texture_repeat = 2
+scale = Vector2(0.812, 20.295)
+texture = ExtResource("13_scuhw")
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 70)
+
+[node name="AnnounceCommands" type="Node" parent="."]
+script = ExtResource("14_3ls88")
+
+[node name="Timer" type="Timer" parent="AnnounceCommands"]
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("15_p3hr2")
+
+[node name="CompoundState" type="Node" parent="StateChart"]
+script = ExtResource("16_3o8ud")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("17_ive1c")
+
+[node name="ToGoState" type="Node" parent="StateChart/CompoundState/IdleState"]
+script = ExtResource("18_g6a8h")
+to = NodePath("../../GoState")
+event = &"started"
+delay_in_seconds = "0.0"
+
+[node name="GoState" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("17_ive1c")
+
+[node name="ToIdleState" type="Node" parent="StateChart/CompoundState/GoState"]
+script = ExtResource("18_g6a8h")
+to = NodePath("../../IdleState")
+event = &"idled"
+delay_in_seconds = "0.0"
+
+[node name="ToWarning" type="Node" parent="StateChart/CompoundState/GoState"]
+script = ExtResource("18_g6a8h")
+to = NodePath("../../WarningState")
+event = &"next"
+delay_in_seconds = "0.0"
+
+[node name="WarningState" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("17_ive1c")
+
+[node name="ToStopTransition" type="Node" parent="StateChart/CompoundState/WarningState"]
+script = ExtResource("18_g6a8h")
+to = NodePath("../../StopState")
+event = &"next"
+delay_in_seconds = "0.0"
+
+[node name="ToIdleState" type="Node" parent="StateChart/CompoundState/WarningState"]
+script = ExtResource("18_g6a8h")
+to = NodePath("../../IdleState")
+event = &"idled"
+delay_in_seconds = "0.0"
+
+[node name="StopState" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("17_ive1c")
+
+[node name="ToGoState" type="Node" parent="StateChart/CompoundState/StopState"]
+script = ExtResource("18_g6a8h")
+to = NodePath("../../GoState")
+event = &"next"
+delay_in_seconds = "0.0"
+
+[node name="ToEndState" type="Node" parent="StateChart/CompoundState/StopState"]
+script = ExtResource("18_g6a8h")
+to = NodePath("../../IdleState")
+event = &"ended"
+delay_in_seconds = "0.0"
+
+[node name="EndedState" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("17_ive1c")
+
+[connection signal="body_entered" from="StartingLineArea2D" to="StartingLineArea2D/DetectStartingLineReached" method="_on_starting_line_area_2d_body_entered"]
+[connection signal="entered_play_area" from="StartingLineArea2D/DetectStartingLineReached" to="AnnounceCommands" method="_on_detect_starting_line_reached_entered_play_area"]
+[connection signal="body_entered" from="FinishLineArea2D" to="FinishLineArea2D/DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
+[connection signal="finished_line_reached" from="FinishLineArea2D/DetectFinishLineReached" to="AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
+[connection signal="timeout" from="AnnounceCommands/Timer" to="AnnounceCommands" method="_on_timer_timeout"]
+[connection signal="state_entered" from="StateChart/CompoundState/IdleState" to="HUD/PanelContainer/Instructions" method="_on_idle_state_state_entered"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState" to="HUD/PanelContainer/Instructions" method="_on_go_state_state_entered"]
+[connection signal="state_entered" from="StateChart/CompoundState/WarningState" to="HUD/PanelContainer/Instructions" method="_on_warning_state_state_entered"]
+[connection signal="state_entered" from="StateChart/CompoundState/StopState" to="HUD/PanelContainer/Instructions" method="_on_stop_state_state_entered"]

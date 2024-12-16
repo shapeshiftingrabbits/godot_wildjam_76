@@ -1,10 +1,11 @@
-[gd_scene load_steps=50 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=60 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
+[ext_resource type="Script" path="res://scripts/camera_panning.gd" id="1_jburt"]
 [ext_resource type="Script" path="res://scripts/move.gd" id="1_xoidt"]
-[ext_resource type="Texture2D" uid="uid://dgpy8sey60xjr" path="res://textures/character_femaleAdventurer_sheetHD.png" id="2_jr7tu"]
 [ext_resource type="Script" path="res://scripts/tween_show_up.gd" id="2_mnr4h"]
 [ext_resource type="Script" path="res://scripts/move_character_back.gd" id="3_0cdfv"]
+[ext_resource type="Texture2D" uid="uid://dj7fr863w3w1e" path="res://textures/character_femalePerson_sheetHD.png" id="3_v52op"]
 [ext_resource type="Texture2D" uid="uid://bb76chblox1qy" path="res://textures/grassMid.png" id="3_we4ca"]
 [ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="4_7quu1"]
 [ext_resource type="Texture2D" uid="uid://xhvgmbx5lfvs" path="res://textures/grassCenter.png" id="4_hv57n"]
@@ -35,6 +36,10 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="19_257rj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="19_n3dkt"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="20_nrba1"]
+[ext_resource type="Script" path="res://scripts/toggle_collision.gd" id="25_8exr6"]
+[ext_resource type="Script" path="res://scripts/player_arrived_in_level.gd" id="32_rc0s6"]
+[ext_resource type="Texture2D" uid="uid://bum1k6bxj63po" path="res://textures/signRight.png" id="36_ttlx3"]
+[ext_resource type="Script" path="res://scripts/move_to_next_level.gd" id="38_1siek"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrfrj"]
 size = Vector2(64.75, 98)
@@ -44,7 +49,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -60,7 +65,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -77,7 +82,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -93,7 +98,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -111,7 +116,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("CharacterSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -130,6 +135,8 @@ _data = {
 "walk": SubResource("Animation_gtn2c")
 }
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_qxxqq"]
+
 [sub_resource type="Resource" id="Resource_eeurf"]
 script = ExtResource("13_s3ig7")
 guard = ExtResource("12_gr8w6")
@@ -138,26 +145,48 @@ guard = ExtResource("12_gr8w6")
 script = ExtResource("13_404iv")
 guards = Array[ExtResource("11_3lk3j")]([ExtResource("9_yr3nq"), SubResource("Resource_eeurf")])
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_24u1r"]
-size = Vector2(60, 1080)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71hhf"]
+size = Vector2(2160, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dviuj"]
 size = Vector2(40, 1080)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_71hhf"]
-size = Vector2(2160, 80)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24u1r"]
+size = Vector2(60, 1080)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xdvd"]
-size = Vector2(20, 60)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k56t8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t83yq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saorr"]
 size = Vector2(18.8854, 60)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xdvd"]
+size = Vector2(20, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wnuic"]
+size = Vector2(2160, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7m7yc"]
+size = Vector2(40, 1080)
+
 [node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("1_jburt")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 901.0
+offset_top = 286.0
+offset_right = 1031.0
+offset_bottom = 317.0
+text = "pan the camera
+"
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 unique_name_in_owner = true
-position = Vector2(103, 925)
+position = Vector2(1380, 925)
 script = ExtResource("1_xoidt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
@@ -172,13 +201,23 @@ libraries = {
 "": SubResource("AnimationLibrary_djn3v")
 }
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="CharacterSprite" type="Sprite2D" parent="Player"]
+unique_name_in_owner = true
+position = Vector2(-24, 0)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_jr7tu")
+texture = ExtResource("3_v52op")
+centered = false
+offset = Vector2(-48, -128)
 hframes = 9
 vframes = 5
 frame = 36
 region_rect = Rect2(32, 65, 128, 191)
+
+[node name="Mask" type="Sprite2D" parent="Player"]
+clip_children = 1
+position = Vector2(1, 4)
+scale = Vector2(96, 120)
+texture = SubResource("CanvasTexture_qxxqq")
 
 [node name="HandleCharacterOrientation" type="Node" parent="Player"]
 script = ExtResource("4_kanht")
@@ -279,46 +318,37 @@ to = NodePath("../../ShovedBack")
 guard = ExtResource("9_gs72s")
 delay_in_seconds = "0.0"
 
+[node name="CheckPlayerMovement" type="Node" parent="Player"]
+script = ExtResource("14_yfcr8")
+
 [node name="Punisher" type="Sprite2D" parent="."]
 position = Vector2(73, 1068)
 scale = Vector2(0.81, 0.97001)
 texture = ExtResource("4_u55yo")
 script = ExtResource("2_mnr4h")
 
-[node name="WallStaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 465)
+[node name="Level1" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WallStaticBody2D"]
-shape = SubResource("RectangleShape2D_24u1r")
+[node name="SignRight" type="Sprite2D" parent="Level1"]
+position = Vector2(1481, 924)
+scale = Vector2(2, 2)
+texture = ExtResource("36_ttlx3")
 
-[node name="Sprite2D" type="Sprite2D" parent="WallStaticBody2D"]
-texture_repeat = 2
-scale = Vector2(1, 25)
-texture = ExtResource("4_hv57n")
-region_enabled = true
-region_rect = Rect2(0, 0, 70, 70)
+[node name="Label" type="Label" parent="Level1/SignRight"]
+offset_left = -25.0
+offset_top = -20.0
+offset_right = 15.0
+offset_bottom = 3.0
+text = "Start"
 
-[node name="WallStaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(1920, 360)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WallStaticBody2D2"]
-shape = SubResource("RectangleShape2D_dviuj")
-
-[node name="Sprite2D" type="Sprite2D" parent="WallStaticBody2D2"]
-texture_repeat = 2
-scale = Vector2(0.812, 20.295)
-texture = ExtResource("4_hv57n")
-region_enabled = true
-region_rect = Rect2(0, 0, 70, 70)
-
-[node name="FloorStaticBody2D" type="StaticBody2D" parent="."]
+[node name="FloorStaticBody2D" type="StaticBody2D" parent="Level1"]
 position = Vector2(417, 1000)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorStaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/FloorStaticBody2D"]
 position = Vector2(539.5, 35.5)
 shape = SubResource("RectangleShape2D_71hhf")
 
-[node name="Sprite2D" type="Sprite2D" parent="FloorStaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Level1/FloorStaticBody2D"]
 texture_repeat = 2
 position = Vector2(540, 37)
 scale = Vector2(27.972, 1.2)
@@ -326,84 +356,127 @@ texture = ExtResource("3_we4ca")
 region_enabled = true
 region_rect = Rect2(0, 0, 70, 70)
 
-[node name="HUD" type="Control" parent="."]
+[node name="RightWall" type="StaticBody2D" parent="Level1"]
+position = Vector2(1920, 360)
+script = ExtResource("25_8exr6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/RightWall"]
+shape = SubResource("RectangleShape2D_dviuj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Level1/RightWall"]
+texture_repeat = 2
+scale = Vector2(0.812, 20.295)
+texture = ExtResource("4_hv57n")
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 70)
+
+[node name="LeftWall" type="StaticBody2D" parent="Level1"]
+position = Vector2(0, 465)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/LeftWall"]
+shape = SubResource("RectangleShape2D_24u1r")
+
+[node name="Sprite2D" type="Sprite2D" parent="Level1/LeftWall"]
+texture_repeat = 2
+scale = Vector2(1, 25)
+texture = ExtResource("4_hv57n")
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 70)
+
+[node name="TriggerMoveToNextLevel" type="Area2D" parent="Level1"]
+position = Vector2(1804, 982)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level1/TriggerMoveToNextLevel"]
+shape = SubResource("RectangleShape2D_k56t8")
+
+[node name="MoveToNextLevel" type="Node" parent="Level1/TriggerMoveToNextLevel" node_paths=PackedStringArray("target_collider")]
+script = ExtResource("38_1siek")
+target_collider = NodePath("../../RightWall")
+
+[node name="Level2" type="Node2D" parent="."]
+position = Vector2(1917, 0)
+
+[node name="HUD" type="Control" parent="Level2"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_left = -1992.0
+offset_top = 1.0
+offset_right = -72.0
+offset_bottom = 1081.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="HUD"]
+[node name="PanelContainer" type="PanelContainer" parent="Level2/HUD"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -100.0
+offset_left = 1867.0
 offset_top = 80.0
-offset_right = 100.0
+offset_right = 2067.0
 offset_bottom = 298.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Instructions" type="VBoxContainer" parent="HUD/PanelContainer"]
+[node name="Instructions" type="VBoxContainer" parent="Level2/HUD/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 script = ExtResource("8_sdu8k")
 
-[node name="GoInstruction" type="HBoxContainer" parent="HUD/PanelContainer/Instructions"]
+[node name="GoInstruction" type="HBoxContainer" parent="Level2/HUD/PanelContainer/Instructions"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="HUD/PanelContainer/Instructions/GoInstruction"]
+[node name="Label" type="Label" parent="Level2/HUD/PanelContainer/Instructions/GoInstruction"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Go !"
 
-[node name="TextureRect" type="TextureRect" parent="HUD/PanelContainer/Instructions/GoInstruction"]
+[node name="TextureRect" type="TextureRect" parent="Level2/HUD/PanelContainer/Instructions/GoInstruction"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("8_06u38")
 
-[node name="StopInstruction" type="HBoxContainer" parent="HUD/PanelContainer/Instructions"]
+[node name="StopInstruction" type="HBoxContainer" parent="Level2/HUD/PanelContainer/Instructions"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="HUD/PanelContainer/Instructions/StopInstruction"]
+[node name="Label" type="Label" parent="Level2/HUD/PanelContainer/Instructions/StopInstruction"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Stop!"
 
-[node name="TextureRect" type="TextureRect" parent="HUD/PanelContainer/Instructions/StopInstruction"]
+[node name="TextureRect" type="TextureRect" parent="Level2/HUD/PanelContainer/Instructions/StopInstruction"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("4_7quu1")
 
-[node name="WarningInstruction" type="HBoxContainer" parent="HUD/PanelContainer/Instructions"]
+[node name="WarningInstruction" type="HBoxContainer" parent="Level2/HUD/PanelContainer/Instructions"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="HUD/PanelContainer/Instructions/WarningInstruction"]
+[node name="Label" type="Label" parent="Level2/HUD/PanelContainer/Instructions/WarningInstruction"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Prepare to stop
 "
 
-[node name="TextureRect" type="TextureRect" parent="HUD/PanelContainer/Instructions/WarningInstruction"]
+[node name="TextureRect" type="TextureRect" parent="Level2/HUD/PanelContainer/Instructions/WarningInstruction"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("14_ijdch")
 
-[node name="StateChartDebugger" parent="HUD" instance=ExtResource("1_2xc5i")]
+[node name="StateChartDebugger" parent="Level2/HUD" instance=ExtResource("1_2xc5i")]
+visible = false
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 1
 anchors_preset = 11
@@ -412,129 +485,170 @@ offset_left = -18.0
 grow_horizontal = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-initial_node_to_watch = NodePath("../../Player/StateChart")
+initial_node_to_watch = NodePath("../../../Player/StateChart")
 
-[node name="FinishLineArea2D" type="Area2D" parent="."]
-position = Vector2(1326, 916)
+[node name="TriggerEnteredLevel" type="Area2D" parent="Level2"]
+position = Vector2(126, 985)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLineArea2D"]
-position = Vector2(39, -3)
-scale = Vector2(-4.61429, -2.53186)
-shape = SubResource("RectangleShape2D_7xdvd")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level2/TriggerEnteredLevel"]
+shape = SubResource("RectangleShape2D_t83yq")
 
-[node name="LollipopBaseBrown" type="Sprite2D" parent="FinishLineArea2D"]
-position = Vector2(-2, 34)
-texture = ExtResource("6_1swtq")
+[node name="PlayerArrivedInLevel" type="Node" parent="Level2/TriggerEnteredLevel" node_paths=PackedStringArray("target_collider")]
+script = ExtResource("32_rc0s6")
+target_collider = NodePath("../../../Level1/RightWall")
 
-[node name="LollipopFruitGreen" type="Sprite2D" parent="FinishLineArea2D"]
-position = Vector2(-2, -37)
-texture = ExtResource("7_60v0s")
-
-[node name="DetectFinishLineReached" type="Node" parent="FinishLineArea2D"]
-script = ExtResource("6_to2lt")
-
-[node name="StartingLineArea2D" type="Area2D" parent="."]
+[node name="StartingLineArea2D" type="Area2D" parent="Level2"]
 position = Vector2(419, 918)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartingLineArea2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level2/StartingLineArea2D"]
 position = Vector2(44, -3)
 rotation = 3.14159
 scale = Vector2(4.61429, 2.53186)
 shape = SubResource("RectangleShape2D_saorr")
 
-[node name="LollipopBaseBrown" type="Sprite2D" parent="StartingLineArea2D"]
+[node name="LollipopBaseBrown" type="Sprite2D" parent="Level2/StartingLineArea2D"]
 position = Vector2(-2, 34)
 texture = ExtResource("6_1swtq")
 
-[node name="LollipopFruitGreen" type="Sprite2D" parent="StartingLineArea2D"]
+[node name="LollipopFruitGreen" type="Sprite2D" parent="Level2/StartingLineArea2D"]
 position = Vector2(-2, -37)
 texture = ExtResource("7_bwe1x")
 
-[node name="DetectStartingLineReached" type="Node" parent="StartingLineArea2D"]
+[node name="DetectStartingLineReached" type="Node" parent="Level2/StartingLineArea2D"]
 script = ExtResource("8_ouh8i")
 
-[node name="AnnounceCommands" type="Node" parent="."]
+[node name="FinishLineArea2D" type="Area2D" parent="Level2"]
+position = Vector2(1326, 916)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level2/FinishLineArea2D"]
+position = Vector2(39, -3)
+scale = Vector2(-4.61429, -2.53186)
+shape = SubResource("RectangleShape2D_7xdvd")
+
+[node name="LollipopBaseBrown" type="Sprite2D" parent="Level2/FinishLineArea2D"]
+position = Vector2(-2, 34)
+texture = ExtResource("6_1swtq")
+
+[node name="LollipopFruitGreen" type="Sprite2D" parent="Level2/FinishLineArea2D"]
+position = Vector2(-2, -37)
+texture = ExtResource("7_60v0s")
+
+[node name="DetectFinishLineReached" type="Node" parent="Level2/FinishLineArea2D"]
+script = ExtResource("6_to2lt")
+
+[node name="FloorStaticBody2D" type="StaticBody2D" parent="Level2"]
+position = Vector2(417, 1000)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level2/FloorStaticBody2D"]
+position = Vector2(538, 38)
+shape = SubResource("RectangleShape2D_wnuic")
+
+[node name="Sprite2D" type="Sprite2D" parent="Level2/FloorStaticBody2D"]
+texture_repeat = 2
+position = Vector2(540, 37)
+scale = Vector2(27.972, 1.2)
+texture = ExtResource("3_we4ca")
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 70)
+
+[node name="RightWall" type="StaticBody2D" parent="Level2"]
+position = Vector2(1920, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level2/RightWall"]
+shape = SubResource("RectangleShape2D_7m7yc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Level2/RightWall"]
+texture_repeat = 2
+scale = Vector2(0.812, 20.295)
+texture = ExtResource("4_hv57n")
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 70)
+
+[node name="AnnounceCommands" type="Node" parent="Level2"]
 script = ExtResource("13_d88ly")
 
-[node name="Timer" type="Timer" parent="AnnounceCommands"]
+[node name="Timer" type="Timer" parent="Level2/AnnounceCommands"]
 
-[node name="CheckPlayerMovement" type="Node" parent="."]
-script = ExtResource("14_yfcr8")
-
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="Level2"]
 script = ExtResource("19_n3dkt")
 
-[node name="CompoundState" type="Node" parent="StateChart"]
+[node name="CompoundState" type="Node" parent="Level2/StateChart"]
 script = ExtResource("18_3107p")
 initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="StateChart/CompoundState"]
+[node name="IdleState" type="Node" parent="Level2/StateChart/CompoundState"]
 script = ExtResource("19_257rj")
 
-[node name="ToGoState" type="Node" parent="StateChart/CompoundState/IdleState"]
+[node name="ToGoState" type="Node" parent="Level2/StateChart/CompoundState/IdleState"]
 script = ExtResource("20_nrba1")
 to = NodePath("../../GoState")
 event = &"started"
 delay_in_seconds = "0.0"
 
-[node name="GoState" type="Node" parent="StateChart/CompoundState"]
+[node name="GoState" type="Node" parent="Level2/StateChart/CompoundState"]
 script = ExtResource("19_257rj")
 
-[node name="ToIdleState" type="Node" parent="StateChart/CompoundState/GoState"]
+[node name="ToIdleState" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
 script = ExtResource("20_nrba1")
 to = NodePath("../../IdleState")
 event = &"idled"
 delay_in_seconds = "0.0"
 
-[node name="ToWarning" type="Node" parent="StateChart/CompoundState/GoState"]
+[node name="ToWarning" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
 script = ExtResource("20_nrba1")
 to = NodePath("../../WarningState")
 event = &"next"
 delay_in_seconds = "0.0"
 
-[node name="WarningState" type="Node" parent="StateChart/CompoundState"]
+[node name="WarningState" type="Node" parent="Level2/StateChart/CompoundState"]
 script = ExtResource("19_257rj")
 
-[node name="ToStopTransition" type="Node" parent="StateChart/CompoundState/WarningState"]
+[node name="ToStopTransition" type="Node" parent="Level2/StateChart/CompoundState/WarningState"]
 script = ExtResource("20_nrba1")
 to = NodePath("../../StopState")
 event = &"next"
 delay_in_seconds = "0.0"
 
-[node name="ToIdleState" type="Node" parent="StateChart/CompoundState/WarningState"]
+[node name="ToIdleState" type="Node" parent="Level2/StateChart/CompoundState/WarningState"]
 script = ExtResource("20_nrba1")
 to = NodePath("../../IdleState")
 event = &"idled"
 delay_in_seconds = "0.0"
 
-[node name="StopState" type="Node" parent="StateChart/CompoundState"]
+[node name="StopState" type="Node" parent="Level2/StateChart/CompoundState"]
 script = ExtResource("19_257rj")
 
-[node name="ToGoState" type="Node" parent="StateChart/CompoundState/StopState"]
+[node name="ToGoState" type="Node" parent="Level2/StateChart/CompoundState/StopState"]
 script = ExtResource("20_nrba1")
 to = NodePath("../../GoState")
 event = &"next"
 delay_in_seconds = "0.0"
 
-[node name="ToIdleState" type="Node" parent="StateChart/CompoundState/StopState"]
+[node name="ToEndState" type="Node" parent="Level2/StateChart/CompoundState/StopState"]
 script = ExtResource("20_nrba1")
 to = NodePath("../../IdleState")
-event = &"idled"
+event = &"ended"
 delay_in_seconds = "0.0"
 
+[node name="EndedState" type="Node" parent="Level2/StateChart/CompoundState"]
+script = ExtResource("19_257rj")
+
+[connection signal="pressed" from="Button" to="Camera2D" method="_on_button_pressed"]
 [connection signal="end_move_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_end_move_back"]
 [connection signal="player_is_moved_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_player_is_moved_back"]
 [connection signal="player_is_moved_back" from="Player/MoveCharacterBack" to="Punisher" method="_on_move_character_back_player_is_moved_back"]
 [connection signal="state_physics_processing" from="Player/StateChart/CompoundState/Walk" to="Player/HandleCharacterOrientation" method="_on_walk_state_physics_processing"]
 [connection signal="state_physics_processing" from="Player/StateChart/CompoundState/Jump" to="Player/HandleCharacterOrientation" method="_on_jump_state_physics_processing"]
-[connection signal="body_entered" from="FinishLineArea2D" to="FinishLineArea2D/DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
-[connection signal="finished_line_reached" from="FinishLineArea2D/DetectFinishLineReached" to="AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
-[connection signal="body_entered" from="StartingLineArea2D" to="StartingLineArea2D/DetectStartingLineReached" method="_on_starting_line_area_2d_body_entered"]
-[connection signal="entered_play_area" from="StartingLineArea2D/DetectStartingLineReached" to="AnnounceCommands" method="_on_detect_starting_line_reached_entered_play_area"]
-[connection signal="timeout" from="AnnounceCommands/Timer" to="AnnounceCommands" method="_on_timer_timeout"]
-[connection signal="player_has_moved" from="CheckPlayerMovement" to="Player/MoveCharacterBack" method="_on_check_player_movement_player_has_moved"]
-[connection signal="state_entered" from="StateChart/CompoundState/IdleState" to="HUD/PanelContainer/Instructions" method="_on_idle_state_state_entered"]
-[connection signal="state_entered" from="StateChart/CompoundState/GoState" to="HUD/PanelContainer/Instructions" method="_on_go_state_state_entered"]
-[connection signal="state_entered" from="StateChart/CompoundState/WarningState" to="HUD/PanelContainer/Instructions" method="_on_warning_state_state_entered"]
-[connection signal="state_entered" from="StateChart/CompoundState/StopState" to="HUD/PanelContainer/Instructions" method="_on_stop_state_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/CompoundState/StopState" to="CheckPlayerMovement" method="_on_stop_state_state_physics_processing"]
+[connection signal="player_has_moved" from="Player/CheckPlayerMovement" to="Player/MoveCharacterBack" method="_on_check_player_movement_player_has_moved"]
+[connection signal="body_entered" from="Level1/TriggerMoveToNextLevel" to="Level1/TriggerMoveToNextLevel/MoveToNextLevel" method="_on_trigger_move_to_next_level_body_entered"]
+[connection signal="body_exited" from="Level1/TriggerMoveToNextLevel" to="Camera2D" method="_on_trigger_move_to_next_level_body_exited"]
+[connection signal="body_entered" from="Level2/TriggerEnteredLevel" to="Level2/TriggerEnteredLevel/PlayerArrivedInLevel" method="_on_trigger_entered_level_body_entered"]
+[connection signal="body_entered" from="Level2/StartingLineArea2D" to="Level2/StartingLineArea2D/DetectStartingLineReached" method="_on_starting_line_area_2d_body_entered"]
+[connection signal="entered_play_area" from="Level2/StartingLineArea2D/DetectStartingLineReached" to="Level2/AnnounceCommands" method="_on_detect_starting_line_reached_entered_play_area"]
+[connection signal="body_entered" from="Level2/FinishLineArea2D" to="Level2/FinishLineArea2D/DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
+[connection signal="finished_line_reached" from="Level2/FinishLineArea2D/DetectFinishLineReached" to="Level2/AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
+[connection signal="timeout" from="Level2/AnnounceCommands/Timer" to="Level2/AnnounceCommands" method="_on_timer_timeout"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/HUD/PanelContainer/Instructions" method="_on_idle_state_state_entered"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState" to="Level2/HUD/PanelContainer/Instructions" method="_on_go_state_state_entered"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/WarningState" to="Level2/HUD/PanelContainer/Instructions" method="_on_warning_state_state_entered"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/StopState" to="Level2/HUD/PanelContainer/Instructions" method="_on_stop_state_state_entered"]
