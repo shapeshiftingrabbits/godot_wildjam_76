@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=50 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
 [ext_resource type="Script" path="res://scripts/move.gd" id="1_xoidt"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bb76chblox1qy" path="res://textures/grassMid.png" id="3_we4ca"]
 [ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="4_7quu1"]
 [ext_resource type="Texture2D" uid="uid://xhvgmbx5lfvs" path="res://textures/grassCenter.png" id="4_hv57n"]
+[ext_resource type="Script" path="res://scripts/handle_character_orientation.gd" id="4_kanht"]
 [ext_resource type="Texture2D" uid="uid://35n1dsp0rogv" path="res://textures/pokerMad.png" id="4_u55yo"]
 [ext_resource type="Texture2D" uid="uid://cd053hfja0sbd" path="res://textures/lollipopBaseBrown.png" id="6_1swtq"]
 [ext_resource type="Script" path="res://scripts/detect_finish_line_reached.gd" id="6_to2lt"]
@@ -138,7 +139,10 @@ script = ExtResource("13_404iv")
 guards = Array[ExtResource("11_3lk3j")]([ExtResource("9_yr3nq"), SubResource("Resource_eeurf")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24u1r"]
-size = Vector2(60, 720)
+size = Vector2(60, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dviuj"]
+size = Vector2(40, 1080)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71hhf"]
 size = Vector2(2160, 80)
@@ -147,13 +151,13 @@ size = Vector2(2160, 80)
 size = Vector2(20, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saorr"]
-size = Vector2(20, 60)
+size = Vector2(18.8854, 60)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 unique_name_in_owner = true
-position = Vector2(73, 512)
+position = Vector2(103, 925)
 script = ExtResource("1_xoidt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
@@ -174,6 +178,10 @@ texture = ExtResource("2_jr7tu")
 hframes = 9
 vframes = 5
 frame = 36
+region_rect = Rect2(32, 65, 128, 191)
+
+[node name="HandleCharacterOrientation" type="Node" parent="Player"]
+script = ExtResource("4_kanht")
 
 [node name="HandleStateChart" type="Node" parent="Player"]
 script = ExtResource("8_tnrut")
@@ -272,13 +280,13 @@ guard = ExtResource("9_gs72s")
 delay_in_seconds = "0.0"
 
 [node name="Punisher" type="Sprite2D" parent="."]
-position = Vector2(73, 720)
+position = Vector2(73, 1068)
 scale = Vector2(0.81, 0.97001)
 texture = ExtResource("4_u55yo")
 script = ExtResource("2_mnr4h")
 
 [node name="WallStaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 360)
+position = Vector2(0, 465)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallStaticBody2D"]
 shape = SubResource("RectangleShape2D_24u1r")
@@ -291,20 +299,20 @@ region_enabled = true
 region_rect = Rect2(0, 0, 70, 70)
 
 [node name="WallStaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(1108, 360)
+position = Vector2(1920, 360)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallStaticBody2D2"]
-shape = SubResource("RectangleShape2D_24u1r")
+shape = SubResource("RectangleShape2D_dviuj")
 
 [node name="Sprite2D" type="Sprite2D" parent="WallStaticBody2D2"]
 texture_repeat = 2
-scale = Vector2(1, 25)
+scale = Vector2(0.812, 20.295)
 texture = ExtResource("4_hv57n")
 region_enabled = true
 region_rect = Rect2(0, 0, 70, 70)
 
 [node name="FloorStaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(0, 644)
+position = Vector2(417, 1000)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorStaticBody2D"]
 position = Vector2(539.5, 35.5)
@@ -319,23 +327,27 @@ region_enabled = true
 region_rect = Rect2(0, 0, 70, 70)
 
 [node name="HUD" type="Control" parent="."]
-custom_minimum_size = Vector2(1080, 720)
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1080.0
-offset_bottom = 720.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="HUD"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -618.0
-offset_top = 196.0
-offset_right = -418.0
-offset_bottom = 340.0
-grow_horizontal = 0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 80.0
+offset_right = 100.0
+offset_bottom = 298.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
@@ -394,14 +406,19 @@ texture = ExtResource("14_ijdch")
 [node name="StateChartDebugger" parent="HUD" instance=ExtResource("1_2xc5i")]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+offset_left = -18.0
+grow_horizontal = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 initial_node_to_watch = NodePath("../../Player/StateChart")
 
 [node name="FinishLineArea2D" type="Area2D" parent="."]
-position = Vector2(914, 571)
+position = Vector2(1326, 916)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLineArea2D"]
+position = Vector2(39, -3)
 scale = Vector2(-4.61429, -2.53186)
 shape = SubResource("RectangleShape2D_7xdvd")
 
@@ -417,10 +434,12 @@ texture = ExtResource("7_60v0s")
 script = ExtResource("6_to2lt")
 
 [node name="StartingLineArea2D" type="Area2D" parent="."]
-position = Vector2(207, 570)
+position = Vector2(419, 918)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartingLineArea2D"]
-scale = Vector2(-4.61429, -2.53186)
+position = Vector2(44, -3)
+rotation = 3.14159
+scale = Vector2(4.61429, 2.53186)
 shape = SubResource("RectangleShape2D_saorr")
 
 [node name="LollipopBaseBrown" type="Sprite2D" parent="StartingLineArea2D"]
@@ -506,6 +525,8 @@ delay_in_seconds = "0.0"
 [connection signal="end_move_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_end_move_back"]
 [connection signal="player_is_moved_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_player_is_moved_back"]
 [connection signal="player_is_moved_back" from="Player/MoveCharacterBack" to="Punisher" method="_on_move_character_back_player_is_moved_back"]
+[connection signal="state_physics_processing" from="Player/StateChart/CompoundState/Walk" to="Player/HandleCharacterOrientation" method="_on_walk_state_physics_processing"]
+[connection signal="state_physics_processing" from="Player/StateChart/CompoundState/Jump" to="Player/HandleCharacterOrientation" method="_on_jump_state_physics_processing"]
 [connection signal="body_entered" from="FinishLineArea2D" to="FinishLineArea2D/DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
 [connection signal="finished_line_reached" from="FinishLineArea2D/DetectFinishLineReached" to="AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
 [connection signal="body_entered" from="StartingLineArea2D" to="StartingLineArea2D/DetectStartingLineReached" method="_on_starting_line_area_2d_body_entered"]
