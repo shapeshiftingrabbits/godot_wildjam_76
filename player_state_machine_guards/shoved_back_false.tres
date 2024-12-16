@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ExpressionGuard" load_steps=2 format=3 uid="uid://crv0fdii022lf"]
+
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="1_qr3k2"]
+
+[resource]
+script = ExtResource("1_qr3k2")
+expression = "shoved_back == false"

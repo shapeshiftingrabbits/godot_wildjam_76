@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AllOfGuard" load_steps=6 format=3 uid="uid://ir2ab4760o0v"]
+
+[ext_resource type="Script" path="res://addons/godot_state_charts/guard.gd" id="1_h7yws"]
+[ext_resource type="Resource" uid="uid://crv0fdii022lf" path="res://player_state_machine_guards/shoved_back_false.tres" id="2_phlr8"]
+[ext_resource type="Resource" uid="uid://cxt7pwy4im56t" path="res://player_state_machine_guards/velocity_x_null.tres" id="3_6al6h"]
+[ext_resource type="Resource" uid="uid://dlp2pxuai5pti" path="res://player_state_machine_guards/velocity_y_null.tres" id="4_4ybgj"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="5_hetgi"]
+
+[resource]
+script = ExtResource("5_hetgi")
+guards = Array[ExtResource("1_h7yws")]([ExtResource("2_phlr8"), ExtResource("3_6al6h"), ExtResource("4_4ybgj")])

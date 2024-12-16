@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AllOfGuard" load_steps=8 format=3 uid="uid://wg325ebralar"]
+
+[ext_resource type="Script" path="res://addons/godot_state_charts/guard.gd" id="1_mymdg"]
+[ext_resource type="Resource" uid="uid://crv0fdii022lf" path="res://player_state_machine_guards/shoved_back_false.tres" id="2_tuk0l"]
+[ext_resource type="Resource" uid="uid://cxt7pwy4im56t" path="res://player_state_machine_guards/velocity_x_null.tres" id="3_bncu6"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="4_aphul"]
+[ext_resource type="Resource" uid="uid://dlp2pxuai5pti" path="res://player_state_machine_guards/velocity_y_null.tres" id="5_6dxh5"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="6_k1v7o"]
+
+[sub_resource type="Resource" id="Resource_arhbn"]
+script = ExtResource("4_aphul")
+guard = ExtResource("3_bncu6")
+
+[resource]
+script = ExtResource("6_k1v7o")
+guards = Array[ExtResource("1_mymdg")]([ExtResource("2_tuk0l"), SubResource("Resource_arhbn"), ExtResource("5_6dxh5")])

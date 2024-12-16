@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ExpressionGuard" load_steps=2 format=3 uid="uid://cxt7pwy4im56t"]
+
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="1_d2fcx"]
+
+[resource]
+script = ExtResource("1_d2fcx")
+expression = "velocity.x == 0"
