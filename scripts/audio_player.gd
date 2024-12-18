@@ -17,6 +17,9 @@ func resume():
 		stream_paused = false
 
 
+func _on_ended_state_state_entered() -> void:
+	stop()
+
 # for debugging
 func _on_button_pressed() -> void:
 	if !sound_playing:
@@ -25,3 +28,7 @@ func _on_button_pressed() -> void:
 	else:
 		sound_playing = false
 		pause()
+
+
+func _on_reset() -> void:
+	first_time = true
