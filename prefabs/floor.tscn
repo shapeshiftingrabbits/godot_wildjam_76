@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1xryu6kfp5uq"]
+
+[ext_resource type="Texture2D" uid="uid://bb76chblox1qy" path="res://textures/grassMid.png" id="1_57px6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71hhf"]
+size = Vector2(1920, 70)
+
+[node name="Floor" type="StaticBody2D"]
+position = Vector2(960, 1044.23)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_71hhf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("1_57px6")
+region_enabled = true
+region_rect = Rect2(0, 0, 1920, 70)

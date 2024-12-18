@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bb76chblox1qy" path="res://textures/grassMid.png" id="2_6fpcf"]
 [ext_resource type="Script" path="res://scripts/toggle_collision.gd" id="3_snq36"]
 [ext_resource type="Texture2D" uid="uid://xhvgmbx5lfvs" path="res://textures/grassCenter.png" id="4_8b6ws"]
-[ext_resource type="Script" path="res://scripts/move_to_next_level.gd" id="5_goety"]
+[ext_resource type="Script" path="res://scripts/detect_target_group_collision.gd" id="5_goety"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71hhf"]
 size = Vector2(2160, 80)
