@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=58 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_2wvwb"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
@@ -38,11 +38,13 @@
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="24_po0hx"]
 [ext_resource type="PackedScene" uid="uid://b1xryu6kfp5uq" path="res://prefabs/floor.tscn" id="26_6bflj"]
 [ext_resource type="PackedScene" uid="uid://p2et6u5v7uqr" path="res://prefabs/trigger_2d.tscn" id="27_dc8k4"]
+[ext_resource type="Texture2D" uid="uid://bp0suvr8wupj8" path="res://textures/star.png" id="33_co2t7"]
 [ext_resource type="Texture2D" uid="uid://bum1k6bxj63po" path="res://textures/signRight.png" id="36_ttlx3"]
 [ext_resource type="AudioStream" uid="uid://cli5dklxqm2rb" path="res://audio/Children_Game_Music/WAV/Song_Cartoon_Adventure_Loop.wav" id="39_8t8pj"]
 [ext_resource type="Script" path="res://scripts/move_to_here.gd" id="39_jfije"]
 [ext_resource type="PackedScene" uid="uid://bomwgt3savmk0" path="res://prefabs/dirt_wall.tscn" id="39_jrjcm"]
 [ext_resource type="Script" path="res://scripts/audio_player.gd" id="40_vods0"]
+[ext_resource type="AudioStream" uid="uid://khkpkakhgenh" path="res://audio/Children_Game_Music/WAV/SFX_Complete.wav" id="44_ue0md"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrfrj"]
 size = Vector2(64.75, 98)
@@ -407,9 +409,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1992.0
 offset_top = 1.0
-offset_right = -72.0
+offset_right = 1920.0
 offset_bottom = 1081.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -420,10 +421,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 1867.0
-offset_top = 80.0
-offset_right = 2067.0
-offset_bottom = 298.0
+offset_left = -148.0
+offset_top = 437.0
+offset_right = 52.0
+offset_bottom = 655.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -481,6 +482,35 @@ text = "Prepare to stop
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("14_ijdch")
+
+[node name="LevelCompleted" type="VBoxContainer" parent="Level2/LevelHUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.0
+offset_top = -35.0
+offset_right = 174.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Level2/LevelHUD/LevelCompleted"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Level2/LevelHUD/LevelCompleted/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Level Completed !"
+
+[node name="TextureRect" type="TextureRect" parent="Level2/LevelHUD/LevelCompleted/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("33_co2t7")
 
 [node name="TriggerEnterLevel" parent="Level2" instance=ExtResource("27_dc8k4")]
 position = Vector2(151, 997)
@@ -544,7 +574,11 @@ position = Vector2(35, 540)
 position = Vector2(356, 996)
 script = ExtResource("39_jfije")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Level2"]
+[node name="WinAudioStreamPlayer" type="AudioStreamPlayer" parent="Level2"]
+stream = ExtResource("44_ue0md")
+volume_db = -3.239
+
+[node name="GameAudioStreamPlayer" type="AudioStreamPlayer" parent="Level2"]
 process_mode = 1
 stream = ExtResource("39_8t8pj")
 script = ExtResource("40_vods0")
@@ -669,11 +703,13 @@ script = ExtResource("1_2wvwb")
 [connection signal="timeout" from="Level2/AnnounceCommands/Timer" to="Level2/AnnounceCommands" method="_on_timer_timeout"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/PanelContainer" method="hide_all"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState" to="Level2/LevelHUD/PanelContainer" method="_on_go_state_state_entered"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState" to="Level2/AudioStreamPlayer" method="resume"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState" to="Level2/GameAudioStreamPlayer" method="resume"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/WarningState" to="Level2/LevelHUD/PanelContainer" method="_on_warning_state_state_entered"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/StopState" to="Level2/LevelHUD/PanelContainer" method="_on_stop_state_state_entered"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/StopState" to="Level2/AudioStreamPlayer" method="pause"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/StopState" to="Level2/GameAudioStreamPlayer" method="pause"]
 [connection signal="state_physics_processing" from="Level2/StateChart/CompoundState/StopState" to="Player/CheckPlayerMovement" method="_on_stop_state_state_physics_processing"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/LevelHUD/PanelContainer" method="_on_ended_state_state_entered"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/AudioStreamPlayer" method="stop"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/GameAudioStreamPlayer" method="stop"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/LevelHUD/LevelCompleted" method="show"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/WinAudioStreamPlayer" method="play"]
 [connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
