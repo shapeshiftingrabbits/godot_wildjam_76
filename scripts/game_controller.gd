@@ -25,4 +25,7 @@ func _moving_to_next_level():
 	next_level.enter_level()
 	current_level_controller = next_level
 	move_to_next_level.emit(current_level_controller)
-	
+
+
+func reset_current_level() -> void:
+	current_level_controller.reset_level()
