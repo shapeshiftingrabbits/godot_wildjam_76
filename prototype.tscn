@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=61 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_2wvwb"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
@@ -36,7 +36,9 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="19_n3dkt"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="20_nrba1"]
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="24_po0hx"]
+[ext_resource type="AudioStream" uid="uid://dmsxdtv4kf7x3" path="res://audio/footstep_grass_003.ogg" id="25_74thl"]
 [ext_resource type="PackedScene" uid="uid://b1xryu6kfp5uq" path="res://prefabs/floor.tscn" id="26_6bflj"]
+[ext_resource type="AudioStream" uid="uid://bnv5akw5iirtf" path="res://audio/footstep_grass_004.ogg" id="26_am74k"]
 [ext_resource type="PackedScene" uid="uid://p2et6u5v7uqr" path="res://prefabs/trigger_2d.tscn" id="27_dc8k4"]
 [ext_resource type="Texture2D" uid="uid://bp0suvr8wupj8" path="res://textures/star.png" id="33_co2t7"]
 [ext_resource type="Texture2D" uid="uid://bum1k6bxj63po" path="res://textures/signRight.png" id="36_ttlx3"]
@@ -149,6 +151,12 @@ guard = ExtResource("12_gr8w6")
 [sub_resource type="Resource" id="Resource_jye0k"]
 script = ExtResource("13_404iv")
 guards = Array[ExtResource("11_3lk3j")]([ExtResource("9_yr3nq"), SubResource("Resource_eeurf")])
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_p50u2"]
+fade_time = 0.0
+stream_count = 2
+stream_0 = ExtResource("25_74thl")
+stream_1 = ExtResource("26_am74k")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_saorr"]
 size = Vector2(18.8854, 60)
@@ -368,6 +376,10 @@ script = ExtResource("20_nrba1")
 to = NodePath("../../ShovedBack")
 guard = ExtResource("9_gs72s")
 delay_in_seconds = "0.0"
+
+[node name="WalkAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+stream = SubResource("AudioStreamPlaylist_p50u2")
+pitch_scale = 2.5
 
 [node name="Punisher" type="Sprite2D" parent="."]
 position = Vector2(73, 1083)
@@ -688,6 +700,8 @@ script = ExtResource("1_2wvwb")
 [connection signal="end_move_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_end_move_back"]
 [connection signal="player_is_moved_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_player_is_moved_back"]
 [connection signal="player_is_moved_back" from="Player/MoveCharacterBack" to="Punisher" method="_on_move_character_back_player_is_moved_back"]
+[connection signal="state_entered" from="Player/StateChart/CompoundState/Walk" to="Player/WalkAudioStreamPlayer2D" method="play"]
+[connection signal="state_exited" from="Player/StateChart/CompoundState/Walk" to="Player/WalkAudioStreamPlayer2D" method="stop"]
 [connection signal="state_physics_processing" from="Player/StateChart/CompoundState/Walk" to="Player/HandleCharacterOrientation" method="_on_walk_state_physics_processing"]
 [connection signal="state_physics_processing" from="Player/StateChart/CompoundState/Jump" to="Player/HandleCharacterOrientation" method="_on_jump_state_physics_processing"]
 [connection signal="level_exited" from="Level1" to="Level1/RightWall" method="turn_off"]
@@ -709,7 +723,7 @@ script = ExtResource("1_2wvwb")
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/StopState" to="Level2/GameAudioStreamPlayer" method="pause"]
 [connection signal="state_physics_processing" from="Level2/StateChart/CompoundState/StopState" to="Player/CheckPlayerMovement" method="_on_stop_state_state_physics_processing"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/LevelHUD/PanelContainer" method="_on_ended_state_state_entered"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/GameAudioStreamPlayer" method="stop"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/LevelHUD/LevelCompleted" method="show"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/WinAudioStreamPlayer" method="play"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/GameAudioStreamPlayer" method="stop"]
 [connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
