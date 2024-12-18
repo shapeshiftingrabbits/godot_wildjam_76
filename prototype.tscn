@@ -155,6 +155,7 @@ size = Vector2(20, 60)
 [node name="GameRoot" type="Node2D"]
 
 [node name="HUD" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
 anchors_preset = 15
@@ -172,7 +173,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="HUD/MarginContainer/VBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="MenuButton" type="Button" parent="HUD/MarginContainer/VBox/HBoxContainer"]
+layout_mode = 2
+text = "Menu"
+
+[node name="RestartLevelButton" type="Button" parent="HUD/MarginContainer/VBox/HBoxContainer"]
 layout_mode = 2
 text = "Retry Level"
 
@@ -183,6 +191,38 @@ size_flags_horizontal = 0
 size_flags_vertical = 3
 enabled = false
 initial_node_to_watch = NodePath("../../../../Level2/StateChart")
+
+[node name="MenuPanelContainer" type="PanelContainer" parent="HUD"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MenuPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="HUD/MenuPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="ExitToMainScreenButton" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Go To Main Screen"
+
+[node name="QuitButton" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(190, 50)
+layout_mode = 2
+text = "QUIT
+"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -596,9 +636,13 @@ event = &"idled"
 delay_in_seconds = "0.0"
 
 [node name="GameController" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("1_2wvwb")
 
-[connection signal="pressed" from="HUD/MarginContainer/VBox/Button" to="GameController" method="reset_current_level"]
+[connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="GameController" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="GameController" method="reset_current_level"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/ExitToMainScreenButton" to="GameController" method="_on_exit_to_main_screen_button_pressed"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/QuitButton" to="GameController" method="_on_quit_button_pressed"]
 [connection signal="player_has_moved" from="Player/CheckPlayerMovement" to="Player/MoveCharacterBack" method="_on_check_player_movement_player_has_moved"]
 [connection signal="end_move_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_end_move_back"]
 [connection signal="player_is_moved_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_player_is_moved_back"]
