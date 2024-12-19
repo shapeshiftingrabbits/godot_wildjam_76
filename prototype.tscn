@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=65 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_2wvwb"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
@@ -47,6 +47,7 @@
 [ext_resource type="Script" path="res://scripts/audio_player.gd" id="40_vods0"]
 [ext_resource type="AudioStream" uid="uid://b76m01fh00qfl" path="res://audio/prompts/prompt_1.ogg" id="44_0lhmv"]
 [ext_resource type="AudioStream" uid="uid://khkpkakhgenh" path="res://audio/Children_Game_Music/WAV/SFX_Complete.wav" id="44_ue0md"]
+[ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="48_j0q31"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrfrj"]
 size = Vector2(64.75, 98)
@@ -790,6 +791,11 @@ script = ExtResource("40_vods0")
 [node name="GameController" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("1_2wvwb")
+
+[node name="BgAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("48_j0q31")
+volume_db = -13.0
+autoplay = true
 
 [connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="GameController" method="_on_menu_button_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="GameController" method="reset_current_level"]
