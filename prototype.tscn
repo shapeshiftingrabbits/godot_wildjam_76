@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=64 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_2wvwb"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
@@ -19,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://csn7lhln11087" path="res://textures/flagGreen2.png" id="8_06u38"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="8_k2n6f"]
 [ext_resource type="Script" path="res://scripts/detect_starting_line_reached.gd" id="8_ouh8i"]
-[ext_resource type="Script" path="res://scripts/instructions.gd" id="8_sdu8k"]
 [ext_resource type="Script" path="res://scripts/handle_state_chart.gd" id="8_tnrut"]
 [ext_resource type="Resource" uid="uid://g3xriqdtdlre" path="res://player_state_machine_guards/shoved_back_true.tres" id="9_gs72s"]
 [ext_resource type="Resource" uid="uid://crv0fdii022lf" path="res://player_state_machine_guards/shoved_back_false.tres" id="9_yr3nq"]
@@ -43,10 +42,10 @@
 [ext_resource type="Texture2D" uid="uid://5qxurwjaaqq2" path="res://textures/tilemap_packed.png" id="31_24rfj"]
 [ext_resource type="Texture2D" uid="uid://bp0suvr8wupj8" path="res://textures/star.png" id="33_co2t7"]
 [ext_resource type="Texture2D" uid="uid://bum1k6bxj63po" path="res://textures/signRight.png" id="36_ttlx3"]
-[ext_resource type="AudioStream" uid="uid://cli5dklxqm2rb" path="res://audio/Children_Game_Music/WAV/Song_Cartoon_Adventure_Loop.wav" id="39_8t8pj"]
 [ext_resource type="Script" path="res://scripts/move_to_here.gd" id="39_jfije"]
 [ext_resource type="PackedScene" uid="uid://bomwgt3savmk0" path="res://prefabs/dirt_wall.tscn" id="39_jrjcm"]
 [ext_resource type="Script" path="res://scripts/audio_player.gd" id="40_vods0"]
+[ext_resource type="AudioStream" uid="uid://b76m01fh00qfl" path="res://audio/prompts/prompt_1.ogg" id="44_0lhmv"]
 [ext_resource type="AudioStream" uid="uid://khkpkakhgenh" path="res://audio/Children_Game_Music/WAV/SFX_Complete.wav" id="44_ue0md"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrfrj"]
@@ -476,6 +475,88 @@ horizontal_alignment = 1
 position = Vector2(1920, 0)
 script = ExtResource("24_po0hx")
 
+[node name="StateChart" type="Node" parent="Level2"]
+script = ExtResource("19_n3dkt")
+
+[node name="CompoundState" type="Node" parent="Level2/StateChart"]
+script = ExtResource("18_3107p")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="Level2/StateChart/CompoundState"]
+script = ExtResource("19_257rj")
+
+[node name="ToGoState" type="Node" parent="Level2/StateChart/CompoundState/IdleState"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../GoState")
+event = &"started"
+delay_in_seconds = "0.0"
+
+[node name="GoState" type="Node" parent="Level2/StateChart/CompoundState"]
+script = ExtResource("18_3107p")
+initial_state = NodePath("1State")
+
+[node name="1State" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
+script = ExtResource("19_257rj")
+
+[node name="Transition" type="Node" parent="Level2/StateChart/CompoundState/GoState/1State"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../2State")
+delay_in_seconds = "1.1"
+
+[node name="2State" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
+script = ExtResource("19_257rj")
+
+[node name="Transition" type="Node" parent="Level2/StateChart/CompoundState/GoState/2State"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../3State")
+delay_in_seconds = "0.7
+"
+
+[node name="3State" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
+script = ExtResource("19_257rj")
+
+[node name="Transition" type="Node" parent="Level2/StateChart/CompoundState/GoState/3State"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../SoleilState")
+delay_in_seconds = "1.0"
+
+[node name="SoleilState" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
+script = ExtResource("19_257rj")
+
+[node name="Transition" type="Node" parent="Level2/StateChart/CompoundState/GoState/SoleilState"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../CheckState")
+delay_in_seconds = "0.8"
+
+[node name="CheckState" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
+script = ExtResource("19_257rj")
+
+[node name="Transition" type="Node" parent="Level2/StateChart/CompoundState/GoState/CheckState"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../1State")
+delay_in_seconds = "1.0"
+
+[node name="ToEndState" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../EndedState")
+event = &"ended"
+delay_in_seconds = "0.0"
+
+[node name="ToIdleState" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../IdleState")
+event = &"idled"
+delay_in_seconds = "0.0"
+
+[node name="EndedState" type="Node" parent="Level2/StateChart/CompoundState"]
+script = ExtResource("19_257rj")
+
+[node name="ToIdleState" type="Node" parent="Level2/StateChart/CompoundState/EndedState"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../IdleState")
+event = &"idled"
+delay_in_seconds = "0.0"
+
 [node name="LevelHUD" type="Control" parent="Level2"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 3
@@ -501,60 +582,89 @@ offset_bottom = 655.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-script = ExtResource("8_sdu8k")
 
 [node name="Instructions" type="VBoxContainer" parent="Level2/LevelHUD/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="GoInstruction" type="HBoxContainer" parent="Level2/LevelHUD/PanelContainer/Instructions"]
+[node name="1Instruction" type="HBoxContainer" parent="Level2/LevelHUD/PanelContainer/Instructions"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/GoInstruction"]
+[node name="Label" type="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/1Instruction"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Go !"
+text = "1..."
 
-[node name="TextureRect" type="TextureRect" parent="Level2/LevelHUD/PanelContainer/Instructions/GoInstruction"]
+[node name="TextureRect" type="TextureRect" parent="Level2/LevelHUD/PanelContainer/Instructions/1Instruction"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("8_06u38")
 
-[node name="StopInstruction" type="HBoxContainer" parent="Level2/LevelHUD/PanelContainer/Instructions"]
+[node name="2Instruction" type="HBoxContainer" parent="Level2/LevelHUD/PanelContainer/Instructions"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/StopInstruction"]
+[node name="Label" type="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/2Instruction"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Stop!"
+text = "2..."
 
-[node name="TextureRect" type="TextureRect" parent="Level2/LevelHUD/PanelContainer/Instructions/StopInstruction"]
+[node name="TextureRect" type="TextureRect" parent="Level2/LevelHUD/PanelContainer/Instructions/2Instruction"]
 layout_mode = 2
 size_flags_horizontal = 8
-texture = ExtResource("4_7quu1")
+texture = ExtResource("8_06u38")
 
-[node name="WarningInstruction" type="HBoxContainer" parent="Level2/LevelHUD/PanelContainer/Instructions"]
+[node name="3Instruction" type="HBoxContainer" parent="Level2/LevelHUD/PanelContainer/Instructions"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/WarningInstruction"]
+[node name="Label" type="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/3Instruction"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Prepare to stop
+text = "3..."
+
+[node name="TextureRect" type="TextureRect" parent="Level2/LevelHUD/PanelContainer/Instructions/3Instruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("8_06u38")
+
+[node name="SoleilInstruction" type="HBoxContainer" parent="Level2/LevelHUD/PanelContainer/Instructions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/SoleilInstruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Soleil!
 "
 
-[node name="TextureRect" type="TextureRect" parent="Level2/LevelHUD/PanelContainer/Instructions/WarningInstruction"]
+[node name="TextureRect" type="TextureRect" parent="Level2/LevelHUD/PanelContainer/Instructions/SoleilInstruction"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("14_ijdch")
+
+[node name="CheckInstruction" type="HBoxContainer" parent="Level2/LevelHUD/PanelContainer/Instructions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Don't move!"
+
+[node name="TextureRect" type="TextureRect" parent="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("4_7quu1")
 
 [node name="LevelCompleted" type="VBoxContainer" parent="Level2/LevelHUD"]
 visible = false
@@ -585,11 +695,32 @@ text = "Level Completed !"
 layout_mode = 2
 texture = ExtResource("33_co2t7")
 
+[node name="AnnounceCommands" type="Node" parent="Level2"]
+script = ExtResource("13_d88ly")
+
+[node name="FirstTimer" type="Timer" parent="Level2/AnnounceCommands"]
+wait_time = 1.1
+one_shot = true
+
+[node name="SecondTimer" type="Timer" parent="Level2/AnnounceCommands"]
+wait_time = 1.8
+one_shot = true
+
+[node name="ThirdTimer" type="Timer" parent="Level2/AnnounceCommands"]
+wait_time = 2.8
+one_shot = true
+
+[node name="SoleilTimer" type="Timer" parent="Level2/AnnounceCommands"]
+wait_time = 3.6
+
+[node name="CheckTimer" type="Timer" parent="Level2/AnnounceCommands"]
+one_shot = true
+
 [node name="TriggerEnterLevel" parent="Level2" instance=ExtResource("27_dc8k4")]
 position = Vector2(151, 997)
 
 [node name="StartingLineArea2D" type="Area2D" parent="Level2"]
-position = Vector2(587, 943)
+position = Vector2(282, 943)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level2/StartingLineArea2D"]
 position = Vector2(44, -3)
@@ -615,7 +746,7 @@ metadata/_edit_group_ = true
 script = ExtResource("8_ouh8i")
 
 [node name="FinishLineArea2D" type="Area2D" parent="Level2"]
-position = Vector2(1541, 939)
+position = Vector2(1570, 939)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level2/FinishLineArea2D"]
 position = Vector2(39, -3)
@@ -644,7 +775,7 @@ position = Vector2(35, 540)
 [node name="Floor" parent="Level2" instance=ExtResource("26_6bflj")]
 
 [node name="StartingPosition" type="Node2D" parent="Level2"]
-position = Vector2(356, 996)
+position = Vector2(189, 996)
 script = ExtResource("39_jfije")
 
 [node name="WinAudioStreamPlayer" type="AudioStreamPlayer" parent="Level2"]
@@ -653,101 +784,8 @@ volume_db = -3.239
 
 [node name="GameAudioStreamPlayer" type="AudioStreamPlayer" parent="Level2"]
 process_mode = 1
-stream = ExtResource("39_8t8pj")
+stream = ExtResource("44_0lhmv")
 script = ExtResource("40_vods0")
-
-[node name="AnnounceCommands" type="Node" parent="Level2"]
-script = ExtResource("13_d88ly")
-
-[node name="Timer" type="Timer" parent="Level2/AnnounceCommands"]
-
-[node name="StateChart" type="Node" parent="Level2"]
-script = ExtResource("19_n3dkt")
-
-[node name="CompoundState" type="Node" parent="Level2/StateChart"]
-script = ExtResource("18_3107p")
-initial_state = NodePath("IdleState")
-
-[node name="IdleState" type="Node" parent="Level2/StateChart/CompoundState"]
-script = ExtResource("19_257rj")
-
-[node name="ToGoState" type="Node" parent="Level2/StateChart/CompoundState/IdleState"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../GoState")
-event = &"started"
-delay_in_seconds = "0.0"
-
-[node name="GoState" type="Node" parent="Level2/StateChart/CompoundState"]
-script = ExtResource("19_257rj")
-
-[node name="ToEndState" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../EndedState")
-event = &"ended"
-delay_in_seconds = "0.0"
-
-[node name="ToIdleState" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../IdleState")
-event = &"idled"
-delay_in_seconds = "0.0"
-
-[node name="ToWarning" type="Node" parent="Level2/StateChart/CompoundState/GoState"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../WarningState")
-event = &"next"
-delay_in_seconds = "0.0"
-
-[node name="WarningState" type="Node" parent="Level2/StateChart/CompoundState"]
-script = ExtResource("19_257rj")
-
-[node name="ToEndState" type="Node" parent="Level2/StateChart/CompoundState/WarningState"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../EndedState")
-event = &"ended"
-delay_in_seconds = "0.0"
-
-[node name="ToStopTransition" type="Node" parent="Level2/StateChart/CompoundState/WarningState"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../StopState")
-event = &"next"
-delay_in_seconds = "0.0"
-
-[node name="ToIdleState" type="Node" parent="Level2/StateChart/CompoundState/WarningState"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../IdleState")
-event = &"idled"
-delay_in_seconds = "0.0"
-
-[node name="StopState" type="Node" parent="Level2/StateChart/CompoundState"]
-script = ExtResource("19_257rj")
-
-[node name="ToGoState" type="Node" parent="Level2/StateChart/CompoundState/StopState"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../GoState")
-event = &"next"
-delay_in_seconds = "0.0"
-
-[node name="ToEndState" type="Node" parent="Level2/StateChart/CompoundState/StopState"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../EndedState")
-event = &"ended"
-delay_in_seconds = "0.0"
-
-[node name="ToIdleState" type="Node" parent="Level2/StateChart/CompoundState/StopState"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../IdleState")
-event = &"idled"
-delay_in_seconds = "0.0"
-
-[node name="EndedState" type="Node" parent="Level2/StateChart/CompoundState"]
-script = ExtResource("19_257rj")
-
-[node name="ToIdleState" type="Node" parent="Level2/StateChart/CompoundState/EndedState"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../IdleState")
-event = &"idled"
-delay_in_seconds = "0.0"
 
 [node name="GameController" type="Node" parent="."]
 process_mode = 3
@@ -770,23 +808,38 @@ script = ExtResource("1_2wvwb")
 [connection signal="level_entered" from="Level2" to="Level2/LeftWall" method="turn_off"]
 [connection signal="reset" from="Level2" to="Level2/LevelHUD/LevelCompleted" method="hide"]
 [connection signal="reset" from="Level2" to="Level2/StartingPosition" method="do"]
-[connection signal="reset" from="Level2" to="Level2/GameAudioStreamPlayer" method="_on_reset"]
 [connection signal="reset" from="Level2" to="Level2/AnnounceCommands" method="reset_game"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/PanelContainer" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/PanelContainer/Instructions/1Instruction" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/PanelContainer/Instructions/2Instruction" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/PanelContainer/Instructions/3Instruction" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/LevelCompleted" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/PanelContainer/Instructions/SoleilInstruction" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState" to="Level2/LevelHUD/PanelContainer" method="show"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState" to="Level2/GameAudioStreamPlayer" method="play"]
+[connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState" to="Level2/LevelHUD/PanelContainer" method="hide"]
+[connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState" to="Level2/GameAudioStreamPlayer" method="stop"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/1State" to="Level2/LevelHUD/PanelContainer/Instructions/1Instruction" method="show"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/1State" to="Level2/GameAudioStreamPlayer" method="play"]
+[connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState/1State" to="Level2/LevelHUD/PanelContainer/Instructions/1Instruction" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/2State" to="Level2/LevelHUD/PanelContainer/Instructions/2Instruction" method="show"]
+[connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState/2State" to="Level2/LevelHUD/PanelContainer/Instructions/2Instruction" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/3State" to="Level2/LevelHUD/PanelContainer/Instructions/3Instruction" method="show"]
+[connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState/3State" to="Level2/LevelHUD/PanelContainer/Instructions/3Instruction" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/SoleilState" to="Level2/LevelHUD/PanelContainer/Instructions/SoleilInstruction" method="show"]
+[connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState/SoleilState" to="Level2/LevelHUD/PanelContainer/Instructions/SoleilInstruction" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/CheckState" to="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" method="show"]
+[connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState/CheckState" to="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" method="hide"]
+[connection signal="state_physics_processing" from="Level2/StateChart/CompoundState/GoState/CheckState" to="Player/CheckPlayerMovement" method="_on_check_state_state_physics_processing"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/LevelHUD/LevelCompleted" method="show"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/WinAudioStreamPlayer" method="play"]
+[connection signal="state_exited" from="Level2/StateChart/CompoundState/EndedState" to="Level2/LevelHUD/LevelCompleted" method="hide"]
+[connection signal="timeout" from="Level2/AnnounceCommands/SoleilTimer" to="Level2/AnnounceCommands" method="_on_timer_timeout"]
+[connection signal="timeout" from="Level2/AnnounceCommands/CheckTimer" to="Level2/AnnounceCommands" method="_on_timer_timeout"]
 [connection signal="target_group_entered" from="Level2/TriggerEnterLevel" to="Level2/LeftWall" method="turn_on"]
 [connection signal="body_entered" from="Level2/StartingLineArea2D" to="Level2/StartingLineArea2D/DetectStartingLineReached" method="_on_starting_line_area_2d_body_entered"]
 [connection signal="entered_play_area" from="Level2/StartingLineArea2D/DetectStartingLineReached" to="Level2/AnnounceCommands" method="_on_detect_starting_line_reached_entered_play_area"]
 [connection signal="body_entered" from="Level2/FinishLineArea2D" to="Level2/FinishLineArea2D/DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
 [connection signal="finished_line_reached" from="Level2/FinishLineArea2D/DetectFinishLineReached" to="Level2/AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
-[connection signal="timeout" from="Level2/AnnounceCommands/Timer" to="Level2/AnnounceCommands" method="_on_timer_timeout"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/PanelContainer" method="hide_all"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState" to="Level2/LevelHUD/PanelContainer" method="_on_go_state_state_entered"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState" to="Level2/GameAudioStreamPlayer" method="resume"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/WarningState" to="Level2/LevelHUD/PanelContainer" method="_on_warning_state_state_entered"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/StopState" to="Level2/LevelHUD/PanelContainer" method="_on_stop_state_state_entered"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/StopState" to="Level2/GameAudioStreamPlayer" method="pause"]
-[connection signal="state_physics_processing" from="Level2/StateChart/CompoundState/StopState" to="Player/CheckPlayerMovement" method="_on_stop_state_state_physics_processing"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/LevelHUD/PanelContainer" method="_on_ended_state_state_entered"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/LevelHUD/LevelCompleted" method="show"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/WinAudioStreamPlayer" method="play"]
-[connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/GameAudioStreamPlayer" method="_on_ended_state_state_entered"]
 [connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
