@@ -278,3 +278,7 @@ func _on_ignore_state_changes_checkbox_toggled(button_pressed):
 
 func _on_ignore_transitions_checkbox_toggled(button_pressed):
 	ignore_transitions = button_pressed
+
+
+func play(extra_arg_0: StringName) -> void:
+	pass # Replace with function body.

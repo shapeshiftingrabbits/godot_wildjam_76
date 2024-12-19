@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=74 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_2wvwb"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
@@ -172,15 +172,21 @@ region = Rect2(288, 176, 16, 16)
 atlas = ExtResource("31_24rfj")
 region = Rect2(320, 176, 16, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_saorr"]
-size = Vector2(18.8854, 60)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xdvd"]
-size = Vector2(20, 60)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_0phsj"]
 atlas = ExtResource("49_wymhs")
 region = Rect2(0, 256, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h00rt"]
+atlas = ExtResource("49_wymhs")
+region = Rect2(960, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rwg1"]
+atlas = ExtResource("49_wymhs")
+region = Rect2(1152, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjvmt"]
+atlas = ExtResource("49_wymhs")
+region = Rect2(576, 0, 192, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fe2oc"]
 atlas = ExtResource("49_wymhs")
@@ -204,14 +210,28 @@ animations = [{
 "name": &"1",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h00rt")
+}],
 "loop": true,
 "name": &"2",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rwg1")
+}],
 "loop": true,
 "name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjvmt")
+}],
+"loop": true,
+"name": &"check",
 "speed": 5.0
 }, {
 "frames": [{
@@ -238,6 +258,12 @@ animations = [{
 "name": &"soleil",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_saorr"]
+size = Vector2(18.8854, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xdvd"]
+size = Vector2(20, 60)
 
 [node name="GameRoot" type="Node2D"]
 
@@ -537,6 +563,12 @@ horizontal_alignment = 1
 [node name="Level2" type="Node2D" parent="."]
 position = Vector2(1920, 0)
 script = ExtResource("24_po0hx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Level2"]
+position = Vector2(1763, 946)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_puma4")
+animation = &"check"
 
 [node name="StateChart" type="Node" parent="Level2"]
 script = ExtResource("19_n3dkt")
@@ -859,10 +891,6 @@ stream = ExtResource("48_j0q31")
 volume_db = -13.0
 autoplay = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_puma4")
-animation = &"2"
-
 [connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="GameController" method="_on_menu_button_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="GameController" method="reset_current_level"]
 [connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/ExitToMainScreenButton" to="GameController" method="_on_exit_to_main_screen_button_pressed"]
@@ -888,20 +916,27 @@ animation = &"2"
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/LevelCompleted" method="hide"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/PanelContainer/Instructions/SoleilInstruction" method="hide"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" method="hide"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/IdleState" to="Level2/AnimatedSprite2D" method="play" binds= [&"idle"]]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState" to="Level2/LevelHUD/PanelContainer" method="show"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState" to="Level2/GameAudioStreamPlayer" method="play"]
 [connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState" to="Level2/LevelHUD/PanelContainer" method="hide"]
 [connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState" to="Level2/GameAudioStreamPlayer" method="stop"]
+[connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState" to="Level2/AnimatedSprite2D" method="play" binds= [&"idle"]]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/1State" to="Level2/LevelHUD/PanelContainer/Instructions/1Instruction" method="show"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/1State" to="Level2/GameAudioStreamPlayer" method="play"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/1State" to="Level2/AnimatedSprite2D" method="play" binds= [&"1"]]
 [connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState/1State" to="Level2/LevelHUD/PanelContainer/Instructions/1Instruction" method="hide"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/2State" to="Level2/LevelHUD/PanelContainer/Instructions/2Instruction" method="show"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/2State" to="Level2/AnimatedSprite2D" method="play" binds= [&"2"]]
 [connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState/2State" to="Level2/LevelHUD/PanelContainer/Instructions/2Instruction" method="hide"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/3State" to="Level2/LevelHUD/PanelContainer/Instructions/3Instruction" method="show"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/3State" to="Level2/AnimatedSprite2D" method="play" binds= [&"3"]]
 [connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState/3State" to="Level2/LevelHUD/PanelContainer/Instructions/3Instruction" method="hide"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/SoleilState" to="Level2/LevelHUD/PanelContainer/Instructions/SoleilInstruction" method="show"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/SoleilState" to="Level2/AnimatedSprite2D" method="play" binds= [&"soleil"]]
 [connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState/SoleilState" to="Level2/LevelHUD/PanelContainer/Instructions/SoleilInstruction" method="hide"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/CheckState" to="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" method="show"]
+[connection signal="state_entered" from="Level2/StateChart/CompoundState/GoState/CheckState" to="Level2/AnimatedSprite2D" method="play" binds= [&"check"]]
 [connection signal="state_exited" from="Level2/StateChart/CompoundState/GoState/CheckState" to="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" method="hide"]
 [connection signal="state_physics_processing" from="Level2/StateChart/CompoundState/GoState/CheckState" to="Player/CheckPlayerMovement" method="_on_check_state_state_physics_processing"]
 [connection signal="state_entered" from="Level2/StateChart/CompoundState/EndedState" to="Level2/LevelHUD/LevelCompleted" method="show"]
