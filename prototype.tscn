@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="4_7quu1"]
 [ext_resource type="Script" path="res://scripts/handle_character_orientation.gd" id="4_kanht"]
 [ext_resource type="Texture2D" uid="uid://35n1dsp0rogv" path="res://textures/pokerMad.png" id="4_u55yo"]
+[ext_resource type="AudioStream" uid="uid://biu0ia7l3vyj3" path="res://audio/sfx/footstep_grass_1.ogg" id="5_4vnsi"]
+[ext_resource type="AudioStream" uid="uid://bh1qumibn68hj" path="res://audio/sfx/footstep_grass_2.ogg" id="6_1bbx6"]
 [ext_resource type="Texture2D" uid="uid://cd053hfja0sbd" path="res://textures/lollipopBaseBrown.png" id="6_1swtq"]
 [ext_resource type="Script" path="res://scripts/detect_finish_line_reached.gd" id="6_to2lt"]
 [ext_resource type="Texture2D" uid="uid://c1s74jb6f2sxq" path="res://textures/lollipopFruitGreen.png" id="7_60v0s"]
@@ -36,9 +38,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="19_n3dkt"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="20_nrba1"]
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="24_po0hx"]
-[ext_resource type="AudioStream" uid="uid://dmsxdtv4kf7x3" path="res://audio/footstep_grass_003.ogg" id="25_74thl"]
 [ext_resource type="PackedScene" uid="uid://b1xryu6kfp5uq" path="res://prefabs/floor.tscn" id="26_6bflj"]
-[ext_resource type="AudioStream" uid="uid://bnv5akw5iirtf" path="res://audio/footstep_grass_004.ogg" id="26_am74k"]
 [ext_resource type="PackedScene" uid="uid://p2et6u5v7uqr" path="res://prefabs/trigger_2d.tscn" id="27_dc8k4"]
 [ext_resource type="Texture2D" uid="uid://5qxurwjaaqq2" path="res://textures/tilemap_packed.png" id="31_24rfj"]
 [ext_resource type="Texture2D" uid="uid://bp0suvr8wupj8" path="res://textures/star.png" id="33_co2t7"]
@@ -145,6 +145,12 @@ _data = {
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_qxxqq"]
 
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_p50u2"]
+fade_time = 1.0
+stream_count = 2
+stream_0 = ExtResource("5_4vnsi")
+stream_1 = ExtResource("6_1bbx6")
+
 [sub_resource type="Resource" id="Resource_eeurf"]
 script = ExtResource("13_s3ig7")
 guard = ExtResource("12_gr8w6")
@@ -152,12 +158,6 @@ guard = ExtResource("12_gr8w6")
 [sub_resource type="Resource" id="Resource_jye0k"]
 script = ExtResource("13_404iv")
 guards = Array[ExtResource("11_3lk3j")]([ExtResource("9_yr3nq"), SubResource("Resource_eeurf")])
-
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_p50u2"]
-fade_time = 0.0
-stream_count = 2
-stream_0 = ExtResource("25_74thl")
-stream_1 = ExtResource("26_am74k")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_78gsa"]
 atlas = ExtResource("31_24rfj")
@@ -285,6 +285,9 @@ position = Vector2(1, 4)
 scale = Vector2(96, 120)
 texture = SubResource("CanvasTexture_qxxqq")
 
+[node name="WalkAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+stream = SubResource("AudioStreamPlaylist_p50u2")
+
 [node name="CheckPlayerMovement" type="Node" parent="Player"]
 script = ExtResource("14_yfcr8")
 
@@ -389,10 +392,6 @@ script = ExtResource("20_nrba1")
 to = NodePath("../../ShovedBack")
 guard = ExtResource("9_gs72s")
 delay_in_seconds = "0.0"
-
-[node name="WalkAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
-stream = SubResource("AudioStreamPlaylist_p50u2")
-pitch_scale = 3.0
 
 [node name="Punisher" type="Sprite2D" parent="."]
 position = Vector2(73, 1083)
