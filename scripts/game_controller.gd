@@ -5,6 +5,7 @@ class_name GameController
 signal move_to_next_level(level: LevelController)
 @onready var menu_panel_container: PanelContainer = $"../HUD/MenuPanelContainer"
 
+
 # Level name need to be sortable by name in ascending order
 var level_controllers: Array[Node]
 var current_level_controller: LevelController
@@ -27,6 +28,7 @@ func _moving_to_next_level():
 	next_level.enter_level()
 	current_level_controller = next_level
 	move_to_next_level.emit(current_level_controller)
+	
 
 
 func reset_current_level() -> void:

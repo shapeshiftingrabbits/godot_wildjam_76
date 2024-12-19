@@ -24,14 +24,10 @@ func _on_check_player_movement_player_has_moved() -> void:
 func turn_on():
 	has_been_thrown_in_air = false
 	is_moving_back = true
-	player.is_control_on = false
-	pass
 
 
 func turn_off():
 	is_moving_back = false
-	player.is_control_on = true
-	pass
 
 
 func _physics_process(delta: float) -> void:

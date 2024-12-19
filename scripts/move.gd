@@ -11,13 +11,8 @@ const SPEED = 300.0
 
 @export var JUMP_VELOCITY: float = -800.0
 
-var is_control_on: bool = true
 
-
-func _physics_process(delta: float) -> void:
-	if !is_control_on:
-		return
-	
+func _on_in_control_state_state_physics_processing(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
