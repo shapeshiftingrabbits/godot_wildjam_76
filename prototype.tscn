@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=71 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_2wvwb"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
@@ -48,6 +48,7 @@
 [ext_resource type="AudioStream" uid="uid://b76m01fh00qfl" path="res://audio/prompts/prompt_1.ogg" id="44_0lhmv"]
 [ext_resource type="AudioStream" uid="uid://khkpkakhgenh" path="res://audio/Children_Game_Music/WAV/SFX_Complete.wav" id="44_ue0md"]
 [ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="48_j0q31"]
+[ext_resource type="Texture2D" uid="uid://dgpy8sey60xjr" path="res://textures/character_femaleAdventurer_sheetHD.png" id="49_wymhs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrfrj"]
 size = Vector2(64.75, 98)
@@ -176,6 +177,67 @@ size = Vector2(18.8854, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xdvd"]
 size = Vector2(20, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0phsj"]
+atlas = ExtResource("49_wymhs")
+region = Rect2(0, 256, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fe2oc"]
+atlas = ExtResource("49_wymhs")
+region = Rect2(0, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs82v"]
+atlas = ExtResource("49_wymhs")
+region = Rect2(1536, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1fkq"]
+atlas = ExtResource("49_wymhs")
+region = Rect2(1536, 0, 192, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_puma4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0phsj")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fe2oc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs82v")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1fkq")
+}],
+"loop": true,
+"name": &"soleil",
+"speed": 5.0
+}]
 
 [node name="GameRoot" type="Node2D"]
 
@@ -796,6 +858,10 @@ script = ExtResource("1_2wvwb")
 stream = ExtResource("48_j0q31")
 volume_db = -13.0
 autoplay = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_puma4")
+animation = &"2"
 
 [connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="GameController" method="_on_menu_button_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="GameController" method="reset_current_level"]
