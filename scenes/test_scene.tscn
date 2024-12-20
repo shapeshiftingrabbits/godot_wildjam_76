@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr6ym2spglvsm"]
+
+[ext_resource type="PackedScene" uid="uid://bq3882tkp8hwx" path="res://scenes/prototype.tscn" id="1_700qt"]
+[ext_resource type="PackedScene" uid="uid://dcn77v8uc5ms" path="res://prefabs/level_3.tscn" id="2_01uoa"]
+
+[node name="GameRoot" instance=ExtResource("1_700qt")]
+
+[node name="Player" parent="." index="2"]
+position = Vector2(113, 925)
+
+[node name="Level" parent="." index="3" instance=ExtResource("2_01uoa")]
+position = Vector2(0, 0)
+
+[editable path="Level"]
+[editable path="Level/RightWall"]
+[editable path="Level/LeftWall"]

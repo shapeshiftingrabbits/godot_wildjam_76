@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://cihbomr01nysf"]
+
+[ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_s4q80"]
+[ext_resource type="Texture2D" uid="uid://bum1k6bxj63po" path="res://textures/signRight.png" id="2_ii83k"]
+[ext_resource type="PackedScene" uid="uid://bomwgt3savmk0" path="res://prefabs/dirt_wall.tscn" id="3_x0cix"]
+[ext_resource type="PackedScene" uid="uid://b1xryu6kfp5uq" path="res://prefabs/floor.tscn" id="4_uoxab"]
+[ext_resource type="PackedScene" uid="uid://p2et6u5v7uqr" path="res://prefabs/trigger_2d.tscn" id="5_6y3hm"]
+[ext_resource type="Texture2D" uid="uid://5qxurwjaaqq2" path="res://textures/tilemap_packed.png" id="6_mltsp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78gsa"]
+atlas = ExtResource("6_mltsp")
+region = Rect2(240, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mkxw"]
+atlas = ExtResource("6_mltsp")
+region = Rect2(288, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtl7h"]
+atlas = ExtResource("6_mltsp")
+region = Rect2(320, 176, 16, 16)
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_s4q80")
+
+[node name="SignRight" type="Sprite2D" parent="."]
+position = Vector2(1481, 939)
+scale = Vector2(2, 2)
+texture = ExtResource("2_ii83k")
+
+[node name="Label" type="Label" parent="SignRight"]
+offset_left = -25.0
+offset_top = -20.0
+offset_right = 15.0
+offset_bottom = 3.0
+text = "Start"
+
+[node name="RightWall" parent="." instance=ExtResource("3_x0cix")]
+
+[node name="LeftWall" parent="." instance=ExtResource("3_x0cix")]
+position = Vector2(35, 540)
+
+[node name="Floor" parent="." instance=ExtResource("4_uoxab")]
+
+[node name="TriggerExitLevel" parent="." instance=ExtResource("5_6y3hm")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1251.0
+offset_top = 630.0
+offset_right = 1451.0
+offset_bottom = 743.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_78gsa")
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "/"
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_4mkxw")
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_gtl7h")
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Move"
+horizontal_alignment = 1
+
+[connection signal="level_exited" from="." to="RightWall" method="turn_off"]
+[connection signal="target_group_entered" from="TriggerExitLevel" to="." method="exit_level"]

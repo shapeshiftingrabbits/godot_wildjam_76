@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cvpnwunomn7ab"]
+[gd_scene load_steps=36 format=3 uid="uid://cvpnwunomn7ab"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_emc6c"]
 [ext_resource type="Texture2D" uid="uid://dgpy8sey60xjr" path="res://textures/character_femaleAdventurer_sheetHD.png" id="2_qktxg"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://khkpkakhgenh" path="res://audio/Children_Game_Music/WAV/SFX_Complete.wav" id="21_ahr8r"]
 [ext_resource type="AudioStream" uid="uid://b76m01fh00qfl" path="res://audio/prompts/prompt_1.ogg" id="22_oqhk1"]
 [ext_resource type="Script" path="res://scripts/audio_player.gd" id="23_dcya8"]
+[ext_resource type="Script" path="res://scripts/bind_player_check_state_with_level_change.gd" id="25_d63fd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0phsj"]
 atlas = ExtResource("2_qktxg")
@@ -426,10 +427,15 @@ process_mode = 1
 stream = ExtResource("22_oqhk1")
 script = ExtResource("23_dcya8")
 
+[node name="BindPlayerCheckState" type="Node" parent="."]
+script = ExtResource("25_d63fd")
+
 [connection signal="level_entered" from="." to="Punisher" method="_on_level_entered"]
 [connection signal="level_entered" from="." to="LeftWall" method="turn_off"]
+[connection signal="level_entered" from="." to="BindPlayerCheckState" method="_on_level_entered"]
 [connection signal="level_exited" from="." to="Punisher" method="_on_level_exited"]
 [connection signal="level_exited" from="." to="RightWall" method="turn_off"]
+[connection signal="level_exited" from="." to="BindPlayerCheckState" method="_on_level_exited"]
 [connection signal="reset" from="." to="LevelHUD/LevelCompleted" method="hide"]
 [connection signal="reset" from="." to="AnnounceCommands" method="reset_game"]
 [connection signal="reset" from="." to="StartingPosition" method="do"]

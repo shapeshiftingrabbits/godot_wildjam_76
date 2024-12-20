@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=45 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_2wvwb"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
@@ -29,15 +29,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="19_257rj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="19_n3dkt"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="20_nrba1"]
-[ext_resource type="Script" path="res://scripts/level_controller.gd" id="24_po0hx"]
-[ext_resource type="PackedScene" uid="uid://b1xryu6kfp5uq" path="res://prefabs/floor.tscn" id="26_6bflj"]
 [ext_resource type="Resource" uid="uid://b1hwt8ptptgj5" path="res://player_state_machine_guards/in_control.tres" id="26_jgdgf"]
-[ext_resource type="PackedScene" uid="uid://p2et6u5v7uqr" path="res://prefabs/trigger_2d.tscn" id="27_dc8k4"]
-[ext_resource type="Texture2D" uid="uid://5qxurwjaaqq2" path="res://textures/tilemap_packed.png" id="31_24rfj"]
-[ext_resource type="Texture2D" uid="uid://bum1k6bxj63po" path="res://textures/signRight.png" id="36_ttlx3"]
-[ext_resource type="PackedScene" uid="uid://boc8qbty5ese6" path="res://prefabs/fence_static_body_2d.tscn" id="39_8agdt"]
-[ext_resource type="PackedScene" uid="uid://bomwgt3savmk0" path="res://prefabs/dirt_wall.tscn" id="39_jrjcm"]
-[ext_resource type="PackedScene" uid="uid://cvpnwunomn7ab" path="res://prefabs/level_2.tscn" id="39_sxjpk"]
 [ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="48_j0q31"]
 [ext_resource type="Script" path="res://scripts/move_player_to_next_level.gd" id="50_4mvyr"]
 
@@ -155,18 +147,6 @@ guards = Array[ExtResource("11_3lk3j")]([ExtResource("9_yr3nq"), SubResource("Re
 script = ExtResource("13_s3ig7")
 guard = ExtResource("26_jgdgf")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_78gsa"]
-atlas = ExtResource("31_24rfj")
-region = Rect2(240, 96, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4mkxw"]
-atlas = ExtResource("31_24rfj")
-region = Rect2(288, 176, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gtl7h"]
-atlas = ExtResource("31_24rfj")
-region = Rect2(320, 176, 16, 16)
-
 [node name="GameRoot" type="Node2D"]
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -205,7 +185,6 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 enabled = false
-initial_node_to_watch = NodePath("../../../../Level2/StateChart")
 
 [node name="MenuPanelContainer" type="PanelContainer" parent="HUD"]
 process_mode = 3
@@ -427,86 +406,6 @@ to = NodePath("../../InControlState")
 guard = ExtResource("26_jgdgf")
 delay_in_seconds = "0.0"
 
-[node name="Level1" type="Node2D" parent="."]
-script = ExtResource("24_po0hx")
-
-[node name="SignRight" type="Sprite2D" parent="Level1"]
-position = Vector2(1481, 939)
-scale = Vector2(2, 2)
-texture = ExtResource("36_ttlx3")
-
-[node name="Label" type="Label" parent="Level1/SignRight"]
-offset_left = -25.0
-offset_top = -20.0
-offset_right = 15.0
-offset_bottom = 3.0
-text = "Start"
-
-[node name="RightWall" parent="Level1" instance=ExtResource("39_jrjcm")]
-
-[node name="LeftWall" parent="Level1" instance=ExtResource("39_jrjcm")]
-position = Vector2(35, 540)
-
-[node name="Floor" parent="Level1" instance=ExtResource("26_6bflj")]
-
-[node name="TriggerExitLevel" parent="Level1" instance=ExtResource("27_dc8k4")]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Level1"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 1251.0
-offset_top = 630.0
-offset_right = 1451.0
-offset_bottom = 743.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Level1/VBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Level1/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_78gsa")
-
-[node name="Label2" type="Label" parent="Level1/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "/"
-horizontal_alignment = 1
-
-[node name="TextureRect2" type="TextureRect" parent="Level1/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_4mkxw")
-
-[node name="TextureRect3" type="TextureRect" parent="Level1/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = SubResource("AtlasTexture_gtl7h")
-
-[node name="Label" type="Label" parent="Level1/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Move"
-horizontal_alignment = 1
-
-[node name="Level2" parent="." instance=ExtResource("39_sxjpk")]
-
-[node name="Level3" parent="." instance=ExtResource("39_sxjpk")]
-position = Vector2(3840, 0)
-
-[node name="FenceStaticBody2D" parent="Level3" instance=ExtResource("39_8agdt")]
-
 [node name="GameController" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("1_2wvwb")
@@ -534,12 +433,5 @@ autoplay = true
 [connection signal="state_physics_processing" from="Player/StateChart/ParallelState/CompoundState/Jump" to="Player/HandleCharacterOrientation" method="_on_jump_state_physics_processing"]
 [connection signal="state_physics_processing" from="Player/StateChart/ParallelState/PlayerControlState/InControlState" to="Player" method="_on_in_control_state_state_physics_processing"]
 [connection signal="state_physics_processing" from="Player/StateChart/ParallelState/PlayerControlState/NotInControlState" to="Player/MovePlayerToNextLevel" method="_on_not_in_control_state_state_physics_processing"]
-[connection signal="level_exited" from="Level1" to="Level1/RightWall" method="turn_off"]
-[connection signal="target_group_entered" from="Level1/TriggerExitLevel" to="Level1" method="exit_level"]
-[connection signal="leave_level" from="GameController" to="Player/CheckPlayerMovement" method="_on_game_controller_leave_level"]
 [connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
-[connection signal="move_to_next_level" from="GameController" to="Player/CheckPlayerMovement" method="_on_game_controller_move_to_next_level"]
 [connection signal="move_to_next_level" from="GameController" to="Player/MovePlayerToNextLevel" method="do"]
-
-[editable path="Level2"]
-[editable path="Level3"]

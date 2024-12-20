@@ -1,5 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcn77v8uc5ms"]
+[gd_scene load_steps=3 format=3 uid="uid://dcn77v8uc5ms"]
 
 [ext_resource type="PackedScene" uid="uid://cvpnwunomn7ab" path="res://prefabs/level_2.tscn" id="1_f84ol"]
+[ext_resource type="PackedScene" uid="uid://boc8qbty5ese6" path="res://prefabs/fence_static_body_2d.tscn" id="2_yqdqj"]
 
-[node name="Level2" instance=ExtResource("1_f84ol")]
+[node name="Level" instance=ExtResource("1_f84ol")]
+
+[node name="FenceStaticBody2D" parent="." index="1" instance=ExtResource("2_yqdqj")]
+position = Vector2(558, 976)
+
+[node name="FenceStaticBody2D2" parent="." index="2" instance=ExtResource("2_yqdqj")]
+
+[node name="FenceStaticBody2D3" parent="." index="3" instance=ExtResource("2_yqdqj")]
+position = Vector2(1286, 976)

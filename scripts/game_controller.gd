@@ -18,6 +18,8 @@ func _ready() -> void:
 	current_level_controller = level_controllers.front()
 	current_level_controller_index = 0
 	level_controllers.map( func (level_controller: LevelController): level_controller.level_exited.connect(_moving_to_next_level))
+	await current_level_controller.ready
+	current_level_controller.enter_level()
 
 
 func _moving_to_next_level():

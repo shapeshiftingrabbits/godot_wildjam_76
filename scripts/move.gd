@@ -3,8 +3,6 @@ extends CharacterBody2D
 
 class_name Player
 
-signal running
-signal stopped
 signal jumping
 
 const SPEED = 300.0
