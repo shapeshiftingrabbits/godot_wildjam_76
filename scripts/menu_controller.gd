@@ -14,13 +14,20 @@ func _on_quit_button_pressed() -> void:
 
 
 func _on_menu_button_pressed() -> void:
+	show_menu()
+
+
+func show_menu():
 	get_tree().paused = true
 	show()
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action("ui_cancel"):
-		resume()
+	if event.is_action_released("ui_cancel"):
+		if visible:
+			resume()
+		else:
+			show_menu()
 
 
 func resume() -> void:
