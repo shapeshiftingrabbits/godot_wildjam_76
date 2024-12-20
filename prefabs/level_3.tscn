@@ -12,3 +12,6 @@ position = Vector2(558, 976)
 
 [node name="FenceStaticBody2D3" parent="." index="3" instance=ExtResource("2_yqdqj")]
 position = Vector2(1286, 976)
+
+[node name="ExitLevelTrigger2D" parent="." index="14"]
+disabled = true
