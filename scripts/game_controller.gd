@@ -28,27 +28,7 @@ func _moving_to_next_level():
 	next_level.enter_level()
 	current_level_controller = next_level
 	move_to_next_level.emit(current_level_controller)
-	
 
 
 func reset_current_level() -> void:
 	current_level_controller.reset_level()
-
-
-func _on_exit_to_main_screen_button_pressed() -> void:
-	get_tree().reload_current_scene()
-
-
-func _on_quit_button_pressed() -> void:
-	get_tree().quit()
-
-
-func _on_menu_button_pressed() -> void:
-	get_tree().paused = true
-	menu_panel_container.show()
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action("ui_cancel"):
-		menu_panel_container.hide()
-		get_tree().paused = false

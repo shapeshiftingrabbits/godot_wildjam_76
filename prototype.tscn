@@ -1,9 +1,10 @@
-[gd_scene load_steps=80 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=81 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_2wvwb"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
 [ext_resource type="Script" path="res://scripts/camera_panning.gd" id="1_jburt"]
 [ext_resource type="Script" path="res://scripts/move.gd" id="1_xoidt"]
+[ext_resource type="Script" path="res://scripts/menu_controller.gd" id="2_djbro"]
 [ext_resource type="Script" path="res://scripts/tween_show_up.gd" id="2_mnr4h"]
 [ext_resource type="Script" path="res://scripts/move_character_back.gd" id="3_0cdfv"]
 [ext_resource type="Texture2D" uid="uid://dj7fr863w3w1e" path="res://textures/character_femalePerson_sheetHD.png" id="3_v52op"]
@@ -315,7 +316,7 @@ enabled = false
 initial_node_to_watch = NodePath("../../../../Level2/StateChart")
 
 [node name="MenuPanelContainer" type="PanelContainer" parent="HUD"]
-visible = false
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -323,6 +324,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("2_djbro")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/MenuPanelContainer"]
 layout_mode = 2
@@ -334,6 +336,11 @@ theme_override_constants/separation = 24
 layout_mode = 2
 text = "Menu"
 horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Resume"
 
 [node name="ExitToMainScreenButton" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(180, 50)
@@ -916,6 +923,8 @@ position = Vector2(35, 540)
 
 [node name="Floor" parent="Level2" instance=ExtResource("26_6bflj")]
 
+[node name="ExitLevelTrigger2D" parent="Level2" instance=ExtResource("27_dc8k4")]
+
 [node name="StartingPosition" type="Node2D" parent="Level2"]
 position = Vector2(189, 996)
 script = ExtResource("39_jfije")
@@ -929,6 +938,19 @@ process_mode = 1
 stream = ExtResource("44_0lhmv")
 script = ExtResource("40_vods0")
 
+[node name="Level3" type="Node2D" parent="."]
+position = Vector2(3840, 0)
+script = ExtResource("24_po0hx")
+
+[node name="Trigger2D" parent="Level3" instance=ExtResource("27_dc8k4")]
+
+[node name="LeftDirtWall" parent="Level3" instance=ExtResource("39_jrjcm")]
+position = Vector2(35, 540)
+
+[node name="RightWall" parent="Level3" instance=ExtResource("39_jrjcm")]
+
+[node name="Floor" parent="Level3" instance=ExtResource("26_6bflj")]
+
 [node name="GameController" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("1_2wvwb")
@@ -938,10 +960,11 @@ stream = ExtResource("48_j0q31")
 volume_db = -13.0
 autoplay = true
 
-[connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="GameController" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="HUD/MenuPanelContainer" method="_on_menu_button_pressed"]
 [connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="GameController" method="reset_current_level"]
-[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/ExitToMainScreenButton" to="GameController" method="_on_exit_to_main_screen_button_pressed"]
-[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/QuitButton" to="GameController" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/Resume" to="HUD/MenuPanelContainer" method="resume"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/ExitToMainScreenButton" to="HUD/MenuPanelContainer" method="_on_exit_to_main_screen_button_pressed"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/QuitButton" to="HUD/MenuPanelContainer" method="_on_quit_button_pressed"]
 [connection signal="jumping" from="Player" to="Player/JumpAudioStreamPlayer2D" method="play"]
 [connection signal="player_has_moved" from="Player/CheckPlayerMovement" to="Player/MoveCharacterBack" method="_on_check_player_movement_player_has_moved"]
 [connection signal="end_move_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_end_move_back"]
@@ -1000,5 +1023,6 @@ autoplay = true
 [connection signal="entered_play_area" from="Level2/StartingLineArea2D/DetectStartingLineReached" to="Level2/AnnounceCommands" method="_on_detect_starting_line_reached_entered_play_area"]
 [connection signal="body_entered" from="Level2/FinishLineArea2D" to="Level2/FinishLineArea2D/DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
 [connection signal="finished_line_reached" from="Level2/FinishLineArea2D/DetectFinishLineReached" to="Level2/AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
+[connection signal="target_group_entered" from="Level2/ExitLevelTrigger2D" to="Level2" method="exit_level"]
 [connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
 [connection signal="move_to_next_level" from="GameController" to="Player/MovePlayerToNextLevel" method="do"]
