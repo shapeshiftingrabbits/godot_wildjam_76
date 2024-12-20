@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dgda0gpbolspv"]
 
 [ext_resource type="PackedScene" uid="uid://bq3882tkp8hwx" path="res://scenes/prototype.tscn" id="1_r7qus"]
-[ext_resource type="PackedScene" uid="uid://cihbomr01nysf" path="res://prefabs/level_1.tscn" id="2_igd85"]
+[ext_resource type="PackedScene" uid="uid://dcn77v8uc5ms" path="res://prefabs/level_3.tscn" id="2_a12sv"]
 
 [node name="GameRoot" instance=ExtResource("1_r7qus")]
 
-[node name="Level3" parent="." index="5" instance=ExtResource("2_igd85")]
+[node name="Level3" parent="." index="5" instance=ExtResource("2_a12sv")]
+position = Vector2(3840, 0)
 
 [editable path="Level2"]
-[editable path="Level3"]
