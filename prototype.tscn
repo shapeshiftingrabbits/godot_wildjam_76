@@ -34,8 +34,8 @@
 [ext_resource type="Resource" uid="uid://b1hwt8ptptgj5" path="res://player_state_machine_guards/in_control.tres" id="26_jgdgf"]
 [ext_resource type="PackedScene" uid="uid://p2et6u5v7uqr" path="res://prefabs/trigger_2d.tscn" id="27_dc8k4"]
 [ext_resource type="Texture2D" uid="uid://5qxurwjaaqq2" path="res://textures/tilemap_packed.png" id="31_24rfj"]
-[ext_resource type="PackedScene" uid="uid://dy6rfphsyvehp" path="res://prefabs/punisher.tscn" id="31_uxv0k"]
 [ext_resource type="Texture2D" uid="uid://bum1k6bxj63po" path="res://textures/signRight.png" id="36_ttlx3"]
+[ext_resource type="PackedScene" uid="uid://boc8qbty5ese6" path="res://prefabs/fence_static_body_2d.tscn" id="39_8agdt"]
 [ext_resource type="PackedScene" uid="uid://bomwgt3savmk0" path="res://prefabs/dirt_wall.tscn" id="39_jrjcm"]
 [ext_resource type="PackedScene" uid="uid://cvpnwunomn7ab" path="res://prefabs/level_2.tscn" id="39_sxjpk"]
 [ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="48_j0q31"]
@@ -427,8 +427,6 @@ to = NodePath("../../InControlState")
 guard = ExtResource("26_jgdgf")
 delay_in_seconds = "0.0"
 
-[node name="Punisher" parent="." instance=ExtResource("31_uxv0k")]
-
 [node name="Level1" type="Node2D" parent="."]
 script = ExtResource("24_po0hx")
 
@@ -507,6 +505,8 @@ horizontal_alignment = 1
 [node name="Level3" parent="." instance=ExtResource("39_sxjpk")]
 position = Vector2(3840, 0)
 
+[node name="FenceStaticBody2D" parent="Level3" instance=ExtResource("39_8agdt")]
+
 [node name="GameController" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("1_2wvwb")
@@ -516,7 +516,9 @@ stream = ExtResource("48_j0q31")
 volume_db = -13.0
 autoplay = true
 
+[connection signal="button_up" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" method="release_focus"]
 [connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="HUD/MenuPanelContainer" method="_on_menu_button_pressed"]
+[connection signal="button_up" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" method="release_focus"]
 [connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="GameController" method="reset_current_level"]
 [connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/Resume" to="HUD/MenuPanelContainer" method="resume"]
 [connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/ExitToMainScreenButton" to="HUD/MenuPanelContainer" method="_on_exit_to_main_screen_button_pressed"]
@@ -529,7 +531,6 @@ autoplay = true
 [connection signal="state_exited" from="Player/StateChart/ParallelState/CompoundState/Walk" to="Player/WalkAudioStreamPlayer2D" method="stop"]
 [connection signal="state_physics_processing" from="Player/StateChart/ParallelState/CompoundState/Walk" to="Player/HandleCharacterOrientation" method="_on_walk_state_physics_processing"]
 [connection signal="state_entered" from="Player/StateChart/ParallelState/CompoundState/ShovedBack" to="Player/HitAudioStreamPlayer2D2" method="play"]
-[connection signal="state_entered" from="Player/StateChart/ParallelState/CompoundState/ShovedBack" to="Punisher" method="animate"]
 [connection signal="state_physics_processing" from="Player/StateChart/ParallelState/CompoundState/Jump" to="Player/HandleCharacterOrientation" method="_on_jump_state_physics_processing"]
 [connection signal="state_physics_processing" from="Player/StateChart/ParallelState/PlayerControlState/InControlState" to="Player" method="_on_in_control_state_state_physics_processing"]
 [connection signal="state_physics_processing" from="Player/StateChart/ParallelState/PlayerControlState/NotInControlState" to="Player/MovePlayerToNextLevel" method="_on_not_in_control_state_state_physics_processing"]

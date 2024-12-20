@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://cvpnwunomn7ab"]
+[gd_scene load_steps=35 format=3 uid="uid://cvpnwunomn7ab"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_emc6c"]
 [ext_resource type="Texture2D" uid="uid://dgpy8sey60xjr" path="res://textures/character_femaleAdventurer_sheetHD.png" id="2_qktxg"]
+[ext_resource type="PackedScene" uid="uid://dy6rfphsyvehp" path="res://prefabs/punisher.tscn" id="2_rytac"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_1pydu"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_o8g36"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_uxoki"]
@@ -117,9 +118,11 @@ size = Vector2(18.8854, 60)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xdvd"]
 size = Vector2(20, 60)
 
-[node name="Level2" type="Node2D"]
+[node name="Level" type="Node2D"]
 position = Vector2(1920, 0)
 script = ExtResource("1_emc6c")
+
+[node name="Punisher" parent="." instance=ExtResource("2_rytac")]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1763, 946)
@@ -423,7 +426,9 @@ process_mode = 1
 stream = ExtResource("22_oqhk1")
 script = ExtResource("23_dcya8")
 
+[connection signal="level_entered" from="." to="Punisher" method="_on_level_entered"]
 [connection signal="level_entered" from="." to="LeftWall" method="turn_off"]
+[connection signal="level_exited" from="." to="Punisher" method="_on_level_exited"]
 [connection signal="level_exited" from="." to="RightWall" method="turn_off"]
 [connection signal="reset" from="." to="LevelHUD/LevelCompleted" method="hide"]
 [connection signal="reset" from="." to="AnnounceCommands" method="reset_game"]
