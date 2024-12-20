@@ -18,4 +18,3 @@ func animate():
 
 func _on_move_character_back_player_is_moved_back() -> void:
 	animate()
-	pass # Replace with function body.

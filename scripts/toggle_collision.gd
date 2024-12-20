@@ -5,12 +5,10 @@ class_name ToggleCollision
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 func turn_off():
-	#set_deferred("disabled", true)
 	hide()
 	collision_shape_2d.set_deferred("disabled", true)
 
 
 func turn_on():
-	#set_deferred("disabled", false)
 	collision_shape_2d.set_deferred("disabled", false)
 	show()
