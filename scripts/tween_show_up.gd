@@ -14,7 +14,3 @@ func animate():
 	show_up_tween.tween_property( self, "position", Vector2( position.x, current_y - 120.0), 0.3)
 	show_up_tween.tween_property( self, "position", Vector2( position.x, current_y), 0.3)
 	show_up_tween.tween_callback(func (): is_animating = false)
-
-
-func _on_move_character_back_player_is_moved_back() -> void:
-	animate()

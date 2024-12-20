@@ -350,24 +350,6 @@ texture = ExtResource("10_6wwc8")
 [node name="AnnounceCommands" type="Node" parent="."]
 script = ExtResource("11_6c0ij")
 
-[node name="FirstTimer" type="Timer" parent="AnnounceCommands"]
-wait_time = 1.1
-one_shot = true
-
-[node name="SecondTimer" type="Timer" parent="AnnounceCommands"]
-wait_time = 1.8
-one_shot = true
-
-[node name="ThirdTimer" type="Timer" parent="AnnounceCommands"]
-wait_time = 2.8
-one_shot = true
-
-[node name="SoleilTimer" type="Timer" parent="AnnounceCommands"]
-wait_time = 3.6
-
-[node name="CheckTimer" type="Timer" parent="AnnounceCommands"]
-one_shot = true
-
 [node name="TriggerEnterLevel" parent="." instance=ExtResource("12_2uwtg")]
 position = Vector2(150, 990)
 
@@ -442,6 +424,7 @@ stream = ExtResource("22_oqhk1")
 script = ExtResource("23_dcya8")
 
 [connection signal="level_entered" from="." to="LeftWall" method="turn_off"]
+[connection signal="level_exited" from="." to="RightWall" method="turn_off"]
 [connection signal="reset" from="." to="LevelHUD/LevelCompleted" method="hide"]
 [connection signal="reset" from="." to="AnnounceCommands" method="reset_game"]
 [connection signal="reset" from="." to="StartingPosition" method="do"]
@@ -477,8 +460,6 @@ script = ExtResource("23_dcya8")
 [connection signal="state_entered" from="StateChart/CompoundState/EndedState" to="LevelHUD/LevelCompleted" method="show"]
 [connection signal="state_entered" from="StateChart/CompoundState/EndedState" to="WinAudioStreamPlayer" method="play"]
 [connection signal="state_exited" from="StateChart/CompoundState/EndedState" to="LevelHUD/LevelCompleted" method="hide"]
-[connection signal="timeout" from="AnnounceCommands/SoleilTimer" to="AnnounceCommands" method="_on_timer_timeout"]
-[connection signal="timeout" from="AnnounceCommands/CheckTimer" to="AnnounceCommands" method="_on_timer_timeout"]
 [connection signal="target_group_entered" from="TriggerEnterLevel" to="LeftWall" method="turn_on"]
 [connection signal="body_entered" from="StartingLineArea2D" to="StartingLineArea2D/DetectStartingLineReached" method="_on_starting_line_area_2d_body_entered"]
 [connection signal="entered_play_area" from="StartingLineArea2D/DetectStartingLineReached" to="AnnounceCommands" method="_on_detect_starting_line_reached_entered_play_area"]

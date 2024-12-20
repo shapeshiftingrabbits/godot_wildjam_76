@@ -3,7 +3,7 @@ extends Node
 class_name GameController
 
 signal move_to_next_level(level: LevelController)
-@onready var menu_panel_container: PanelContainer = $"../HUD/MenuPanelContainer"
+signal leave_level(level: LevelController)
 
 
 # Level name need to be sortable by name in ascending order
@@ -23,6 +23,7 @@ func _ready() -> void:
 func _moving_to_next_level():
 	if ! current_level_controller_index < level_controllers.size():
 		return
+	leave_level.emit(level_controllers[current_level_controller_index])
 	current_level_controller_index += 1
 	var next_level: LevelController = level_controllers[current_level_controller_index]
 	next_level.enter_level()
