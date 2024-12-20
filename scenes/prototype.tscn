@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=47 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_2wvwb"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
@@ -30,6 +30,8 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="19_n3dkt"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="20_nrba1"]
 [ext_resource type="Resource" uid="uid://b1hwt8ptptgj5" path="res://player_state_machine_guards/in_control.tres" id="26_jgdgf"]
+[ext_resource type="PackedScene" uid="uid://cihbomr01nysf" path="res://prefabs/level_1.tscn" id="31_x7qow"]
+[ext_resource type="PackedScene" uid="uid://cvpnwunomn7ab" path="res://prefabs/level_2.tscn" id="32_r7uma"]
 [ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="48_j0q31"]
 [ext_resource type="Script" path="res://scripts/move_player_to_next_level.gd" id="50_4mvyr"]
 
@@ -184,7 +186,7 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
-enabled = false
+initial_node_to_watch = NodePath("../../../../Player/StateChart")
 
 [node name="MenuPanelContainer" type="PanelContainer" parent="HUD"]
 process_mode = 3
@@ -372,16 +374,16 @@ to = NodePath("../../Walk")
 guard = ExtResource("16_4wubc")
 delay_in_seconds = "0.0"
 
-[node name="ToIdle" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Jump"]
-script = ExtResource("20_nrba1")
-to = NodePath("../../Idle")
-guard = ExtResource("15_s0lne")
-delay_in_seconds = "0.0"
-
 [node name="ToShovedBack" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Jump"]
 script = ExtResource("20_nrba1")
 to = NodePath("../../ShovedBack")
 guard = ExtResource("9_gs72s")
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Jump"]
+script = ExtResource("20_nrba1")
+to = NodePath("../../Idle")
+guard = ExtResource("15_s0lne")
 delay_in_seconds = "0.0"
 
 [node name="PlayerControlState" type="Node" parent="Player/StateChart/ParallelState"]
@@ -405,6 +407,10 @@ script = ExtResource("20_nrba1")
 to = NodePath("../../InControlState")
 guard = ExtResource("26_jgdgf")
 delay_in_seconds = "0.0"
+
+[node name="Level1" parent="." instance=ExtResource("31_x7qow")]
+
+[node name="Level2" parent="." instance=ExtResource("32_r7uma")]
 
 [node name="GameController" type="Node" parent="."]
 process_mode = 3

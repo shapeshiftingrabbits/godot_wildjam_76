@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		player.velocity += player.get_gravity() * delta
 		
 	player.velocity.x = -1 * player.SPEED
-	print("has_been_thrown_in_air ", has_been_thrown_in_air)
+
 	if !has_been_thrown_in_air and player.is_on_floor():
 		has_been_thrown_in_air = true
 		player.velocity.y = player.JUMP_VELOCITY
