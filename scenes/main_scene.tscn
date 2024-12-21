@@ -126,6 +126,9 @@ size = Vector2(20, 60)
 [node name="StateChartDebugger" parent="HUD/MarginContainer/VBox" index="1"]
 enabled = false
 
+[node name="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="0"]
+text = "Freeze!"
+
 [node name="Level3" type="Node2D" parent="." index="5"]
 position = Vector2(3840, 0)
 script = ExtResource("2_c6q71")
@@ -330,7 +333,7 @@ size_flags_vertical = 0
 [node name="Label" type="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="0"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Don't move!"
+text = "Freeze!"
 
 [node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="1"]
 layout_mode = 2

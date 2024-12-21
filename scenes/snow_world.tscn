@@ -111,6 +111,9 @@ script = ExtResource("3_87lte")
 
 [node name="Level2" parent="." instance=ExtResource("32_ihpeh")]
 
+[node name="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="0"]
+text = "Freeze!"
+
 [node name="LollipopBaseBrown" parent="Level2/StartingLineArea2D" index="1"]
 texture = ExtResource("35_tn2hc")
 
@@ -137,6 +140,9 @@ texture = ExtResource("36_5tuxo")
 [node name="IceZoneTrigger2D" parent="Level2" instance=ExtResource("41_x71t3")]
 
 [node name="Level3" parent="." instance=ExtResource("42_c4ask")]
+
+[node name="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="0"]
+text = "Freeze!"
 
 [node name="ExitLevelTrigger2D" parent="Level3" index="13"]
 disabled = true
