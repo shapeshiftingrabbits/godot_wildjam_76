@@ -2,7 +2,7 @@ extends Node
 
 class_name MovePlayerToNextLevel
 
-@onready var player: Player = %Player
+@onready var player: Player = $".."
 @onready var handle_state_chart: HandleStateChart = $"../HandleStateChart"
 
 var starting_position: Vector2

@@ -1,16 +1,119 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr6ym2spglvsm"]
+[gd_scene load_steps=8 format=3 uid="uid://cr6ym2spglvsm"]
 
-[ext_resource type="PackedScene" uid="uid://bq3882tkp8hwx" path="res://scenes/prototype.tscn" id="1_700qt"]
-[ext_resource type="PackedScene" uid="uid://dcn77v8uc5ms" path="res://prefabs/level_3.tscn" id="2_01uoa"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_xsd3n"]
+[ext_resource type="Script" path="res://scripts/menu_controller.gd" id="2_3jo83"]
+[ext_resource type="Script" path="res://scripts/camera_panning.gd" id="3_wunuj"]
+[ext_resource type="PackedScene" uid="uid://cnjfaqxwgwsat" path="res://prefabs/player.tscn" id="4_xy8km"]
+[ext_resource type="PackedScene" uid="uid://4xrlcemn4wmf" path="res://prefabs/level_3_snow.tscn" id="31_0yqrl"]
+[ext_resource type="Script" path="res://scripts/game_controller.gd" id="32_mk60j"]
+[ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="33_m3pfc"]
 
-[node name="GameRoot" instance=ExtResource("1_700qt")]
+[node name="GameRoot" type="Node2D"]
 
-[node name="Player" parent="." index="2"]
+[node name="HUD" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 64
+
+[node name="VBox" type="VBoxContainer" parent="HUD/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="MenuButton" type="Button" parent="HUD/MarginContainer/VBox/HBoxContainer"]
+layout_mode = 2
+text = "Menu"
+
+[node name="RestartLevelButton" type="Button" parent="HUD/MarginContainer/VBox/HBoxContainer"]
+layout_mode = 2
+text = "Retry Level"
+
+[node name="StateChartDebugger" parent="HUD/MarginContainer/VBox" instance=ExtResource("1_xsd3n")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="MenuPanelContainer" type="PanelContainer" parent="HUD"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_3jo83")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MenuPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="HUD/MenuPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Resume"
+
+[node name="ExitToMainScreenButton" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Go To Main Screen"
+
+[node name="QuitButton" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(190, 50)
+layout_mode = 2
+text = "QUIT
+"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("3_wunuj")
+
+[node name="Player" parent="." instance=ExtResource("4_xy8km")]
 position = Vector2(113, 925)
 
-[node name="Level" parent="." index="3" instance=ExtResource("2_01uoa")]
+[node name="Level3" parent="." instance=ExtResource("31_0yqrl")]
 position = Vector2(0, 0)
 
-[editable path="Level"]
-[editable path="Level/RightWall"]
-[editable path="Level/LeftWall"]
+[node name="TriggerEnterLevel" parent="Level3" index="6"]
+position = Vector2(177, 990)
+
+[node name="GameController" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("32_mk60j")
+
+[node name="BgAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("33_m3pfc")
+volume_db = -13.0
+autoplay = true
+
+[connection signal="button_up" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" method="release_focus"]
+[connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="HUD/MenuPanelContainer" method="_on_menu_button_pressed"]
+[connection signal="button_up" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" method="release_focus"]
+[connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="GameController" method="reset_current_level"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/Resume" to="HUD/MenuPanelContainer" method="resume"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/ExitToMainScreenButton" to="HUD/MenuPanelContainer" method="_on_exit_to_main_screen_button_pressed"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/QuitButton" to="HUD/MenuPanelContainer" method="_on_quit_button_pressed"]
+[connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
+
+[editable path="Level3"]
+[editable path="Level3/IceZoneTrigger2D"]

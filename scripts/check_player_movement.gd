@@ -4,7 +4,8 @@ class_name CheckPlayerMovement
 
 signal player_has_moved
 
-@onready var player: CharacterBody2D = %Player
+@onready var player: Player = $".."
+
 
 func do(delta: float) -> void:
 	if !is_player_frozen():

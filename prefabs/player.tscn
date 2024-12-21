@@ -1,0 +1,415 @@
+[gd_scene load_steps=45 format=3 uid="uid://cnjfaqxwgwsat"]
+
+[ext_resource type="Script" path="res://scripts/move.gd" id="1_h0g4h"]
+[ext_resource type="Texture2D" uid="uid://dj7fr863w3w1e" path="res://textures/character_femalePerson_sheetHD.png" id="2_p1dme"]
+[ext_resource type="AudioStream" uid="uid://c4ybcdan6wyc8" path="res://audio/sfx/SFX_Game_Jump.wav" id="3_jn6ld"]
+[ext_resource type="AudioStream" uid="uid://jo5dkjdpoyyx" path="res://audio/sfx/SFX_Squeaky_Toy.wav" id="4_5l5u1"]
+[ext_resource type="AudioStream" uid="uid://biu0ia7l3vyj3" path="res://audio/sfx/footstep_grass_1.ogg" id="5_0jkam"]
+[ext_resource type="AudioStream" uid="uid://bh1qumibn68hj" path="res://audio/sfx/footstep_grass_2.ogg" id="6_88m7b"]
+[ext_resource type="Script" path="res://scripts/check_player_movement.gd" id="7_xdda3"]
+[ext_resource type="Script" path="res://scripts/move_character_back.gd" id="8_3h86m"]
+[ext_resource type="Script" path="res://scripts/handle_character_orientation.gd" id="9_0qyje"]
+[ext_resource type="Script" path="res://scripts/move_player_to_next_level.gd" id="10_20cw4"]
+[ext_resource type="Script" path="res://scripts/handle_state_chart.gd" id="11_cw8y3"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="12_sa17i"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="13_faflf"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="14_tsmfu"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="15_8q1i7"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="16_sfehy"]
+[ext_resource type="Resource" uid="uid://wg325ebralar" path="res://player_state_machine_guards/to_walk_guard.tres" id="17_7ylmm"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/guard.gd" id="18_6rkfj"]
+[ext_resource type="Resource" uid="uid://crv0fdii022lf" path="res://player_state_machine_guards/shoved_back_false.tres" id="19_662an"]
+[ext_resource type="Resource" uid="uid://dlp2pxuai5pti" path="res://player_state_machine_guards/velocity_y_null.tres" id="20_skpo6"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="21_s21bn"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="22_4iw6m"]
+[ext_resource type="Resource" uid="uid://dvw36piu5nh8i" path="res://player_state_machine_guards/direction_is_null.tres" id="23_4agbf"]
+[ext_resource type="Resource" uid="uid://cxt7pwy4im56t" path="res://player_state_machine_guards/velocity_x_null.tres" id="24_3wwat"]
+[ext_resource type="Resource" uid="uid://b1hwt8ptptgj5" path="res://player_state_machine_guards/in_control.tres" id="25_udcoh"]
+[ext_resource type="Resource" uid="uid://ir2ab4760o0v" path="res://player_state_machine_guards/to_idle_guard.tres" id="26_vqa5f"]
+[ext_resource type="Resource" uid="uid://g3xriqdtdlre" path="res://player_state_machine_guards/shoved_back_true.tres" id="27_3fstr"]
+[ext_resource type="Resource" uid="uid://b8meiwfvilft1" path="res://player_state_machine_guards/to_jump_guard.tres" id="28_ae4au"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="29_h5vav"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrfrj"]
+size = Vector2(64.75, 98)
+
+[sub_resource type="Animation" id="Animation_xoj5a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [36]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%CharacterSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [36]
+}
+
+[sub_resource type="Animation" id="Animation_12ql0"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5u3mi"]
+resource_name = "jump"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_2yfj4"]
+resource_name = "shoved_back"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [31]
+}
+
+[sub_resource type="Animation" id="Animation_g0ghy"]
+resource_name = "slide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [17]
+}
+
+[sub_resource type="Animation" id="Animation_gtn2c"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41, 42, 43]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_djn3v"]
+_data = {
+"RESET": SubResource("Animation_xoj5a"),
+"idle": SubResource("Animation_12ql0"),
+"jump": SubResource("Animation_5u3mi"),
+"shoved_back": SubResource("Animation_2yfj4"),
+"slide": SubResource("Animation_g0ghy"),
+"walk": SubResource("Animation_gtn2c")
+}
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_p50u2"]
+fade_time = 1.0
+stream_count = 2
+stream_0 = ExtResource("5_0jkam")
+stream_1 = ExtResource("6_88m7b")
+
+[sub_resource type="Resource" id="Resource_eeurf"]
+script = ExtResource("21_s21bn")
+guard = ExtResource("20_skpo6")
+
+[sub_resource type="Resource" id="Resource_jye0k"]
+script = ExtResource("22_4iw6m")
+guards = Array[ExtResource("18_6rkfj")]([ExtResource("19_662an"), SubResource("Resource_eeurf")])
+
+[sub_resource type="Resource" id="Resource_erhi1"]
+script = ExtResource("21_s21bn")
+guard = ExtResource("24_3wwat")
+
+[sub_resource type="Resource" id="Resource_4n10k"]
+script = ExtResource("22_4iw6m")
+guards = Array[ExtResource("18_6rkfj")]([ExtResource("23_4agbf"), SubResource("Resource_erhi1"), ExtResource("20_skpo6"), ExtResource("25_udcoh")])
+
+[sub_resource type="Resource" id="Resource_j23xg"]
+script = ExtResource("21_s21bn")
+guard = ExtResource("25_udcoh")
+
+[sub_resource type="Resource" id="Resource_6xw2g"]
+script = ExtResource("21_s21bn")
+guard = ExtResource("25_udcoh")
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(367, 925)
+script = ExtResource("1_h0g4h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_qrfrj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_djn3v")
+}
+
+[node name="CharacterSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-24, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_p1dme")
+centered = false
+offset = Vector2(-48, -128)
+hframes = 9
+vframes = 5
+frame = 36
+region_rect = Rect2(32, 65, 128, 191)
+
+[node name="JumpAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jn6ld")
+
+[node name="HitAudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5l5u1")
+
+[node name="WalkAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamPlaylist_p50u2")
+
+[node name="CheckPlayerMovement" type="Node" parent="."]
+script = ExtResource("7_xdda3")
+
+[node name="MoveCharacterBack" type="Node" parent="."]
+script = ExtResource("8_3h86m")
+
+[node name="HandleCharacterOrientation" type="Node" parent="."]
+script = ExtResource("9_0qyje")
+
+[node name="MovePlayerToNextLevel" type="Node" parent="."]
+script = ExtResource("10_20cw4")
+
+[node name="HandleStateChart" type="Node" parent="."]
+script = ExtResource("11_cw8y3")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("12_sa17i")
+initial_expression_properties = {
+"has_input_direction": 0.0,
+"in_control": true,
+"is_on_floor": true,
+"shoved_back": false
+}
+
+[node name="ParallelState" type="Node" parent="StateChart"]
+script = ExtResource("13_faflf")
+
+[node name="CompoundState" type="Node" parent="StateChart/ParallelState"]
+script = ExtResource("14_tsmfu")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/ParallelState/CompoundState"]
+script = ExtResource("15_8q1i7")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"idle"
+
+[node name="ToWalk" type="Node" parent="StateChart/ParallelState/CompoundState/Idle"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Walk")
+guard = ExtResource("17_7ylmm")
+delay_in_seconds = "0.0"
+
+[node name="ToJump" type="Node" parent="StateChart/ParallelState/CompoundState/Idle"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Jump")
+guard = SubResource("Resource_jye0k")
+delay_in_seconds = "0.0"
+
+[node name="Walk" type="Node" parent="StateChart/ParallelState/CompoundState"]
+script = ExtResource("15_8q1i7")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"walk"
+
+[node name="ToSlide" type="Node" parent="StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Slide")
+guard = SubResource("Resource_4n10k")
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Idle")
+guard = ExtResource("26_vqa5f")
+delay_in_seconds = "0.0"
+
+[node name="ToShovedBack" type="Node" parent="StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../ShovedBack")
+guard = ExtResource("27_3fstr")
+delay_in_seconds = "0.0"
+
+[node name="ToJump" type="Node" parent="StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Jump")
+guard = ExtResource("28_ae4au")
+delay_in_seconds = "0.0"
+
+[node name="ShovedBack" type="Node" parent="StateChart/ParallelState/CompoundState"]
+script = ExtResource("15_8q1i7")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"shoved_back"
+
+[node name="ToWalk" type="Node" parent="StateChart/ParallelState/CompoundState/ShovedBack"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Walk")
+guard = ExtResource("17_7ylmm")
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="StateChart/ParallelState/CompoundState/ShovedBack"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Idle")
+guard = ExtResource("26_vqa5f")
+delay_in_seconds = "0.0"
+
+[node name="ToJump" type="Node" parent="StateChart/ParallelState/CompoundState/ShovedBack"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Jump")
+guard = ExtResource("28_ae4au")
+delay_in_seconds = "0.0"
+
+[node name="Jump" type="Node" parent="StateChart/ParallelState/CompoundState"]
+script = ExtResource("15_8q1i7")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"jump"
+
+[node name="ToSlide" type="Node" parent="StateChart/ParallelState/CompoundState/Jump"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Slide")
+guard = SubResource("Resource_4n10k")
+delay_in_seconds = "0.0"
+
+[node name="ToWalk" type="Node" parent="StateChart/ParallelState/CompoundState/Jump"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Walk")
+guard = ExtResource("17_7ylmm")
+delay_in_seconds = "0.0"
+
+[node name="ToShovedBack" type="Node" parent="StateChart/ParallelState/CompoundState/Jump"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../ShovedBack")
+guard = ExtResource("27_3fstr")
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="StateChart/ParallelState/CompoundState/Jump"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Idle")
+guard = ExtResource("26_vqa5f")
+delay_in_seconds = "0.0"
+
+[node name="Slide" type="Node" parent="StateChart/ParallelState/CompoundState"]
+script = ExtResource("15_8q1i7")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"slide"
+
+[node name="ToWalkForced" type="Node" parent="StateChart/ParallelState/CompoundState/Slide"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Walk")
+guard = SubResource("Resource_j23xg")
+delay_in_seconds = "0.0"
+
+[node name="ToWalk" type="Node" parent="StateChart/ParallelState/CompoundState/Slide"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Walk")
+guard = ExtResource("17_7ylmm")
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="StateChart/ParallelState/CompoundState/Slide"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Idle")
+guard = ExtResource("26_vqa5f")
+delay_in_seconds = "0.0"
+
+[node name="ToJump" type="Node" parent="StateChart/ParallelState/CompoundState/Slide"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../Jump")
+guard = ExtResource("28_ae4au")
+delay_in_seconds = "0.0"
+
+[node name="ToShovedBack" type="Node" parent="StateChart/ParallelState/CompoundState/Slide"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../ShovedBack")
+guard = ExtResource("27_3fstr")
+delay_in_seconds = "0.0"
+
+[node name="PlayerControlState" type="Node" parent="StateChart/ParallelState"]
+script = ExtResource("14_tsmfu")
+initial_state = NodePath("InControlState")
+
+[node name="InControlState" type="Node" parent="StateChart/ParallelState/PlayerControlState"]
+script = ExtResource("29_h5vav")
+
+[node name="ToNotInControl" type="Node" parent="StateChart/ParallelState/PlayerControlState/InControlState"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../NotInControlState")
+guard = SubResource("Resource_6xw2g")
+delay_in_seconds = "0.0"
+
+[node name="NotInControlState" type="Node" parent="StateChart/ParallelState/PlayerControlState"]
+script = ExtResource("29_h5vav")
+
+[node name="ToInControl" type="Node" parent="StateChart/ParallelState/PlayerControlState/NotInControlState"]
+script = ExtResource("16_sfehy")
+to = NodePath("../../InControlState")
+guard = ExtResource("25_udcoh")
+delay_in_seconds = "0.0"
+
+[connection signal="jumping" from="." to="JumpAudioStreamPlayer2D" method="play"]
+[connection signal="player_has_moved" from="CheckPlayerMovement" to="MoveCharacterBack" method="_on_check_player_movement_player_has_moved"]
+[connection signal="end_move_back" from="MoveCharacterBack" to="HandleStateChart" method="_on_move_character_back_end_move_back"]
+[connection signal="player_is_moved_back" from="MoveCharacterBack" to="HandleStateChart" method="_on_move_character_back_player_is_moved_back"]
+[connection signal="state_entered" from="StateChart/ParallelState/CompoundState/Walk" to="WalkAudioStreamPlayer2D" method="play"]
+[connection signal="state_exited" from="StateChart/ParallelState/CompoundState/Walk" to="WalkAudioStreamPlayer2D" method="stop"]
+[connection signal="state_physics_processing" from="StateChart/ParallelState/CompoundState/Walk" to="HandleCharacterOrientation" method="_on_walk_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/ParallelState/CompoundState/ShovedBack" to="HitAudioStreamPlayer2D2" method="play"]
+[connection signal="state_physics_processing" from="StateChart/ParallelState/CompoundState/Jump" to="HandleCharacterOrientation" method="_on_jump_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/ParallelState/PlayerControlState/InControlState" to="." method="_on_in_control_state_state_physics_processing"]
+[connection signal="state_physics_processing" from="StateChart/ParallelState/PlayerControlState/NotInControlState" to="MovePlayerToNextLevel" method="_on_not_in_control_state_state_physics_processing"]

@@ -2,7 +2,7 @@ extends Node
 
 class_name HandleCharacterOrientation
 
-@onready var player: Player = %Player
+@onready var player: Player = $".."
 @onready var character_sprite: Sprite2D = %CharacterSprite
 
 

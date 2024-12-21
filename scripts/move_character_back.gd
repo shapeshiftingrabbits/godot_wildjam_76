@@ -15,15 +15,15 @@ var has_been_thrown_in_air = false
 func _on_check_player_movement_player_has_moved() -> void:
 	if is_moving_back: return
 	turn_on()
-	player_is_moved_back.emit()
-	await get_tree().create_timer(jump_time).timeout
-	turn_off()
-	end_move_back.emit()
 
 
 func turn_on():
 	has_been_thrown_in_air = false
 	is_moving_back = true
+	player_is_moved_back.emit()
+	await get_tree().create_timer(jump_time).timeout
+	turn_off()
+	end_move_back.emit()
 
 
 func turn_off():

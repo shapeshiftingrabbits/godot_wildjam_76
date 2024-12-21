@@ -3,7 +3,7 @@ extends Node
 class_name HandleStateChart
 
 @onready var state_chart: StateChart = $"../StateChart"
-@onready var player: Player = %Player
+@onready var player: Player = $".."
 
 
 func _on_move_character_back_player_is_moved_back() -> void:
