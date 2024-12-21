@@ -36,3 +36,7 @@ func _moving_to_next_level():
 
 func reset_current_level() -> void:
 	current_level_controller.reset_level()
+
+
+func load_snow_world():
+	get_tree().change_scene_to_file("res://scenes/snow_world.tscn")
