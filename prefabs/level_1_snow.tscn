@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bce2mls8dw31g"]
+
+[ext_resource type="PackedScene" uid="uid://cihbomr01nysf" path="res://prefabs/level_1.tscn" id="1_a1q1g"]
+[ext_resource type="Texture2D" uid="uid://t5ee02jhh66e" path="res://textures/tundraCenter.png" id="2_vovda"]
+[ext_resource type="Texture2D" uid="uid://jnv2jrdo42x7" path="res://textures/tundraMid.png" id="3_pom7n"]
+
+[node name="Level1" instance=ExtResource("1_a1q1g")]
+
+[node name="Sprite2D" parent="RightWall" index="1"]
+texture = ExtResource("2_vovda")
+
+[node name="Sprite2D" parent="LeftWall" index="1"]
+texture = ExtResource("2_vovda")
+
+[node name="Sprite2D" parent="Floor" index="1"]
+texture = ExtResource("3_pom7n")
+
+[editable path="RightWall"]
+[editable path="LeftWall"]
+[editable path="Floor"]

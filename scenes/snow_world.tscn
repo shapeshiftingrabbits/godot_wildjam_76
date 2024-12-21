@@ -1,0 +1,503 @@
+[gd_scene load_steps=51 format=3 uid="uid://ccbnm76xut6pw"]
+
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_rgxb2"]
+[ext_resource type="Script" path="res://scripts/menu_controller.gd" id="2_pdeji"]
+[ext_resource type="PackedScene" uid="uid://bce2mls8dw31g" path="res://prefabs/level_1_snow.tscn" id="2_wjndn"]
+[ext_resource type="Script" path="res://scripts/camera_panning.gd" id="3_87lte"]
+[ext_resource type="Script" path="res://scripts/move.gd" id="4_p0kd2"]
+[ext_resource type="Texture2D" uid="uid://dj7fr863w3w1e" path="res://textures/character_femalePerson_sheetHD.png" id="5_fld18"]
+[ext_resource type="AudioStream" uid="uid://c4ybcdan6wyc8" path="res://audio/sfx/SFX_Game_Jump.wav" id="6_ckwko"]
+[ext_resource type="AudioStream" uid="uid://jo5dkjdpoyyx" path="res://audio/sfx/SFX_Squeaky_Toy.wav" id="7_8ml0d"]
+[ext_resource type="AudioStream" uid="uid://biu0ia7l3vyj3" path="res://audio/sfx/footstep_grass_1.ogg" id="8_f7drc"]
+[ext_resource type="AudioStream" uid="uid://bh1qumibn68hj" path="res://audio/sfx/footstep_grass_2.ogg" id="9_y6jiv"]
+[ext_resource type="Script" path="res://scripts/check_player_movement.gd" id="10_rkbww"]
+[ext_resource type="Script" path="res://scripts/move_character_back.gd" id="11_wor20"]
+[ext_resource type="Script" path="res://scripts/handle_character_orientation.gd" id="12_2s1tf"]
+[ext_resource type="Script" path="res://scripts/move_player_to_next_level.gd" id="13_tln4s"]
+[ext_resource type="Script" path="res://scripts/handle_state_chart.gd" id="14_q5m7e"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="15_os8la"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="16_us8k3"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="17_d2e50"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="18_bvbhp"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="19_4vsrg"]
+[ext_resource type="Resource" uid="uid://wg325ebralar" path="res://player_state_machine_guards/to_walk_guard.tres" id="20_60wim"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/guard.gd" id="21_bo6i3"]
+[ext_resource type="Resource" uid="uid://crv0fdii022lf" path="res://player_state_machine_guards/shoved_back_false.tres" id="22_qslq7"]
+[ext_resource type="Resource" uid="uid://dlp2pxuai5pti" path="res://player_state_machine_guards/velocity_y_null.tres" id="23_bay7e"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="24_fe56a"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="25_m0fx2"]
+[ext_resource type="Resource" uid="uid://ir2ab4760o0v" path="res://player_state_machine_guards/to_idle_guard.tres" id="26_ol30m"]
+[ext_resource type="Resource" uid="uid://g3xriqdtdlre" path="res://player_state_machine_guards/shoved_back_true.tres" id="27_uhpe5"]
+[ext_resource type="Resource" uid="uid://b8meiwfvilft1" path="res://player_state_machine_guards/to_jump_guard.tres" id="28_hbxh6"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="29_054yx"]
+[ext_resource type="Resource" uid="uid://dvw36piu5nh8i" path="res://player_state_machine_guards/direction_is_null.tres" id="29_do2s6"]
+[ext_resource type="Resource" uid="uid://cxt7pwy4im56t" path="res://player_state_machine_guards/velocity_x_null.tres" id="30_nwg0r"]
+[ext_resource type="Resource" uid="uid://b1hwt8ptptgj5" path="res://player_state_machine_guards/in_control.tres" id="30_vk6ag"]
+[ext_resource type="PackedScene" uid="uid://cvpnwunomn7ab" path="res://prefabs/level_2.tscn" id="32_ihpeh"]
+[ext_resource type="Script" path="res://scripts/game_controller.gd" id="33_fvviu"]
+[ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="34_j351h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrfrj"]
+size = Vector2(64.75, 98)
+
+[sub_resource type="Animation" id="Animation_xoj5a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [36]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%CharacterSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [36]
+}
+
+[sub_resource type="Animation" id="Animation_12ql0"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5u3mi"]
+resource_name = "jump"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_2yfj4"]
+resource_name = "shoved_back"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [17]
+}
+
+[sub_resource type="Animation" id="Animation_gtn2c"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41, 42, 43]
+}
+
+[sub_resource type="Animation" id="Animation_g0ghy"]
+resource_name = "slide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [28]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_djn3v"]
+_data = {
+"RESET": SubResource("Animation_xoj5a"),
+"idle": SubResource("Animation_12ql0"),
+"jump": SubResource("Animation_5u3mi"),
+"shoved_back": SubResource("Animation_2yfj4"),
+"slide": SubResource("Animation_g0ghy"),
+"walk": SubResource("Animation_gtn2c")
+}
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_p50u2"]
+fade_time = 1.0
+stream_count = 2
+stream_0 = ExtResource("8_f7drc")
+stream_1 = ExtResource("9_y6jiv")
+
+[sub_resource type="Resource" id="Resource_eeurf"]
+script = ExtResource("24_fe56a")
+guard = ExtResource("23_bay7e")
+
+[sub_resource type="Resource" id="Resource_jye0k"]
+script = ExtResource("25_m0fx2")
+guards = Array[ExtResource("21_bo6i3")]([ExtResource("22_qslq7"), SubResource("Resource_eeurf")])
+
+[sub_resource type="Resource" id="Resource_erhi1"]
+script = ExtResource("24_fe56a")
+guard = ExtResource("30_nwg0r")
+
+[sub_resource type="Resource" id="Resource_4n10k"]
+script = ExtResource("25_m0fx2")
+guards = Array[ExtResource("21_bo6i3")]([ExtResource("29_do2s6"), SubResource("Resource_erhi1")])
+
+[sub_resource type="Resource" id="Resource_6xw2g"]
+script = ExtResource("24_fe56a")
+guard = ExtResource("30_vk6ag")
+
+[node name="GameRoot" type="Node2D"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 64
+
+[node name="VBox" type="VBoxContainer" parent="HUD/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="MenuButton" type="Button" parent="HUD/MarginContainer/VBox/HBoxContainer"]
+layout_mode = 2
+text = "Menu"
+
+[node name="RestartLevelButton" type="Button" parent="HUD/MarginContainer/VBox/HBoxContainer"]
+layout_mode = 2
+text = "Retry Level"
+
+[node name="StateChartDebugger" parent="HUD/MarginContainer/VBox" instance=ExtResource("1_rgxb2")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+initial_node_to_watch = NodePath("../../../../Player/StateChart")
+
+[node name="MenuPanelContainer" type="PanelContainer" parent="HUD"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_pdeji")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MenuPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="HUD/MenuPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Resume"
+
+[node name="ExitToMainScreenButton" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Go To Main Screen"
+
+[node name="QuitButton" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(190, 50)
+layout_mode = 2
+text = "QUIT
+"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("3_87lte")
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+unique_name_in_owner = true
+position = Vector2(1380, 925)
+script = ExtResource("4_p0kd2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_qrfrj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_djn3v")
+}
+
+[node name="CharacterSprite" type="Sprite2D" parent="Player"]
+unique_name_in_owner = true
+position = Vector2(-24, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_fld18")
+centered = false
+offset = Vector2(-48, -128)
+hframes = 9
+vframes = 5
+frame = 36
+region_rect = Rect2(32, 65, 128, 191)
+
+[node name="JumpAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("6_ckwko")
+
+[node name="HitAudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("7_8ml0d")
+
+[node name="WalkAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+stream = SubResource("AudioStreamPlaylist_p50u2")
+
+[node name="CheckPlayerMovement" type="Node" parent="Player"]
+script = ExtResource("10_rkbww")
+
+[node name="MoveCharacterBack" type="Node" parent="Player"]
+script = ExtResource("11_wor20")
+
+[node name="HandleCharacterOrientation" type="Node" parent="Player"]
+script = ExtResource("12_2s1tf")
+
+[node name="MovePlayerToNextLevel" type="Node" parent="Player"]
+script = ExtResource("13_tln4s")
+
+[node name="HandleStateChart" type="Node" parent="Player"]
+script = ExtResource("14_q5m7e")
+
+[node name="StateChart" type="Node" parent="Player"]
+script = ExtResource("15_os8la")
+initial_expression_properties = {
+"direction": 0.0,
+"in_control": true,
+"shoved_back": false
+}
+
+[node name="ParallelState" type="Node" parent="Player/StateChart"]
+script = ExtResource("16_us8k3")
+
+[node name="CompoundState" type="Node" parent="Player/StateChart/ParallelState"]
+script = ExtResource("17_d2e50")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Player/StateChart/ParallelState/CompoundState"]
+script = ExtResource("18_bvbhp")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"idle"
+
+[node name="ToWalk" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Idle"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Walk")
+guard = ExtResource("20_60wim")
+delay_in_seconds = "0.0"
+
+[node name="ToJump" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Idle"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Jump")
+guard = SubResource("Resource_jye0k")
+delay_in_seconds = "0.0"
+
+[node name="Walk" type="Node" parent="Player/StateChart/ParallelState/CompoundState"]
+script = ExtResource("18_bvbhp")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"walk"
+
+[node name="ToIdle" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Idle")
+guard = ExtResource("26_ol30m")
+delay_in_seconds = "0.0"
+
+[node name="ToShovedBack" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../ShovedBack")
+guard = ExtResource("27_uhpe5")
+delay_in_seconds = "0.0"
+
+[node name="ToJump" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Jump")
+guard = ExtResource("28_hbxh6")
+delay_in_seconds = "0.0"
+
+[node name="ToSlide" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Slide")
+guard = SubResource("Resource_4n10k")
+delay_in_seconds = "0.0"
+
+[node name="ShovedBack" type="Node" parent="Player/StateChart/ParallelState/CompoundState"]
+script = ExtResource("18_bvbhp")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"shoved_back"
+
+[node name="ToWalk" type="Node" parent="Player/StateChart/ParallelState/CompoundState/ShovedBack"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Walk")
+guard = ExtResource("20_60wim")
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="Player/StateChart/ParallelState/CompoundState/ShovedBack"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Idle")
+guard = ExtResource("26_ol30m")
+delay_in_seconds = "0.0"
+
+[node name="ToJump" type="Node" parent="Player/StateChart/ParallelState/CompoundState/ShovedBack"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Jump")
+guard = ExtResource("28_hbxh6")
+delay_in_seconds = "0.0"
+
+[node name="Jump" type="Node" parent="Player/StateChart/ParallelState/CompoundState"]
+script = ExtResource("18_bvbhp")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"jump"
+
+[node name="ToWalk" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Jump"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Walk")
+guard = ExtResource("20_60wim")
+delay_in_seconds = "0.0"
+
+[node name="ToShovedBack" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Jump"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../ShovedBack")
+guard = ExtResource("27_uhpe5")
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Jump"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Idle")
+guard = ExtResource("26_ol30m")
+delay_in_seconds = "0.0"
+
+[node name="Slide" type="Node" parent="Player/StateChart/ParallelState/CompoundState"]
+script = ExtResource("18_bvbhp")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"slide"
+
+[node name="ToWalk" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Slide"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Walk")
+guard = ExtResource("20_60wim")
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Slide"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Idle")
+guard = ExtResource("26_ol30m")
+delay_in_seconds = "0.0"
+
+[node name="ToJump" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Slide"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Jump")
+guard = ExtResource("28_hbxh6")
+delay_in_seconds = "0.0"
+
+[node name="PlayerControlState" type="Node" parent="Player/StateChart/ParallelState"]
+script = ExtResource("17_d2e50")
+initial_state = NodePath("InControlState")
+
+[node name="InControlState" type="Node" parent="Player/StateChart/ParallelState/PlayerControlState"]
+script = ExtResource("29_054yx")
+
+[node name="ToNotInControl" type="Node" parent="Player/StateChart/ParallelState/PlayerControlState/InControlState"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../NotInControlState")
+guard = SubResource("Resource_6xw2g")
+delay_in_seconds = "0.0"
+
+[node name="NotInControlState" type="Node" parent="Player/StateChart/ParallelState/PlayerControlState"]
+script = ExtResource("29_054yx")
+
+[node name="ToInControl" type="Node" parent="Player/StateChart/ParallelState/PlayerControlState/NotInControlState"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../InControlState")
+guard = ExtResource("30_vk6ag")
+delay_in_seconds = "0.0"
+
+[node name="Level1" parent="." instance=ExtResource("2_wjndn")]
+
+[node name="Level2" parent="." instance=ExtResource("32_ihpeh")]
+
+[node name="GameController" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("33_fvviu")
+
+[node name="BgAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("34_j351h")
+volume_db = -13.0
+autoplay = true
+
+[connection signal="button_up" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" method="release_focus"]
+[connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="HUD/MenuPanelContainer" method="_on_menu_button_pressed"]
+[connection signal="button_up" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" method="release_focus"]
+[connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="GameController" method="reset_current_level"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/Resume" to="HUD/MenuPanelContainer" method="resume"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/ExitToMainScreenButton" to="HUD/MenuPanelContainer" method="_on_exit_to_main_screen_button_pressed"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/QuitButton" to="HUD/MenuPanelContainer" method="_on_quit_button_pressed"]
+[connection signal="jumping" from="Player" to="Player/JumpAudioStreamPlayer2D" method="play"]
+[connection signal="player_has_moved" from="Player/CheckPlayerMovement" to="Player/MoveCharacterBack" method="_on_check_player_movement_player_has_moved"]
+[connection signal="end_move_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_end_move_back"]
+[connection signal="player_is_moved_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_player_is_moved_back"]
+[connection signal="state_entered" from="Player/StateChart/ParallelState/CompoundState/Walk" to="Player/WalkAudioStreamPlayer2D" method="play"]
+[connection signal="state_exited" from="Player/StateChart/ParallelState/CompoundState/Walk" to="Player/WalkAudioStreamPlayer2D" method="stop"]
+[connection signal="state_physics_processing" from="Player/StateChart/ParallelState/CompoundState/Walk" to="Player/HandleCharacterOrientation" method="_on_walk_state_physics_processing"]
+[connection signal="state_entered" from="Player/StateChart/ParallelState/CompoundState/ShovedBack" to="Player/HitAudioStreamPlayer2D2" method="play"]
+[connection signal="state_physics_processing" from="Player/StateChart/ParallelState/CompoundState/Jump" to="Player/HandleCharacterOrientation" method="_on_jump_state_physics_processing"]
+[connection signal="state_physics_processing" from="Player/StateChart/ParallelState/PlayerControlState/InControlState" to="Player" method="_on_in_control_state_state_physics_processing"]
+[connection signal="state_physics_processing" from="Player/StateChart/ParallelState/PlayerControlState/NotInControlState" to="Player/MovePlayerToNextLevel" method="_on_not_in_control_state_state_physics_processing"]
+[connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
+[connection signal="move_to_next_level" from="GameController" to="Player/MovePlayerToNextLevel" method="do"]

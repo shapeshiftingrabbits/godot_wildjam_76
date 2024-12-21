@@ -5,6 +5,9 @@
 
 [node name="GameRoot" instance=ExtResource("1_r7qus")]
 
+[node name="StateChartDebugger" parent="HUD/MarginContainer/VBox" index="1"]
+enabled = false
+
 [node name="Level3" parent="." index="5" instance=ExtResource("2_a12sv")]
 position = Vector2(3840, 0)
 

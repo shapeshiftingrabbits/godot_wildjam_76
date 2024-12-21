@@ -22,3 +22,4 @@ func set_in_control_property(in_control: bool):
 
 func _physics_process(delta: float) -> void:
 	state_chart.set_expression_property(&"velocity", player.velocity)
+	state_chart.set_expression_property(&"direction", player.direction)
