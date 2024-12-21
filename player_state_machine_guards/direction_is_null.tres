@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_b2qy2")
-expression = "direction == 0.0"
+expression = "has_input_direction == 0.0"

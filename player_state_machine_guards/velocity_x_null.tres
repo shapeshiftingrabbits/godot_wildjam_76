@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_d2fcx")
-expression = "velocity.x == 0"
+expression = "velocity.x == 0.0"

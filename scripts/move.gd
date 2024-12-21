@@ -10,7 +10,7 @@ const SPEED = 300.0
 @export var JUMP_VELOCITY: float = -800.0
 @export_range(0.0,1.0) var deceleration = 0.1
 
-var direction: float
+var direction : float = 0.0
 
 func _on_in_control_state_state_physics_processing(delta: float) -> void:
 	# Add the gravity.

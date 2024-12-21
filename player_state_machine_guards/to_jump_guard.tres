@@ -1,15 +1,20 @@
-[gd_resource type="Resource" script_class="AllOfGuard" load_steps=7 format=3 uid="uid://b8meiwfvilft1"]
+[gd_resource type="Resource" script_class="AllOfGuard" load_steps=9 format=3 uid="uid://b8meiwfvilft1"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/guard.gd" id="1_avt7q"]
 [ext_resource type="Resource" uid="uid://crv0fdii022lf" path="res://player_state_machine_guards/shoved_back_false.tres" id="2_wwnhr"]
 [ext_resource type="Resource" uid="uid://dlp2pxuai5pti" path="res://player_state_machine_guards/velocity_y_null.tres" id="3_tfp6i"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="4_qnnsr"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="5_2ge8i"]
+[ext_resource type="Resource" uid="uid://dvt3banuk683s" path="res://player_state_machine_guards/is_on_floor.tres" id="5_euht4"]
 
 [sub_resource type="Resource" id="Resource_ca3gt"]
 script = ExtResource("4_qnnsr")
 guard = ExtResource("3_tfp6i")
 
+[sub_resource type="Resource" id="Resource_70sap"]
+script = ExtResource("4_qnnsr")
+guard = ExtResource("5_euht4")
+
 [resource]
 script = ExtResource("5_2ge8i")
-guards = Array[ExtResource("1_avt7q")]([ExtResource("2_wwnhr"), SubResource("Resource_ca3gt")])
+guards = Array[ExtResource("1_avt7q")]([ExtResource("2_wwnhr"), SubResource("Resource_ca3gt"), SubResource("Resource_70sap")])

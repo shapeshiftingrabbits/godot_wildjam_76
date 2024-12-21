@@ -116,6 +116,21 @@ tracks/0/keys = {
 "values": [17]
 }
 
+[sub_resource type="Animation" id="Animation_g0ghy"]
+resource_name = "slide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [17]
+}
+
 [sub_resource type="Animation" id="Animation_gtn2c"]
 resource_name = "walk"
 length = 0.8
@@ -132,21 +147,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [36, 37, 38, 39, 40, 41, 42, 43]
-}
-
-[sub_resource type="Animation" id="Animation_g0ghy"]
-resource_name = "slide"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%CharacterSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [28]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_djn3v"]
@@ -179,7 +179,7 @@ guard = ExtResource("30_nwg0r")
 
 [sub_resource type="Resource" id="Resource_4n10k"]
 script = ExtResource("25_m0fx2")
-guards = Array[ExtResource("21_bo6i3")]([ExtResource("29_do2s6"), SubResource("Resource_erhi1")])
+guards = Array[ExtResource("21_bo6i3")]([ExtResource("29_do2s6"), SubResource("Resource_erhi1"), ExtResource("23_bay7e")])
 
 [sub_resource type="Resource" id="Resource_6xw2g"]
 script = ExtResource("24_fe56a")
@@ -270,6 +270,7 @@ script = ExtResource("3_87lte")
 unique_name_in_owner = true
 position = Vector2(1380, 925)
 script = ExtResource("4_p0kd2")
+deceleration = 0.025
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, 15)
@@ -319,8 +320,9 @@ script = ExtResource("14_q5m7e")
 [node name="StateChart" type="Node" parent="Player"]
 script = ExtResource("15_os8la")
 initial_expression_properties = {
-"direction": 0.0,
+"has_input_direction": 0.0,
 "in_control": true,
+"is_on_floor": true,
 "shoved_back": false
 }
 
@@ -353,6 +355,12 @@ script = ExtResource("18_bvbhp")
 animation_player = NodePath("../../../../AnimationPlayer")
 animation_name = &"walk"
 
+[node name="ToSlide" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Slide")
+guard = SubResource("Resource_4n10k")
+delay_in_seconds = "0.0"
+
 [node name="ToIdle" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Walk"]
 script = ExtResource("19_4vsrg")
 to = NodePath("../../Idle")
@@ -369,12 +377,6 @@ delay_in_seconds = "0.0"
 script = ExtResource("19_4vsrg")
 to = NodePath("../../Jump")
 guard = ExtResource("28_hbxh6")
-delay_in_seconds = "0.0"
-
-[node name="ToSlide" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Walk"]
-script = ExtResource("19_4vsrg")
-to = NodePath("../../Slide")
-guard = SubResource("Resource_4n10k")
 delay_in_seconds = "0.0"
 
 [node name="ShovedBack" type="Node" parent="Player/StateChart/ParallelState/CompoundState"]

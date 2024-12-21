@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_kfhor")
-expression = "velocity.y == 0"
+expression = "velocity.y == 0.0"

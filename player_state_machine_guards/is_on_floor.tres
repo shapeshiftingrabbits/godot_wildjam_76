@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ExpressionGuard" load_steps=2 format=3 uid="uid://dvt3banuk683s"]
+
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="1_ckoy5"]
+
+[resource]
+script = ExtResource("1_ckoy5")
+expression = "is_on_floor == true"
