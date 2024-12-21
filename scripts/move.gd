@@ -8,7 +8,7 @@ signal jumping
 const SPEED = 300.0
 
 @export var JUMP_VELOCITY: float = -800.0
-@export_range(0.0,1.0) var deceleration = 0.1
+@export_range(0.0,1.0) var deceleration = 1.0
 
 var direction : float = 0.0
 

@@ -3,6 +3,7 @@ extends Node
 class_name DetectTargetGroupCollision
 
 signal target_group_entered
+signal target_group_exited
 
 @export var target_group_name: StringName = &"player"
 
@@ -17,3 +18,8 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group(target_group_name):
 		target_group_entered.emit()
+
+
+func _on_body_exited(body: Node2D) -> void:
+	if body.is_in_group(target_group_name):
+		target_group_exited.emit()

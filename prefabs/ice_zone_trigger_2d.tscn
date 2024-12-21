@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://pyvemhdel8lv"]
+
+[ext_resource type="Script" path="res://scripts/detect_target_group_collision.gd" id="1_cr671"]
+[ext_resource type="Texture2D" uid="uid://dtcgtwaqkjpn5" path="res://textures/iceWaterDeepStarsAlt.png" id="2_yf6po"]
+[ext_resource type="Script" path="res://scripts/set_floor_variables.gd" id="3_6tvb6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4ccf"]
+size = Vector2(1260, 70)
+
+[node name="IceZoneTrigger2D" type="Area2D"]
+position = Vector2(899, 1044)
+script = ExtResource("1_cr671")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d4ccf")
+
+[node name="IceBlockHalfAlt" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(-1, 0)
+texture = ExtResource("2_yf6po")
+region_enabled = true
+region_rect = Rect2(0, 0, 1260, 70)
+
+[node name="SetFloorVariables" type="Node" parent="."]
+script = ExtResource("3_6tvb6")
+deceleration = 0.025
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="target_group_entered" from="." to="SetFloorVariables" method="_on_ice_zone_trigger_2d_target_group_entered"]
+[connection signal="target_group_exited" from="." to="SetFloorVariables" method="_on_ice_zone_trigger_2d_target_group_exited"]

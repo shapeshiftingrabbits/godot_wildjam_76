@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ccbnm76xut6pw"]
+[gd_scene load_steps=59 format=3 uid="uid://ccbnm76xut6pw"]
 
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_rgxb2"]
 [ext_resource type="Script" path="res://scripts/menu_controller.gd" id="2_pdeji"]
@@ -42,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://jnv2jrdo42x7" path="res://textures/tundraMid.png" id="36_5tuxo"]
 [ext_resource type="Texture2D" uid="uid://b22bochr2nsa2" path="res://textures/caneGreenTop.png" id="36_q0cx4"]
 [ext_resource type="Texture2D" uid="uid://bp2qnyp1fe5pv" path="res://textures/caneRedTop.png" id="36_t350a"]
+[ext_resource type="PackedScene" uid="uid://pyvemhdel8lv" path="res://prefabs/ice_zone_trigger_2d.tscn" id="41_x71t3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrfrj"]
 size = Vector2(64.75, 98)
@@ -119,7 +120,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [17]
+"values": [31]
 }
 
 [sub_resource type="Animation" id="Animation_g0ghy"]
@@ -185,7 +186,11 @@ guard = ExtResource("30_nwg0r")
 
 [sub_resource type="Resource" id="Resource_4n10k"]
 script = ExtResource("25_m0fx2")
-guards = Array[ExtResource("21_bo6i3")]([ExtResource("29_do2s6"), SubResource("Resource_erhi1"), ExtResource("23_bay7e")])
+guards = Array[ExtResource("21_bo6i3")]([ExtResource("29_do2s6"), SubResource("Resource_erhi1"), ExtResource("23_bay7e"), ExtResource("30_vk6ag")])
+
+[sub_resource type="Resource" id="Resource_j23xg"]
+script = ExtResource("24_fe56a")
+guard = ExtResource("30_vk6ag")
 
 [sub_resource type="Resource" id="Resource_6xw2g"]
 script = ExtResource("24_fe56a")
@@ -228,6 +233,7 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+enabled = false
 initial_node_to_watch = NodePath("../../../../Player/StateChart")
 
 [node name="MenuPanelContainer" type="PanelContainer" parent="HUD"]
@@ -274,9 +280,8 @@ script = ExtResource("3_87lte")
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 unique_name_in_owner = true
-position = Vector2(1380, 925)
+position = Vector2(367, 925)
 script = ExtResource("4_p0kd2")
-deceleration = 0.025
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(0, 15)
@@ -436,6 +441,12 @@ script = ExtResource("18_bvbhp")
 animation_player = NodePath("../../../../AnimationPlayer")
 animation_name = &"slide"
 
+[node name="ToWalkForced" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Slide"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../Walk")
+guard = SubResource("Resource_j23xg")
+delay_in_seconds = "0.0"
+
 [node name="ToWalk" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Slide"]
 script = ExtResource("19_4vsrg")
 to = NodePath("../../Walk")
@@ -490,12 +501,14 @@ delay_in_seconds = "0.0"
 texture = ExtResource("35_tn2hc")
 
 [node name="LollipopFruitGreen" parent="Level2/StartingLineArea2D" index="2"]
+position = Vector2(-2, -36)
 texture = ExtResource("36_t350a")
 
 [node name="LollipopBaseBrown" parent="Level2/FinishLineArea2D" index="1"]
 texture = ExtResource("35_2nqf3")
 
 [node name="LollipopFruitGreen" parent="Level2/FinishLineArea2D" index="2"]
+position = Vector2(-2, -36)
 texture = ExtResource("36_q0cx4")
 
 [node name="Sprite2D" parent="Level2/RightWall" index="1"]
@@ -506,6 +519,8 @@ texture = ExtResource("35_71mq4")
 
 [node name="Sprite2D" parent="Level2/Floor" index="1"]
 texture = ExtResource("36_5tuxo")
+
+[node name="IceZoneTrigger2D" parent="Level2" instance=ExtResource("41_x71t3")]
 
 [node name="GameController" type="Node" parent="."]
 process_mode = 3
@@ -537,6 +552,11 @@ autoplay = true
 [connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
 [connection signal="move_to_next_level" from="GameController" to="Player/MovePlayerToNextLevel" method="do"]
 
+[editable path="Level1"]
+[editable path="Level1/RightWall"]
+[editable path="Level1/LeftWall"]
+[editable path="Level1/Floor"]
+[editable path="Level1/IceZoneTrigger2D"]
 [editable path="Level2"]
 [editable path="Level2/RightWall"]
 [editable path="Level2/LeftWall"]
