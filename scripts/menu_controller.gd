@@ -6,7 +6,7 @@ func _ready() -> void:
 
 
 func _on_exit_to_main_screen_button_pressed() -> void:
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://scenes/main_scene.tscn")
 
 
 func _on_quit_button_pressed() -> void:
@@ -33,3 +33,7 @@ func _input(event: InputEvent) -> void:
 func resume() -> void:
 	hide()
 	get_tree().paused = false
+
+
+func _on_reload_current_world_pressed() -> void:
+	get_tree().reload_current_scene()

@@ -55,6 +55,7 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
+enabled = false
 initial_node_to_watch = NodePath("../../../../Player/StateChart")
 
 [node name="MenuPanelContainer" type="PanelContainer" parent="HUD"]
@@ -88,6 +89,11 @@ text = "Resume"
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 text = "Go To Main Screen"
+
+[node name="ReloadCurrentWorld" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Reload Current World"
 
 [node name="QuitButton" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(190, 50)
@@ -153,6 +159,7 @@ autoplay = true
 [connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="GameController" method="reset_current_level"]
 [connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/Resume" to="HUD/MenuPanelContainer" method="resume"]
 [connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/ExitToMainScreenButton" to="HUD/MenuPanelContainer" method="_on_exit_to_main_screen_button_pressed"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/ReloadCurrentWorld" to="HUD/MenuPanelContainer" method="_on_reload_current_world_pressed"]
 [connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/QuitButton" to="HUD/MenuPanelContainer" method="_on_quit_button_pressed"]
 [connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
 [connection signal="move_to_next_level" from="GameController" to="GameController/BindPlayerMoveToNextLevel" method="_on_game_controller_move_to_next_level"]
