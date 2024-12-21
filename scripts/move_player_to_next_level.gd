@@ -11,6 +11,8 @@ var cached_deceleration: float
 
 func do(current_level_controller: LevelController):
 	var starting_position_node = current_level_controller.find_child("StartingPosition") as Node2D
+	if !starting_position_node: 
+		return
 	starting_position = starting_position_node.get_global_transform().get_origin()
 	cached_deceleration = player.deceleration
 	player.deceleration = 1.0

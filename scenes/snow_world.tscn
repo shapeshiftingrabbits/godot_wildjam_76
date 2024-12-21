@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ccbnm76xut6pw"]
+[gd_scene load_steps=18 format=3 uid="uid://ccbnm76xut6pw"]
 
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_rgxb2"]
 [ext_resource type="Script" path="res://scripts/menu_controller.gd" id="2_pdeji"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bp2qnyp1fe5pv" path="res://textures/caneRedTop.png" id="36_t350a"]
 [ext_resource type="PackedScene" uid="uid://pyvemhdel8lv" path="res://prefabs/ice_zone_trigger_2d.tscn" id="41_x71t3"]
 [ext_resource type="PackedScene" uid="uid://4xrlcemn4wmf" path="res://prefabs/level_3_snow.tscn" id="42_c4ask"]
+[ext_resource type="Script" path="res://scripts/bind_player_check_state_with_level_change.gd" id="60_xecav"]
 
 [node name="GameRoot" type="Node2D"]
 
@@ -54,7 +55,6 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
-enabled = false
 initial_node_to_watch = NodePath("../../../../Player/StateChart")
 
 [node name="MenuPanelContainer" type="PanelContainer" parent="HUD"]
@@ -100,7 +100,6 @@ anchor_mode = 0
 script = ExtResource("3_87lte")
 
 [node name="Player" parent="." instance=ExtResource("4_3oesl")]
-unique_name_in_owner = true
 
 [node name="Level1" parent="." instance=ExtResource("2_wjndn")]
 
@@ -137,6 +136,9 @@ texture = ExtResource("36_5tuxo")
 process_mode = 3
 script = ExtResource("33_fvviu")
 
+[node name="BindPlayerMoveToNextLevel" type="Node" parent="GameController"]
+script = ExtResource("60_xecav")
+
 [node name="BgAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("34_j351h")
 volume_db = -13.0
@@ -150,7 +152,9 @@ autoplay = true
 [connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/ExitToMainScreenButton" to="HUD/MenuPanelContainer" method="_on_exit_to_main_screen_button_pressed"]
 [connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/QuitButton" to="HUD/MenuPanelContainer" method="_on_quit_button_pressed"]
 [connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
+[connection signal="move_to_next_level" from="GameController" to="GameController/BindPlayerMoveToNextLevel" method="_on_game_controller_move_to_next_level"]
 
+[editable path="Player"]
 [editable path="Level1"]
 [editable path="Level1/RightWall"]
 [editable path="Level1/LeftWall"]
