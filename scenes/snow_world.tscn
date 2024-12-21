@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bce2mls8dw31g" path="res://prefabs/level_1_snow.tscn" id="2_wjndn"]
 [ext_resource type="Script" path="res://scripts/camera_panning.gd" id="3_87lte"]
 [ext_resource type="PackedScene" uid="uid://cnjfaqxwgwsat" path="res://prefabs/player.tscn" id="4_3oesl"]
+[ext_resource type="Script" path="res://scripts/bind_player_movement_with_level_entering.gd" id="16_ed3n1"]
 [ext_resource type="PackedScene" uid="uid://cvpnwunomn7ab" path="res://prefabs/level_2.tscn" id="32_ihpeh"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="33_fvviu"]
 [ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="34_j351h"]
@@ -16,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://bp2qnyp1fe5pv" path="res://textures/caneRedTop.png" id="36_t350a"]
 [ext_resource type="PackedScene" uid="uid://pyvemhdel8lv" path="res://prefabs/ice_zone_trigger_2d.tscn" id="41_x71t3"]
 [ext_resource type="PackedScene" uid="uid://4xrlcemn4wmf" path="res://prefabs/level_3_snow.tscn" id="42_c4ask"]
-[ext_resource type="Script" path="res://scripts/bind_player_check_state_with_level_change.gd" id="60_xecav"]
 
 [node name="GameRoot" type="Node2D"]
 
@@ -132,12 +132,15 @@ texture = ExtResource("36_5tuxo")
 
 [node name="Level3" parent="." instance=ExtResource("42_c4ask")]
 
+[node name="ExitLevelTrigger2D" parent="Level3" index="13"]
+disabled = true
+
 [node name="GameController" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("33_fvviu")
 
 [node name="BindPlayerMoveToNextLevel" type="Node" parent="GameController"]
-script = ExtResource("60_xecav")
+script = ExtResource("16_ed3n1")
 
 [node name="BgAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("34_j351h")
@@ -164,3 +167,5 @@ autoplay = true
 [editable path="Level2/RightWall"]
 [editable path="Level2/LeftWall"]
 [editable path="Level2/Floor"]
+[editable path="Level3"]
+[editable path="Level3/IceZoneTrigger2D"]
