@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://ccbnm76xut6pw"]
+[gd_scene load_steps=57 format=3 uid="uid://ccbnm76xut6pw"]
 
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_rgxb2"]
 [ext_resource type="Script" path="res://scripts/menu_controller.gd" id="2_pdeji"]
@@ -36,6 +36,12 @@
 [ext_resource type="PackedScene" uid="uid://cvpnwunomn7ab" path="res://prefabs/level_2.tscn" id="32_ihpeh"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="33_fvviu"]
 [ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="34_j351h"]
+[ext_resource type="Texture2D" uid="uid://dilyi8tvhx6bv" path="res://textures/caneGreen.png" id="35_2nqf3"]
+[ext_resource type="Texture2D" uid="uid://t5ee02jhh66e" path="res://textures/tundraCenter.png" id="35_71mq4"]
+[ext_resource type="Texture2D" uid="uid://ca4mhp54dh5ts" path="res://textures/caneRed.png" id="35_tn2hc"]
+[ext_resource type="Texture2D" uid="uid://jnv2jrdo42x7" path="res://textures/tundraMid.png" id="36_5tuxo"]
+[ext_resource type="Texture2D" uid="uid://b22bochr2nsa2" path="res://textures/caneGreenTop.png" id="36_q0cx4"]
+[ext_resource type="Texture2D" uid="uid://bp2qnyp1fe5pv" path="res://textures/caneRedTop.png" id="36_t350a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrfrj"]
 size = Vector2(64.75, 98)
@@ -448,6 +454,12 @@ to = NodePath("../../Jump")
 guard = ExtResource("28_hbxh6")
 delay_in_seconds = "0.0"
 
+[node name="ToShovedBack" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Slide"]
+script = ExtResource("19_4vsrg")
+to = NodePath("../../ShovedBack")
+guard = ExtResource("27_uhpe5")
+delay_in_seconds = "0.0"
+
 [node name="PlayerControlState" type="Node" parent="Player/StateChart/ParallelState"]
 script = ExtResource("17_d2e50")
 initial_state = NodePath("InControlState")
@@ -473,6 +485,27 @@ delay_in_seconds = "0.0"
 [node name="Level1" parent="." instance=ExtResource("2_wjndn")]
 
 [node name="Level2" parent="." instance=ExtResource("32_ihpeh")]
+
+[node name="LollipopBaseBrown" parent="Level2/StartingLineArea2D" index="1"]
+texture = ExtResource("35_tn2hc")
+
+[node name="LollipopFruitGreen" parent="Level2/StartingLineArea2D" index="2"]
+texture = ExtResource("36_t350a")
+
+[node name="LollipopBaseBrown" parent="Level2/FinishLineArea2D" index="1"]
+texture = ExtResource("35_2nqf3")
+
+[node name="LollipopFruitGreen" parent="Level2/FinishLineArea2D" index="2"]
+texture = ExtResource("36_q0cx4")
+
+[node name="Sprite2D" parent="Level2/RightWall" index="1"]
+texture = ExtResource("35_71mq4")
+
+[node name="Sprite2D" parent="Level2/LeftWall" index="1"]
+texture = ExtResource("35_71mq4")
+
+[node name="Sprite2D" parent="Level2/Floor" index="1"]
+texture = ExtResource("36_5tuxo")
 
 [node name="GameController" type="Node" parent="."]
 process_mode = 3
@@ -503,3 +536,8 @@ autoplay = true
 [connection signal="state_physics_processing" from="Player/StateChart/ParallelState/PlayerControlState/NotInControlState" to="Player/MovePlayerToNextLevel" method="_on_not_in_control_state_state_physics_processing"]
 [connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
 [connection signal="move_to_next_level" from="GameController" to="Player/MovePlayerToNextLevel" method="do"]
+
+[editable path="Level2"]
+[editable path="Level2/RightWall"]
+[editable path="Level2/LeftWall"]
+[editable path="Level2/Floor"]
