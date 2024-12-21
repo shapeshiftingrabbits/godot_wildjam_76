@@ -1,15 +1,19 @@
 extends Node
 
-class_name BindPlayerMoveToNextLevel
+class_name BindPlayerCheckState
 
 @onready var check_state: AtomicState = $"../StateChart/CompoundState/GoState/CheckState"
 
-var move_to_next_level: MovePlayerToNextLevel
+var check_player_movement: CheckPlayerMovement
 
 func _ready() -> void:
 	var player = get_tree().get_nodes_in_group(&"player").front()
-	move_to_next_level = player.find_child("MovePlayerToNextLevel")
+	check_player_movement = player.find_child("CheckPlayerMovement")
 
 
-func _on_game_controller_move_to_next_level(level: LevelController) -> void:
-	move_to_next_level.do(level)
+func _on_level_entered() -> void:
+	check_state.state_physics_processing.connect(check_player_movement.do)
+
+
+func _on_level_exited() -> void:
+	check_state.state_physics_processing.disconnect(check_player_movement.do)
