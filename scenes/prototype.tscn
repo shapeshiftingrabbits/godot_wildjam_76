@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bq3882tkp8hwx"]
+[gd_scene load_steps=46 format=3 uid="uid://bq3882tkp8hwx"]
 
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="1_2wvwb"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_2xc5i"]
@@ -129,8 +129,6 @@ _data = {
 "walk": SubResource("Animation_gtn2c")
 }
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_qxxqq"]
-
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_p50u2"]
 fade_time = 1.0
 stream_count = 2
@@ -246,6 +244,7 @@ libraries = {
 
 [node name="CharacterSprite" type="Sprite2D" parent="Player"]
 unique_name_in_owner = true
+z_index = 1
 position = Vector2(-24, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_v52op")
@@ -255,12 +254,6 @@ hframes = 9
 vframes = 5
 frame = 36
 region_rect = Rect2(32, 65, 128, 191)
-
-[node name="Mask" type="Sprite2D" parent="Player"]
-clip_children = 1
-position = Vector2(1, 4)
-scale = Vector2(96, 120)
-texture = SubResource("CanvasTexture_qxxqq")
 
 [node name="JumpAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("5_uduhb")
