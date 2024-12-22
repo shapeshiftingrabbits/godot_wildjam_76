@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvl0fh66y62fg"
-path="res://.godot/imported/lollipopFruitRed.png-63395af252ecd864b759b3059360ce9d.ctex"
+uid="uid://c5o7eu3bogq4w"
+path="res://.godot/imported/bg.png-a4a00e8c07c57659a37efa9516c17c26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/lollipopFruitRed.png"
-dest_files=["res://.godot/imported/lollipopFruitRed.png-63395af252ecd864b759b3059360ce9d.ctex"]
+source_file="res://textures/bg.png"
+dest_files=["res://.godot/imported/bg.png-a4a00e8c07c57659a37efa9516c17c26.ctex"]
 
 [params]
 

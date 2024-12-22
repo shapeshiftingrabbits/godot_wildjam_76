@@ -1,22 +1,37 @@
-[gd_scene load_steps=38 format=3 uid="uid://dgda0gpbolspv"]
+[gd_scene load_steps=53 format=3 uid="uid://dgda0gpbolspv"]
 
 [ext_resource type="PackedScene" uid="uid://bq3882tkp8hwx" path="res://scenes/prototype.tscn" id="1_r7qus"]
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="2_c6q71"]
+[ext_resource type="Texture2D" uid="uid://c5o7eu3bogq4w" path="res://textures/bg.png" id="2_digoh"]
 [ext_resource type="PackedScene" uid="uid://dy6rfphsyvehp" path="res://prefabs/punisher.tscn" id="3_j54pm"]
+[ext_resource type="Texture2D" uid="uid://dedpthnqmac52" path="res://textures/bush.png" id="3_mkp0v"]
+[ext_resource type="Texture2D" uid="uid://ccaibyk4jvqoy" path="res://textures/cloud1.png" id="4_m5q0d"]
 [ext_resource type="PackedScene" uid="uid://boc8qbty5ese6" path="res://prefabs/fence_static_body_2d.tscn" id="4_mi7ic"]
+[ext_resource type="Texture2D" uid="uid://dwxlrwiyko577" path="res://textures/cloud2.png" id="5_g8esh"]
 [ext_resource type="Texture2D" uid="uid://dgpy8sey60xjr" path="res://textures/character_femaleAdventurer_sheetHD.png" id="5_slxtl"]
+[ext_resource type="Texture2D" uid="uid://duu6cclnhjmm6" path="res://textures/cloud3.png" id="6_7d6tb"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="6_dctyc"]
+[ext_resource type="Texture2D" uid="uid://ck04mbbc5paj" path="res://textures/plant.png" id="7_jl0he"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="7_pj6af"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="8_baikm"]
+[ext_resource type="Texture2D" uid="uid://bqxxffl85igfh" path="res://textures/plantPurple.png" id="8_oxhmv"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_b4vxr"]
+[ext_resource type="Texture2D" uid="uid://d0emw17eg7xn2" path="res://textures/rock.png" id="9_pqbyr"]
 [ext_resource type="Texture2D" uid="uid://csn7lhln11087" path="res://textures/flagGreen2.png" id="10_vh7pl"]
+[ext_resource type="Texture2D" uid="uid://bfhqg7srheg2a" path="res://textures/tallShroom_red.png" id="10_yy02j"]
+[ext_resource type="Texture2D" uid="uid://bko1qx1xw6d3h" path="res://textures/tallShroom_tan.png" id="11_1qji1"]
 [ext_resource type="Texture2D" uid="uid://biqwgtxxx2ee5" path="res://textures/flagYellow.png" id="11_yu1rw"]
 [ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="12_4ua1a"]
+[ext_resource type="Texture2D" uid="uid://cbv73rb0lqn6j" path="res://textures/tallShroom_brown.png" id="12_hn464"]
 [ext_resource type="Texture2D" uid="uid://bp0suvr8wupj8" path="res://textures/star.png" id="13_dbxho"]
+[ext_resource type="Texture2D" uid="uid://k61ext712e1" path="res://textures/tinyShroom_brown.png" id="13_lr3as"]
 [ext_resource type="Script" path="res://scripts/announce_commands.gd" id="14_58v6t"]
+[ext_resource type="Texture2D" uid="uid://c0uebqclilekc" path="res://textures/tinyShroom_red.png" id="14_w23bc"]
+[ext_resource type="Texture2D" uid="uid://b2e0213enqn70" path="res://textures/tinyShroom_tan.png" id="15_ni0c7"]
 [ext_resource type="PackedScene" uid="uid://p2et6u5v7uqr" path="res://prefabs/trigger_2d.tscn" id="15_wsjvw"]
 [ext_resource type="Texture2D" uid="uid://cd053hfja0sbd" path="res://textures/lollipopBaseBrown.png" id="16_i4ik2"]
 [ext_resource type="Texture2D" uid="uid://c4rub87ujlihk" path="res://textures/lollipopFruitYellow.png" id="17_cpf7h"]
+[ext_resource type="Texture2D" uid="uid://d2m6ku0iloqnr" path="res://textures/cactus.png" id="18_dcwaf"]
 [ext_resource type="Script" path="res://scripts/detect_starting_line_reached.gd" id="18_grqcs"]
 [ext_resource type="Texture2D" uid="uid://c1s74jb6f2sxq" path="res://textures/lollipopFruitGreen.png" id="19_iltav"]
 [ext_resource type="Script" path="res://scripts/detect_finish_line_reached.gd" id="20_cs7gh"]
@@ -123,33 +138,139 @@ size = Vector2(20, 60)
 
 [node name="GameRoot" instance=ExtResource("1_r7qus")]
 
+[node name="Bg" type="Sprite2D" parent="." index="0"]
+position = Vector2(2893, 530)
+scale = Vector2(22.4375, 4.1875)
+texture = ExtResource("2_digoh")
+
 [node name="StateChartDebugger" parent="HUD/MarginContainer/VBox" index="1"]
 enabled = false
+
+[node name="Bush" type="Sprite2D" parent="Level1" index="0"]
+position = Vector2(534, 971)
+texture = ExtResource("3_mkp0v")
+
+[node name="Cloud1" type="Sprite2D" parent="Level1" index="1"]
+position = Vector2(597, 602)
+texture = ExtResource("4_m5q0d")
+
+[node name="Cloud2" type="Sprite2D" parent="Level1" index="2"]
+position = Vector2(1572, 485)
+texture = ExtResource("5_g8esh")
+
+[node name="Cloud3" type="Sprite2D" parent="Level1" index="3"]
+position = Vector2(1224, 322)
+texture = ExtResource("6_7d6tb")
+
+[node name="Plant" type="Sprite2D" parent="Level1" index="4"]
+position = Vector2(806, 956)
+scale = Vector2(1.56299, 1.4871)
+texture = ExtResource("7_jl0he")
+
+[node name="PlantPurple" type="Sprite2D" parent="Level1" index="5"]
+position = Vector2(841, 975)
+texture = ExtResource("8_oxhmv")
+
+[node name="PlantPurple2" type="Sprite2D" parent="Level1" index="6"]
+position = Vector2(720, 975)
+texture = ExtResource("8_oxhmv")
+
+[node name="PlantPurple3" type="Sprite2D" parent="Level1" index="7"]
+position = Vector2(777, 976)
+texture = ExtResource("8_oxhmv")
+
+[node name="Rock" type="Sprite2D" parent="Level1" index="8"]
+position = Vector2(1605, 979)
+texture = ExtResource("9_pqbyr")
+
+[node name="Cloud4" type="Sprite2D" parent="Level2" index="0"]
+position = Vector2(504, 666.5)
+texture = ExtResource("4_m5q0d")
+
+[node name="Cloud5" type="Sprite2D" parent="Level2" index="1"]
+position = Vector2(1479, 549.5)
+texture = ExtResource("5_g8esh")
+
+[node name="Cloud6" type="Sprite2D" parent="Level2" index="2"]
+position = Vector2(1131, 386.5)
+texture = ExtResource("6_7d6tb")
+
+[node name="TallShroomRed" type="Sprite2D" parent="Level2" index="3"]
+position = Vector2(1134, 975)
+texture = ExtResource("10_yy02j")
+
+[node name="TallShroomTan" type="Sprite2D" parent="Level2" index="4"]
+position = Vector2(1236, 974)
+texture = ExtResource("11_1qji1")
+
+[node name="TallShroomBrown" type="Sprite2D" parent="Level2" index="5"]
+position = Vector2(598, 974)
+texture = ExtResource("12_hn464")
+
+[node name="TinyShroomBrown" type="Sprite2D" parent="Level2" index="6"]
+position = Vector2(1158, 974)
+texture = ExtResource("13_lr3as")
+
+[node name="TinyShroomRed" type="Sprite2D" parent="Level2" index="7"]
+position = Vector2(519, 974)
+texture = ExtResource("14_w23bc")
+
+[node name="TinyShroomTan" type="Sprite2D" parent="Level2" index="8"]
+position = Vector2(634, 974)
+texture = ExtResource("15_ni0c7")
 
 [node name="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="0"]
 text = "Freeze!"
 
-[node name="Level3" type="Node2D" parent="." index="5"]
+[node name="Level3" type="Node2D" parent="." index="6"]
 position = Vector2(3840, 0)
 script = ExtResource("2_c6q71")
 
-[node name="Punisher" parent="Level3" index="0" instance=ExtResource("3_j54pm")]
+[node name="Bush" type="Sprite2D" parent="Level3" index="0"]
+position = Vector2(1161, 973)
+texture = ExtResource("3_mkp0v")
 
-[node name="FenceStaticBody2D" parent="Level3" index="1" instance=ExtResource("4_mi7ic")]
+[node name="Cloud7" type="Sprite2D" parent="Level3" index="1"]
+position = Vector2(412, 651.5)
+texture = ExtResource("4_m5q0d")
+
+[node name="Cloud8" type="Sprite2D" parent="Level3" index="2"]
+position = Vector2(1387, 534.5)
+texture = ExtResource("5_g8esh")
+
+[node name="Cloud9" type="Sprite2D" parent="Level3" index="3"]
+position = Vector2(1054, 725)
+texture = ExtResource("6_7d6tb")
+
+[node name="Cactus" type="Sprite2D" parent="Level3" index="4"]
+position = Vector2(123, 973)
+texture = ExtResource("18_dcwaf")
+
+[node name="Plant" type="Sprite2D" parent="Level3" index="5"]
+position = Vector2(515, 975)
+texture = ExtResource("7_jl0he")
+
+[node name="Plant2" type="Sprite2D" parent="Level3" index="6"]
+position = Vector2(949, 975)
+texture = ExtResource("7_jl0he")
+
+[node name="Punisher" parent="Level3" index="7" instance=ExtResource("3_j54pm")]
+
+[node name="FenceStaticBody2D" parent="Level3" index="8" instance=ExtResource("4_mi7ic")]
 position = Vector2(558, 976)
 
-[node name="FenceStaticBody2D2" parent="Level3" index="2" instance=ExtResource("4_mi7ic")]
+[node name="FenceStaticBody2D2" parent="Level3" index="9" instance=ExtResource("4_mi7ic")]
 
-[node name="FenceStaticBody2D3" parent="Level3" index="3" instance=ExtResource("4_mi7ic")]
+[node name="FenceStaticBody2D3" parent="Level3" index="10" instance=ExtResource("4_mi7ic")]
 position = Vector2(1286, 976)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Level3" index="4"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Level3" index="11"]
 position = Vector2(1763, 946)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_puma4")
 animation = &"check"
 
-[node name="StateChart" type="Node" parent="Level3" index="5"]
+[node name="StateChart" type="Node" parent="Level3" index="12"]
 script = ExtResource("6_dctyc")
 
 [node name="CompoundState" type="Node" parent="Level3/StateChart" index="0"]
@@ -231,7 +352,7 @@ to = NodePath("../../IdleState")
 event = &"idled"
 delay_in_seconds = "0.0"
 
-[node name="LevelHUD" type="Control" parent="Level3" index="6"]
+[node name="LevelHUD" type="Control" parent="Level3" index="13"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 3
 anchors_preset = 15
@@ -369,13 +490,13 @@ text = "Level Completed !"
 layout_mode = 2
 texture = ExtResource("13_dbxho")
 
-[node name="AnnounceCommands" type="Node" parent="Level3" index="7"]
+[node name="AnnounceCommands" type="Node" parent="Level3" index="14"]
 script = ExtResource("14_58v6t")
 
-[node name="TriggerEnterLevel" parent="Level3" index="8" instance=ExtResource("15_wsjvw")]
+[node name="TriggerEnterLevel" parent="Level3" index="15" instance=ExtResource("15_wsjvw")]
 position = Vector2(150, 990)
 
-[node name="StartingLineArea2D" type="Area2D" parent="Level3" index="9"]
+[node name="StartingLineArea2D" type="Area2D" parent="Level3" index="16"]
 position = Vector2(282, 943)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level3/StartingLineArea2D" index="0"]
@@ -401,7 +522,7 @@ metadata/_edit_group_ = true
 [node name="DetectStartingLineReached" type="Node" parent="Level3/StartingLineArea2D" index="3"]
 script = ExtResource("18_grqcs")
 
-[node name="FinishLineArea2D" type="Area2D" parent="Level3" index="10"]
+[node name="FinishLineArea2D" type="Area2D" parent="Level3" index="17"]
 position = Vector2(1570, 939)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level3/FinishLineArea2D" index="0"]
@@ -423,30 +544,34 @@ metadata/_edit_lock_ = true
 [node name="DetectFinishLineReached" type="Node" parent="Level3/FinishLineArea2D" index="3"]
 script = ExtResource("20_cs7gh")
 
-[node name="RightWall" parent="Level3" index="11" instance=ExtResource("21_4uqd7")]
+[node name="RightWall" parent="Level3" index="18" instance=ExtResource("21_4uqd7")]
 
-[node name="LeftWall" parent="Level3" index="12" instance=ExtResource("21_4uqd7")]
+[node name="LeftWall" parent="Level3" index="19" instance=ExtResource("21_4uqd7")]
 position = Vector2(35, 540)
 
-[node name="Floor" parent="Level3" index="13" instance=ExtResource("22_7cj8y")]
+[node name="Floor" parent="Level3" index="20" instance=ExtResource("22_7cj8y")]
 
-[node name="ExitLevelTrigger2D" parent="Level3" index="14" instance=ExtResource("15_wsjvw")]
+[node name="ExitLevelTrigger2D" parent="Level3" index="21" instance=ExtResource("15_wsjvw")]
 
-[node name="StartingPosition" type="Node2D" parent="Level3" index="15"]
+[node name="StartingPosition" type="Node2D" parent="Level3" index="22"]
 position = Vector2(189, 996)
 script = ExtResource("23_c3c3s")
 
-[node name="WinAudioStreamPlayer" type="AudioStreamPlayer" parent="Level3" index="16"]
+[node name="WinAudioStreamPlayer" type="AudioStreamPlayer" parent="Level3" index="23"]
 stream = ExtResource("24_q8aeq")
 volume_db = -3.239
 
-[node name="GameAudioStreamPlayer" type="AudioStreamPlayer" parent="Level3" index="17"]
+[node name="GameAudioStreamPlayer" type="AudioStreamPlayer" parent="Level3" index="24"]
 process_mode = 1
 stream = ExtResource("25_tlmyq")
 script = ExtResource("26_pi6j3")
 
-[node name="BindPlayerCheckState" type="Node" parent="Level3" index="18"]
+[node name="BindPlayerCheckState" type="Node" parent="Level3" index="25"]
 script = ExtResource("27_wv6do")
+
+[node name="PlantPurple" type="Sprite2D" parent="Level3" index="26"]
+position = Vector2(1820, 974)
+texture = ExtResource("8_oxhmv")
 
 [connection signal="level_entered" from="Level3" to="Level3/Punisher" method="_on_level_entered"]
 [connection signal="level_entered" from="Level3" to="Level3/LeftWall" method="turn_off"]
@@ -496,4 +621,5 @@ script = ExtResource("27_wv6do")
 [connection signal="finished_line_reached" from="Level3/FinishLineArea2D/DetectFinishLineReached" to="Level3/AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
 [connection signal="target_group_entered" from="Level3/ExitLevelTrigger2D" to="GameController" method="load_snow_world"]
 
+[editable path="Level1"]
 [editable path="Level2"]

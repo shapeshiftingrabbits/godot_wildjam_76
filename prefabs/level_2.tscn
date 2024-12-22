@@ -241,14 +241,12 @@ size_flags_vertical = 0
 
 [node name="Instructions" type="VBoxContainer" parent="LevelHUD/PanelContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="1Instruction" type="HBoxContainer" parent="LevelHUD/PanelContainer/Instructions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Label" type="Label" parent="LevelHUD/PanelContainer/Instructions/1Instruction"]
