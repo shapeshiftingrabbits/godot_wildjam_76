@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/menu_controller.gd" id="2_3jo83"]
 [ext_resource type="Script" path="res://scripts/camera_panning.gd" id="3_wunuj"]
 [ext_resource type="PackedScene" uid="uid://cnjfaqxwgwsat" path="res://prefabs/player.tscn" id="4_xy8km"]
-[ext_resource type="PackedScene" uid="uid://4xrlcemn4wmf" path="res://prefabs/level_3_snow.tscn" id="31_0yqrl"]
+[ext_resource type="PackedScene" uid="uid://dsx188h53wusj" path="res://prefabs/level_3_2.tscn" id="5_girgu"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="32_mk60j"]
 [ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="33_m3pfc"]
 
@@ -89,13 +89,11 @@ anchor_mode = 0
 script = ExtResource("3_wunuj")
 
 [node name="Player" parent="." instance=ExtResource("4_xy8km")]
+z_index = 1
 position = Vector2(113, 925)
 
-[node name="Level3" parent="." instance=ExtResource("31_0yqrl")]
+[node name="Level3" parent="." instance=ExtResource("5_girgu")]
 position = Vector2(0, 0)
-
-[node name="TriggerEnterLevel" parent="Level3" index="6"]
-position = Vector2(177, 990)
 
 [node name="GameController" type="Node" parent="."]
 process_mode = 3

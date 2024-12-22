@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dog26b3n7dwy7"]
+
+[ext_resource type="Script" path="res://scripts/spike_area.gd" id="1_368db"]
+[ext_resource type="Script" path="res://scripts/check_character_body_collision.gd" id="2_1jvar"]
+[ext_resource type="Texture2D" uid="uid://bal7nwxcf3h86" path="res://textures/spikeTop.png" id="3_hanv0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swpjo"]
+size = Vector2(20, 34)
+
+[node name="SpikeRigidBody2D" type="RigidBody2D" groups=["projectile"]]
+position = Vector2(1207, 684)
+gravity_scale = 0.0
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_368db")
+
+[node name="CheckCollision" type="Node" parent="."]
+script = ExtResource("2_1jvar")
+check_groups = Array[String](["projectile"])
+
+[node name="SpikeTop" type="Sprite2D" parent="."]
+texture = ExtResource("3_hanv0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -20)
+shape = SubResource("RectangleShape2D_swpjo")
+
+[connection signal="has_collided" from="CheckCollision" to="." method="_on_check_collision_has_collided"]

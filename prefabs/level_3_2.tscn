@@ -1,0 +1,637 @@
+[gd_scene load_steps=54 format=3 uid="uid://dsx188h53wusj"]
+
+[ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_22h5u"]
+[ext_resource type="Texture2D" uid="uid://ccaibyk4jvqoy" path="res://textures/cloud1.png" id="2_ye6it"]
+[ext_resource type="Texture2D" uid="uid://dwxlrwiyko577" path="res://textures/cloud2.png" id="3_qmjmn"]
+[ext_resource type="Texture2D" uid="uid://duu6cclnhjmm6" path="res://textures/cloud3.png" id="4_gyf03"]
+[ext_resource type="Texture2D" uid="uid://d0emw17eg7xn2" path="res://textures/rock.png" id="5_gh1ry"]
+[ext_resource type="Texture2D" uid="uid://brp7ef08d5l3o" path="res://textures/rockAlt.png" id="6_7dk6t"]
+[ext_resource type="PackedScene" uid="uid://dy6rfphsyvehp" path="res://prefabs/punisher.tscn" id="7_ji3re"]
+[ext_resource type="Texture2D" uid="uid://dgpy8sey60xjr" path="res://textures/character_femaleAdventurer_sheetHD.png" id="8_ekktc"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="9_b8u5u"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="10_5nbmc"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="11_njjfi"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="12_b6p1a"]
+[ext_resource type="Texture2D" uid="uid://csn7lhln11087" path="res://textures/flagGreen2.png" id="13_irgh4"]
+[ext_resource type="Texture2D" uid="uid://biqwgtxxx2ee5" path="res://textures/flagYellow.png" id="14_vsd7y"]
+[ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="15_614ik"]
+[ext_resource type="LabelSettings" uid="uid://dxmn2mb0ej3id" path="res://label_settings.tres" id="16_krb1j"]
+[ext_resource type="Texture2D" uid="uid://bp0suvr8wupj8" path="res://textures/star.png" id="17_mq8md"]
+[ext_resource type="Script" path="res://scripts/announce_commands.gd" id="18_tucjg"]
+[ext_resource type="Script" path="res://scripts/bind_player_check_state_with_level_change.gd" id="19_bidb1"]
+[ext_resource type="PackedScene" uid="uid://p2et6u5v7uqr" path="res://prefabs/trigger_2d.tscn" id="20_ypd15"]
+[ext_resource type="Texture2D" uid="uid://ca4mhp54dh5ts" path="res://textures/caneRed.png" id="21_tpkhb"]
+[ext_resource type="Texture2D" uid="uid://bp2qnyp1fe5pv" path="res://textures/caneRedTop.png" id="22_tpr62"]
+[ext_resource type="Script" path="res://scripts/detect_starting_line_reached.gd" id="23_c7qc4"]
+[ext_resource type="Texture2D" uid="uid://dilyi8tvhx6bv" path="res://textures/caneGreen.png" id="24_uke8d"]
+[ext_resource type="Texture2D" uid="uid://b22bochr2nsa2" path="res://textures/caneGreenTop.png" id="25_f8lim"]
+[ext_resource type="Script" path="res://scripts/detect_finish_line_reached.gd" id="26_y778s"]
+[ext_resource type="PackedScene" uid="uid://boc8qbty5ese6" path="res://prefabs/fence_static_body_2d.tscn" id="27_6bta3"]
+[ext_resource type="Script" path="res://scripts/toggle_collision.gd" id="28_44655"]
+[ext_resource type="Texture2D" uid="uid://t5ee02jhh66e" path="res://textures/tundraCenter.png" id="29_1c424"]
+[ext_resource type="Texture2D" uid="uid://jnv2jrdo42x7" path="res://textures/tundraMid.png" id="30_8o3x5"]
+[ext_resource type="Script" path="res://scripts/move_to_here.gd" id="31_sewsy"]
+[ext_resource type="Texture2D" uid="uid://c6k4so6c8s88s" path="res://textures/houseBeigeAlt.png" id="32_fvmv3"]
+[ext_resource type="Texture2D" uid="uid://kp1fexai0xo" path="res://textures/awningGreenRed.png" id="33_littg"]
+[ext_resource type="Script" path="res://scripts/spawn_spike.gd" id="34_0s2hb"]
+[ext_resource type="Texture2D" uid="uid://lkqpn4lblqo6" path="res://textures/spikesTop.png" id="35_aqfbd"]
+[ext_resource type="PackedScene" uid="uid://dog26b3n7dwy7" path="res://prefabs/spike_rigid_body_2d.tscn" id="36_c645l"]
+[ext_resource type="PackedScene" uid="uid://pyvemhdel8lv" path="res://prefabs/ice_zone_trigger_2d.tscn" id="37_itmsa"]
+[ext_resource type="AudioStream" uid="uid://khkpkakhgenh" path="res://audio/Children_Game_Music/WAV/SFX_Complete.wav" id="38_t06vq"]
+[ext_resource type="AudioStream" uid="uid://b76m01fh00qfl" path="res://audio/prompts/prompt_1.ogg" id="39_e0i54"]
+[ext_resource type="Script" path="res://scripts/audio_player.gd" id="40_xre02"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82c46"]
+atlas = ExtResource("8_ekktc")
+region = Rect2(0, 256, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frvc6"]
+atlas = ExtResource("8_ekktc")
+region = Rect2(960, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt425"]
+atlas = ExtResource("8_ekktc")
+region = Rect2(1152, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcper"]
+atlas = ExtResource("8_ekktc")
+region = Rect2(576, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skxex"]
+atlas = ExtResource("8_ekktc")
+region = Rect2(0, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioa0n"]
+atlas = ExtResource("8_ekktc")
+region = Rect2(1536, 0, 192, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x21y7"]
+atlas = ExtResource("8_ekktc")
+region = Rect2(1536, 0, 192, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uhdmb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82c46")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frvc6")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt425")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcper")
+}],
+"loop": true,
+"name": &"check",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skxex")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioa0n")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x21y7")
+}],
+"loop": true,
+"name": &"soleil",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1ybg"]
+size = Vector2(18.8854, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vykc"]
+size = Vector2(20, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dviuj"]
+size = Vector2(70, 1080)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71hhf"]
+size = Vector2(1920, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71hak"]
+size = Vector2(400, 70)
+
+[node name="Level3" type="Node2D"]
+position = Vector2(3840, 0)
+script = ExtResource("1_22h5u")
+
+[node name="Cloud7" type="Sprite2D" parent="."]
+position = Vector2(549, 206.5)
+texture = ExtResource("2_ye6it")
+
+[node name="Cloud8" type="Sprite2D" parent="."]
+position = Vector2(679, 606.5)
+texture = ExtResource("3_qmjmn")
+
+[node name="Cloud9" type="Sprite2D" parent="."]
+position = Vector2(1315, 480.5)
+texture = ExtResource("4_gyf03")
+
+[node name="Rock2" type="Sprite2D" parent="."]
+position = Vector2(107, 975)
+texture = ExtResource("5_gh1ry")
+
+[node name="RockAlt2" type="Sprite2D" parent="."]
+position = Vector2(1803, 976)
+texture = ExtResource("6_7dk6t")
+
+[node name="Punisher" parent="." instance=ExtResource("7_ji3re")]
+position = Vector2(73, 1082)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1763, 946)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_uhdmb")
+animation = &"check"
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("9_b8u5u")
+
+[node name="CompoundState" type="Node" parent="StateChart"]
+script = ExtResource("10_5nbmc")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("11_njjfi")
+
+[node name="ToGoState" type="Node" parent="StateChart/CompoundState/IdleState"]
+script = ExtResource("12_b6p1a")
+to = NodePath("../../GoState")
+event = &"started"
+delay_in_seconds = "0.0"
+
+[node name="GoState" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("10_5nbmc")
+initial_state = NodePath("1State")
+
+[node name="1State" type="Node" parent="StateChart/CompoundState/GoState"]
+script = ExtResource("11_njjfi")
+
+[node name="Transition" type="Node" parent="StateChart/CompoundState/GoState/1State"]
+script = ExtResource("12_b6p1a")
+to = NodePath("../../2State")
+delay_in_seconds = "1.1"
+
+[node name="2State" type="Node" parent="StateChart/CompoundState/GoState"]
+script = ExtResource("11_njjfi")
+
+[node name="Transition" type="Node" parent="StateChart/CompoundState/GoState/2State"]
+script = ExtResource("12_b6p1a")
+to = NodePath("../../3State")
+delay_in_seconds = "0.7
+"
+
+[node name="3State" type="Node" parent="StateChart/CompoundState/GoState"]
+script = ExtResource("11_njjfi")
+
+[node name="Transition" type="Node" parent="StateChart/CompoundState/GoState/3State"]
+script = ExtResource("12_b6p1a")
+to = NodePath("../../SoleilState")
+delay_in_seconds = "1.0"
+
+[node name="SoleilState" type="Node" parent="StateChart/CompoundState/GoState"]
+script = ExtResource("11_njjfi")
+
+[node name="Transition" type="Node" parent="StateChart/CompoundState/GoState/SoleilState"]
+script = ExtResource("12_b6p1a")
+to = NodePath("../../CheckState")
+delay_in_seconds = "0.8"
+
+[node name="CheckState" type="Node" parent="StateChart/CompoundState/GoState"]
+script = ExtResource("11_njjfi")
+
+[node name="Transition" type="Node" parent="StateChart/CompoundState/GoState/CheckState"]
+script = ExtResource("12_b6p1a")
+to = NodePath("../../1State")
+delay_in_seconds = "1.0"
+
+[node name="ToEndState" type="Node" parent="StateChart/CompoundState/GoState"]
+script = ExtResource("12_b6p1a")
+to = NodePath("../../EndedState")
+event = &"ended"
+delay_in_seconds = "0.0"
+
+[node name="ToIdleState" type="Node" parent="StateChart/CompoundState/GoState"]
+script = ExtResource("12_b6p1a")
+to = NodePath("../../IdleState")
+event = &"idled"
+delay_in_seconds = "0.0"
+
+[node name="EndedState" type="Node" parent="StateChart/CompoundState"]
+script = ExtResource("11_njjfi")
+
+[node name="ToIdleState" type="Node" parent="StateChart/CompoundState/EndedState"]
+script = ExtResource("12_b6p1a")
+to = NodePath("../../IdleState")
+event = &"idled"
+delay_in_seconds = "0.0"
+
+[node name="LevelHUD" type="Control" parent="."]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = 1920.0
+offset_bottom = 1081.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="LevelHUD"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -148.0
+offset_top = 437.0
+offset_right = 52.0
+offset_bottom = 655.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Instructions" type="VBoxContainer" parent="LevelHUD/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="1Instruction" type="HBoxContainer" parent="LevelHUD/PanelContainer/Instructions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="LevelHUD/PanelContainer/Instructions/1Instruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1..."
+
+[node name="TextureRect" type="TextureRect" parent="LevelHUD/PanelContainer/Instructions/1Instruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("13_irgh4")
+
+[node name="2Instruction" type="HBoxContainer" parent="LevelHUD/PanelContainer/Instructions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="LevelHUD/PanelContainer/Instructions/2Instruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2..."
+
+[node name="TextureRect" type="TextureRect" parent="LevelHUD/PanelContainer/Instructions/2Instruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("13_irgh4")
+
+[node name="3Instruction" type="HBoxContainer" parent="LevelHUD/PanelContainer/Instructions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="LevelHUD/PanelContainer/Instructions/3Instruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "3..."
+
+[node name="TextureRect" type="TextureRect" parent="LevelHUD/PanelContainer/Instructions/3Instruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("13_irgh4")
+
+[node name="SoleilInstruction" type="HBoxContainer" parent="LevelHUD/PanelContainer/Instructions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="LevelHUD/PanelContainer/Instructions/SoleilInstruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Soleil!
+"
+
+[node name="TextureRect" type="TextureRect" parent="LevelHUD/PanelContainer/Instructions/SoleilInstruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("14_vsd7y")
+
+[node name="CheckInstruction" type="HBoxContainer" parent="LevelHUD/PanelContainer/Instructions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="LevelHUD/PanelContainer/Instructions/CheckInstruction"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Freeze!"
+
+[node name="TextureRect" type="TextureRect" parent="LevelHUD/PanelContainer/Instructions/CheckInstruction"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("15_614ik")
+
+[node name="LevelCompleted" type="VBoxContainer" parent="LevelHUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.0
+offset_top = -35.0
+offset_right = 174.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="LevelHUD/LevelCompleted"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="LevelHUD/LevelCompleted/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 64
+text = "Game Cleared!"
+label_settings = ExtResource("16_krb1j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="LevelHUD/LevelCompleted/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = ExtResource("17_mq8md")
+
+[node name="AnnounceCommands" type="Node" parent="."]
+script = ExtResource("18_tucjg")
+
+[node name="BindPlayerCheckState" type="Node" parent="."]
+script = ExtResource("19_bidb1")
+
+[node name="TriggerEnterLevel" parent="." instance=ExtResource("20_ypd15")]
+position = Vector2(150, 990)
+
+[node name="StartingLineArea2D" type="Area2D" parent="."]
+position = Vector2(282, 943)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartingLineArea2D"]
+position = Vector2(44, -3)
+rotation = 3.14159
+scale = Vector2(4.61429, 2.53186)
+shape = SubResource("RectangleShape2D_m1ybg")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="LollipopBaseBrown" type="Sprite2D" parent="StartingLineArea2D"]
+position = Vector2(-2, 34)
+texture = ExtResource("21_tpkhb")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="LollipopFruitGreen" type="Sprite2D" parent="StartingLineArea2D"]
+position = Vector2(-2, -36)
+texture = ExtResource("22_tpr62")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="DetectStartingLineReached" type="Node" parent="StartingLineArea2D"]
+script = ExtResource("23_c7qc4")
+
+[node name="FinishLineArea2D" type="Area2D" parent="."]
+position = Vector2(1570, 939)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLineArea2D"]
+position = Vector2(39, -3)
+scale = Vector2(-4.61429, -2.53186)
+shape = SubResource("RectangleShape2D_3vykc")
+metadata/_edit_lock_ = true
+
+[node name="LollipopBaseBrown" type="Sprite2D" parent="FinishLineArea2D"]
+position = Vector2(-2, 34)
+texture = ExtResource("24_uke8d")
+metadata/_edit_lock_ = true
+
+[node name="LollipopFruitGreen" type="Sprite2D" parent="FinishLineArea2D"]
+position = Vector2(-2, -36)
+texture = ExtResource("25_f8lim")
+metadata/_edit_lock_ = true
+
+[node name="DetectFinishLineReached" type="Node" parent="FinishLineArea2D"]
+script = ExtResource("26_y778s")
+
+[node name="FenceStaticBody2D" parent="." instance=ExtResource("27_6bta3")]
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1885, 540)
+script = ExtResource("28_44655")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_dviuj")
+
+[node name="Sprite2D" type="Sprite2D" parent="RightWall"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("29_1c424")
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 1080)
+region_filter_clip_enabled = true
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(35, 540)
+script = ExtResource("28_44655")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_dviuj")
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftWall"]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("29_1c424")
+region_enabled = true
+region_rect = Rect2(0, 0, 70, 1080)
+region_filter_clip_enabled = true
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(960, 1044.23)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RectangleShape2D_71hhf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+texture_repeat = 2
+texture = ExtResource("30_8o3x5")
+region_enabled = true
+region_rect = Rect2(0, 0, 1920, 70)
+
+[node name="ExitLevelTrigger2D" parent="." instance=ExtResource("20_ypd15")]
+visible = false
+disabled = true
+
+[node name="StartingPosition" type="Node2D" parent="."]
+position = Vector2(189, 996)
+script = ExtResource("31_sewsy")
+
+[node name="HouseBeigeAlt" type="Sprite2D" parent="."]
+texture_repeat = 2
+position = Vector2(1205, 842)
+texture = ExtResource("32_fvmv3")
+region_enabled = true
+region_rect = Rect2(0, 0, 220, 500)
+
+[node name="AwningGreenRed" type="Sprite2D" parent="."]
+position = Vector2(1271, 623)
+texture = ExtResource("33_littg")
+
+[node name="AwningGreenRed2" type="Sprite2D" parent="."]
+position = Vector2(1203, 623)
+texture = ExtResource("33_littg")
+
+[node name="AwningGreenRed3" type="Sprite2D" parent="."]
+position = Vector2(1134, 623)
+texture = ExtResource("33_littg")
+
+[node name="SpikeGroup" type="Node2D" parent="."]
+script = ExtResource("34_0s2hb")
+
+[node name="SpikesTop2" type="Sprite2D" parent="SpikeGroup"]
+position = Vector2(1166, 683)
+texture = ExtResource("35_aqfbd")
+
+[node name="SpikesTop" type="Sprite2D" parent="SpikeGroup"]
+position = Vector2(1232, 683)
+texture = ExtResource("35_aqfbd")
+
+[node name="SpikePosition" type="Node2D" parent="SpikeGroup"]
+position = Vector2(1207, 684)
+
+[node name="SpikeRigidBody2D" parent="SpikeGroup" instance=ExtResource("36_c645l")]
+
+[node name="Trigger2D" parent="SpikeGroup" instance=ExtResource("20_ypd15")]
+position = Vector2(984, 996)
+
+[node name="IceZoneTrigger2D" parent="." instance=ExtResource("37_itmsa")]
+position = Vector2(1144, 1044)
+
+[node name="CollisionShape2D" parent="IceZoneTrigger2D" index="0"]
+shape = SubResource("RectangleShape2D_71hak")
+
+[node name="IceBlockHalfAlt" parent="IceZoneTrigger2D" index="1"]
+region_rect = Rect2(0, 0, 400, 70)
+
+[node name="WinAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("38_t06vq")
+volume_db = -3.239
+
+[node name="GameAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 1
+stream = ExtResource("39_e0i54")
+script = ExtResource("40_xre02")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(871, 246)
+emitting = false
+one_shot = true
+explosiveness = 0.67
+randomness = 0.31
+texture = ExtResource("17_mq8md")
+emission_shape = 3
+emission_rect_extents = Vector2(100, 1)
+direction = Vector2(1, -1)
+initial_velocity_min = 84.91
+initial_velocity_max = 393.08
+angle_max = 160.5
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+
+[connection signal="level_entered" from="." to="Punisher" method="_on_level_entered"]
+[connection signal="level_entered" from="." to="BindPlayerCheckState" method="_on_level_entered"]
+[connection signal="level_entered" from="." to="LeftWall" method="turn_off"]
+[connection signal="level_exited" from="." to="Punisher" method="_on_level_exited"]
+[connection signal="level_exited" from="." to="BindPlayerCheckState" method="_on_level_exited"]
+[connection signal="level_exited" from="." to="RightWall" method="turn_off"]
+[connection signal="reset" from="." to="LevelHUD/LevelCompleted" method="hide"]
+[connection signal="reset" from="." to="AnnounceCommands" method="reset_game"]
+[connection signal="reset" from="." to="StartingPosition" method="do"]
+[connection signal="reset" from="." to="SpikeGroup" method="do"]
+[connection signal="reset" from="." to="CPUParticles2D" method="set_emitting" binds= [false]]
+[connection signal="state_entered" from="StateChart/CompoundState/IdleState" to="LevelHUD/PanelContainer" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/IdleState" to="LevelHUD/PanelContainer/Instructions/1Instruction" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/IdleState" to="LevelHUD/PanelContainer/Instructions/2Instruction" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/IdleState" to="LevelHUD/PanelContainer/Instructions/3Instruction" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/IdleState" to="LevelHUD/PanelContainer/Instructions/SoleilInstruction" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/IdleState" to="LevelHUD/PanelContainer/Instructions/CheckInstruction" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/IdleState" to="LevelHUD/LevelCompleted" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/IdleState" to="AnimatedSprite2D" method="play" binds= [&"idle"]]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState" to="LevelHUD/PanelContainer" method="show"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState" to="GameAudioStreamPlayer" method="play"]
+[connection signal="state_exited" from="StateChart/CompoundState/GoState" to="LevelHUD/PanelContainer" method="hide"]
+[connection signal="state_exited" from="StateChart/CompoundState/GoState" to="GameAudioStreamPlayer" method="stop"]
+[connection signal="state_exited" from="StateChart/CompoundState/GoState" to="AnimatedSprite2D" method="play" binds= [&"idle"]]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState/1State" to="LevelHUD/PanelContainer/Instructions/1Instruction" method="show"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState/1State" to="GameAudioStreamPlayer" method="play"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState/1State" to="AnimatedSprite2D" method="play" binds= [&"1"]]
+[connection signal="state_exited" from="StateChart/CompoundState/GoState/1State" to="LevelHUD/PanelContainer/Instructions/1Instruction" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState/2State" to="LevelHUD/PanelContainer/Instructions/2Instruction" method="show"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState/2State" to="AnimatedSprite2D" method="play" binds= [&"2"]]
+[connection signal="state_exited" from="StateChart/CompoundState/GoState/2State" to="LevelHUD/PanelContainer/Instructions/2Instruction" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState/3State" to="LevelHUD/PanelContainer/Instructions/3Instruction" method="show"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState/3State" to="AnimatedSprite2D" method="play" binds= [&"3"]]
+[connection signal="state_exited" from="StateChart/CompoundState/GoState/3State" to="LevelHUD/PanelContainer/Instructions/3Instruction" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState/SoleilState" to="LevelHUD/PanelContainer/Instructions/SoleilInstruction" method="show"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState/SoleilState" to="AnimatedSprite2D" method="play" binds= [&"soleil"]]
+[connection signal="state_exited" from="StateChart/CompoundState/GoState/SoleilState" to="LevelHUD/PanelContainer/Instructions/SoleilInstruction" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState/CheckState" to="LevelHUD/PanelContainer/Instructions/CheckInstruction" method="show"]
+[connection signal="state_entered" from="StateChart/CompoundState/GoState/CheckState" to="AnimatedSprite2D" method="play" binds= [&"check"]]
+[connection signal="state_exited" from="StateChart/CompoundState/GoState/CheckState" to="LevelHUD/PanelContainer/Instructions/CheckInstruction" method="hide"]
+[connection signal="state_entered" from="StateChart/CompoundState/EndedState" to="LevelHUD/LevelCompleted" method="show"]
+[connection signal="state_entered" from="StateChart/CompoundState/EndedState" to="WinAudioStreamPlayer" method="play"]
+[connection signal="state_exited" from="StateChart/CompoundState/EndedState" to="LevelHUD/LevelCompleted" method="hide"]
+[connection signal="target_group_entered" from="TriggerEnterLevel" to="LeftWall" method="turn_on"]
+[connection signal="body_entered" from="StartingLineArea2D" to="StartingLineArea2D/DetectStartingLineReached" method="_on_starting_line_area_2d_body_entered"]
+[connection signal="entered_play_area" from="StartingLineArea2D/DetectStartingLineReached" to="AnnounceCommands" method="_on_detect_starting_line_reached_entered_play_area"]
+[connection signal="body_entered" from="FinishLineArea2D" to="FinishLineArea2D/DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
+[connection signal="finished_line_reached" from="FinishLineArea2D/DetectFinishLineReached" to="AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
+[connection signal="finished_line_reached" from="FinishLineArea2D/DetectFinishLineReached" to="CPUParticles2D" method="set_emitting" binds= [true]]
+[connection signal="target_group_entered" from="ExitLevelTrigger2D" to="." method="exit_level"]
+[connection signal="target_group_entered" from="SpikeGroup/Trigger2D" to="SpikeGroup" method="_on_trigger_2d_target_group_entered"]
+
+[editable path="IceZoneTrigger2D"]

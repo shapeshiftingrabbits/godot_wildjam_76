@@ -4,7 +4,6 @@ class_name SpikeRigidBody2D
 
 var move_back: MoveCharacterBack
 @onready var trigger_2d: DetectTargetGroupCollision = $"../Trigger2D"
-@onready var spike_position: Node2D = $"../SpikePosition"
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var processed: bool = false
@@ -22,18 +21,7 @@ func unfreeze():
 
 func disappear():
 	await get_tree().create_timer(2.0).timeout
-	gravity_scale = 0.0
-	collision_shape_2d.set_deferred(&"disabled", true)
-	hide()
-
-
-func reset():
-	processed = false
-	trigger_2d.disabled = false
-	collision_shape_2d.set_deferred(&"disabled", false)
-	position.x = -1723
-	position.y = -999
-	show()
+	queue_free()
 
 
 func _on_check_collision_has_collided(collider: Object) -> void:
