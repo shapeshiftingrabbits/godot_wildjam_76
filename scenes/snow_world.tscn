@@ -1001,7 +1001,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 64
-text = "Level Completed !"
+text = "Game Cleared!"
 label_settings = ExtResource("7_2idac")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1175,6 +1175,22 @@ process_mode = 1
 stream = ExtResource("51_7uvmw")
 script = ExtResource("52_688ue")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Level3"]
+position = Vector2(871, 246)
+emitting = false
+one_shot = true
+explosiveness = 0.67
+randomness = 0.31
+texture = ExtResource("37_1dbav")
+emission_shape = 3
+emission_rect_extents = Vector2(100, 1)
+direction = Vector2(1, -1)
+initial_velocity_min = 84.91
+initial_velocity_max = 393.08
+angle_max = 160.5
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+
 [node name="GameController" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("33_fvviu")
@@ -1251,6 +1267,7 @@ autoplay = true
 [connection signal="reset" from="Level3" to="Level3/LevelHUD/LevelCompleted" method="hide"]
 [connection signal="reset" from="Level3" to="Level3/AnnounceCommands" method="reset_game"]
 [connection signal="reset" from="Level3" to="Level3/StartingPosition" method="do"]
+[connection signal="reset" from="Level3" to="Level3/CPUParticles2D" method="set_emitting" binds= [false]]
 [connection signal="state_entered" from="Level3/StateChart/CompoundState/IdleState" to="Level3/LevelHUD/PanelContainer" method="hide"]
 [connection signal="state_entered" from="Level3/StateChart/CompoundState/IdleState" to="Level3/LevelHUD/PanelContainer/Instructions/1Instruction" method="hide"]
 [connection signal="state_entered" from="Level3/StateChart/CompoundState/IdleState" to="Level3/LevelHUD/PanelContainer/Instructions/2Instruction" method="hide"]
@@ -1288,6 +1305,7 @@ autoplay = true
 [connection signal="entered_play_area" from="Level3/StartingLineArea2D/DetectStartingLineReached" to="Level3/AnnounceCommands" method="_on_detect_starting_line_reached_entered_play_area"]
 [connection signal="body_entered" from="Level3/FinishLineArea2D" to="Level3/FinishLineArea2D/DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
 [connection signal="finished_line_reached" from="Level3/FinishLineArea2D/DetectFinishLineReached" to="Level3/AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
+[connection signal="finished_line_reached" from="Level3/FinishLineArea2D/DetectFinishLineReached" to="Level3/CPUParticles2D" method="set_emitting" binds= [true]]
 [connection signal="target_group_entered" from="Level3/ExitLevelTrigger2D" to="Level3" method="exit_level"]
 [connection signal="has_collided" from="Level3/SpikeGroup/SpikeRigidBody2D/CheckCollision" to="Level3/SpikeGroup/SpikeRigidBody2D" method="_on_check_collision_has_collided"]
 [connection signal="target_group_entered" from="Level3/SpikeGroup/Trigger2D" to="Level3/SpikeGroup/SpikeRigidBody2D" method="unfreeze"]
