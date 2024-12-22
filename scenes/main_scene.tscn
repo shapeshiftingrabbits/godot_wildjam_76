@@ -1,47 +1,195 @@
-[gd_scene load_steps=53 format=3 uid="uid://dgda0gpbolspv"]
+[gd_scene load_steps=96 format=3 uid="uid://dgda0gpbolspv"]
 
-[ext_resource type="PackedScene" uid="uid://bq3882tkp8hwx" path="res://scenes/prototype.tscn" id="1_r7qus"]
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="2_c6q71"]
 [ext_resource type="PackedScene" uid="uid://bgg8k4ggocfnh" path="res://prefabs/bg.tscn" id="2_gsrfr"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_xgv26"]
 [ext_resource type="PackedScene" uid="uid://dy6rfphsyvehp" path="res://prefabs/punisher.tscn" id="3_j54pm"]
 [ext_resource type="Texture2D" uid="uid://dedpthnqmac52" path="res://textures/bush.png" id="3_mkp0v"]
+[ext_resource type="Script" path="res://scripts/menu_controller.gd" id="3_outo8"]
+[ext_resource type="Script" path="res://scripts/camera_panning.gd" id="4_lf6xp"]
 [ext_resource type="Texture2D" uid="uid://ccaibyk4jvqoy" path="res://textures/cloud1.png" id="4_m5q0d"]
 [ext_resource type="PackedScene" uid="uid://boc8qbty5ese6" path="res://prefabs/fence_static_body_2d.tscn" id="4_mi7ic"]
 [ext_resource type="Texture2D" uid="uid://dwxlrwiyko577" path="res://textures/cloud2.png" id="5_g8esh"]
 [ext_resource type="Texture2D" uid="uid://dgpy8sey60xjr" path="res://textures/character_femaleAdventurer_sheetHD.png" id="5_slxtl"]
+[ext_resource type="Script" path="res://scripts/move.gd" id="5_viexl"]
 [ext_resource type="Texture2D" uid="uid://duu6cclnhjmm6" path="res://textures/cloud3.png" id="6_7d6tb"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="6_dctyc"]
+[ext_resource type="Texture2D" uid="uid://dj7fr863w3w1e" path="res://textures/character_femalePerson_sheetHD.png" id="6_i2vsp"]
 [ext_resource type="Texture2D" uid="uid://ck04mbbc5paj" path="res://textures/plant.png" id="7_jl0he"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="7_pj6af"]
+[ext_resource type="AudioStream" uid="uid://c4ybcdan6wyc8" path="res://audio/sfx/SFX_Game_Jump.wav" id="7_qal5o"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="8_baikm"]
+[ext_resource type="AudioStream" uid="uid://jo5dkjdpoyyx" path="res://audio/sfx/SFX_Squeaky_Toy.wav" id="8_de32c"]
 [ext_resource type="Texture2D" uid="uid://bqxxffl85igfh" path="res://textures/plantPurple.png" id="8_oxhmv"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="9_b4vxr"]
+[ext_resource type="AudioStream" uid="uid://biu0ia7l3vyj3" path="res://audio/sfx/footstep_grass_1.ogg" id="9_f2gns"]
+[ext_resource type="AudioStream" uid="uid://bh1qumibn68hj" path="res://audio/sfx/footstep_grass_2.ogg" id="10_b7nbq"]
 [ext_resource type="Texture2D" uid="uid://csn7lhln11087" path="res://textures/flagGreen2.png" id="10_vh7pl"]
 [ext_resource type="Texture2D" uid="uid://bfhqg7srheg2a" path="res://textures/tallShroom_red.png" id="10_yy02j"]
 [ext_resource type="Texture2D" uid="uid://bko1qx1xw6d3h" path="res://textures/tallShroom_tan.png" id="11_1qji1"]
+[ext_resource type="Script" path="res://scripts/check_player_movement.gd" id="11_lebpp"]
 [ext_resource type="Texture2D" uid="uid://biqwgtxxx2ee5" path="res://textures/flagYellow.png" id="11_yu1rw"]
 [ext_resource type="LabelSettings" uid="uid://dxmn2mb0ej3id" path="res://label_settings.tres" id="12_1nka1"]
 [ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="12_4ua1a"]
 [ext_resource type="Texture2D" uid="uid://cbv73rb0lqn6j" path="res://textures/tallShroom_brown.png" id="12_hn464"]
+[ext_resource type="Script" path="res://scripts/move_character_back.gd" id="12_tn7j2"]
 [ext_resource type="Texture2D" uid="uid://bp0suvr8wupj8" path="res://textures/star.png" id="13_dbxho"]
 [ext_resource type="Texture2D" uid="uid://k61ext712e1" path="res://textures/tinyShroom_brown.png" id="13_lr3as"]
+[ext_resource type="Script" path="res://scripts/handle_character_orientation.gd" id="13_swiwk"]
+[ext_resource type="Script" path="res://scripts/move_player_to_next_level.gd" id="14_8n2nq"]
 [ext_resource type="Script" path="res://scripts/announce_commands.gd" id="14_58v6t"]
 [ext_resource type="Texture2D" uid="uid://c0uebqclilekc" path="res://textures/tinyShroom_red.png" id="14_w23bc"]
+[ext_resource type="Script" path="res://scripts/handle_state_chart.gd" id="15_gc6yx"]
 [ext_resource type="Texture2D" uid="uid://b2e0213enqn70" path="res://textures/tinyShroom_tan.png" id="15_ni0c7"]
 [ext_resource type="PackedScene" uid="uid://p2et6u5v7uqr" path="res://prefabs/trigger_2d.tscn" id="15_wsjvw"]
 [ext_resource type="Texture2D" uid="uid://cd053hfja0sbd" path="res://textures/lollipopBaseBrown.png" id="16_i4ik2"]
 [ext_resource type="Texture2D" uid="uid://c4rub87ujlihk" path="res://textures/lollipopFruitYellow.png" id="17_cpf7h"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="17_s00me"]
 [ext_resource type="Texture2D" uid="uid://d2m6ku0iloqnr" path="res://textures/cactus.png" id="18_dcwaf"]
 [ext_resource type="Script" path="res://scripts/detect_starting_line_reached.gd" id="18_grqcs"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/animation_player_state.gd" id="19_5m0q4"]
 [ext_resource type="Texture2D" uid="uid://c1s74jb6f2sxq" path="res://textures/lollipopFruitGreen.png" id="19_iltav"]
 [ext_resource type="Script" path="res://scripts/detect_finish_line_reached.gd" id="20_cs7gh"]
 [ext_resource type="PackedScene" uid="uid://bomwgt3savmk0" path="res://prefabs/dirt_wall.tscn" id="21_4uqd7"]
+[ext_resource type="Resource" uid="uid://wg325ebralar" path="res://player_state_machine_guards/to_walk_guard.tres" id="21_x5knf"]
 [ext_resource type="PackedScene" uid="uid://b1xryu6kfp5uq" path="res://prefabs/floor.tscn" id="22_7cj8y"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/guard.gd" id="22_wvovv"]
 [ext_resource type="Script" path="res://scripts/move_to_here.gd" id="23_c3c3s"]
+[ext_resource type="Resource" uid="uid://crv0fdii022lf" path="res://player_state_machine_guards/shoved_back_false.tres" id="23_nwfwq"]
 [ext_resource type="AudioStream" uid="uid://khkpkakhgenh" path="res://audio/Children_Game_Music/WAV/SFX_Complete.wav" id="24_q8aeq"]
+[ext_resource type="Resource" uid="uid://dlp2pxuai5pti" path="res://player_state_machine_guards/velocity_y_null.tres" id="24_rw0br"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="25_kqu8n"]
 [ext_resource type="AudioStream" uid="uid://b76m01fh00qfl" path="res://audio/prompts/prompt_1.ogg" id="25_tlmyq"]
 [ext_resource type="Script" path="res://scripts/audio_player.gd" id="26_pi6j3"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/all_of_guard.gd" id="26_y8f86"]
+[ext_resource type="Resource" uid="uid://ir2ab4760o0v" path="res://player_state_machine_guards/to_idle_guard.tres" id="27_4txm2"]
 [ext_resource type="Script" path="res://scripts/bind_player_check_state_with_level_change.gd" id="27_wv6do"]
+[ext_resource type="Resource" uid="uid://g3xriqdtdlre" path="res://player_state_machine_guards/shoved_back_true.tres" id="28_klcg7"]
+[ext_resource type="Resource" uid="uid://b8meiwfvilft1" path="res://player_state_machine_guards/to_jump_guard.tres" id="29_gjttr"]
+[ext_resource type="Resource" uid="uid://b1hwt8ptptgj5" path="res://player_state_machine_guards/in_control.tres" id="31_dlnke"]
+[ext_resource type="PackedScene" uid="uid://cihbomr01nysf" path="res://prefabs/level_1.tscn" id="32_mxu2j"]
+[ext_resource type="PackedScene" uid="uid://cvpnwunomn7ab" path="res://prefabs/level_2.tscn" id="39_gy14y"]
+[ext_resource type="Texture2D" uid="uid://bum1k6bxj63po" path="res://textures/signRight.png" id="45_yw8di"]
+[ext_resource type="Script" path="res://scripts/game_controller.gd" id="70_magbt"]
+[ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="71_q7muf"]
+[ext_resource type="Texture2D" uid="uid://s5ho6v1skhs" path="res://textures/signExit.png" id="73_upjhe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrfrj"]
+size = Vector2(64.75, 98)
+
+[sub_resource type="Animation" id="Animation_xoj5a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [36]
+}
+
+[sub_resource type="Animation" id="Animation_12ql0"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5u3mi"]
+resource_name = "jump"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_2yfj4"]
+resource_name = "shoved_back"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [31]
+}
+
+[sub_resource type="Animation" id="Animation_gtn2c"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41, 42, 43]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_djn3v"]
+_data = {
+"RESET": SubResource("Animation_xoj5a"),
+"idle": SubResource("Animation_12ql0"),
+"jump": SubResource("Animation_5u3mi"),
+"shoved_back": SubResource("Animation_2yfj4"),
+"walk": SubResource("Animation_gtn2c")
+}
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_p50u2"]
+fade_time = 1.0
+stream_count = 2
+stream_0 = ExtResource("9_f2gns")
+stream_1 = ExtResource("10_b7nbq")
+
+[sub_resource type="Resource" id="Resource_eeurf"]
+script = ExtResource("25_kqu8n")
+guard = ExtResource("24_rw0br")
+
+[sub_resource type="Resource" id="Resource_jye0k"]
+script = ExtResource("26_y8f86")
+guards = Array[ExtResource("22_wvovv")]([ExtResource("23_nwfwq"), SubResource("Resource_eeurf")])
+
+[sub_resource type="Resource" id="Resource_6xw2g"]
+script = ExtResource("25_kqu8n")
+guard = ExtResource("31_dlnke")
+
+[sub_resource type="LabelSettings" id="LabelSettings_o2k8l"]
+font_size = 32
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0phsj"]
 atlas = ExtResource("5_slxtl")
@@ -136,72 +284,290 @@ size = Vector2(18.8854, 60)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xdvd"]
 size = Vector2(20, 60)
 
-[node name="GameRoot" instance=ExtResource("1_r7qus")]
+[node name="GameRoot" type="Node2D"]
 
-[node name="Bg" parent="." index="0" instance=ExtResource("2_gsrfr")]
+[node name="Bg" parent="." instance=ExtResource("2_gsrfr")]
 
-[node name="StateChartDebugger" parent="HUD/MarginContainer/VBox" index="1"]
+[node name="HUD" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 64
+
+[node name="VBox" type="VBoxContainer" parent="HUD/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/VBox"]
+layout_mode = 2
+
+[node name="MenuButton" type="Button" parent="HUD/MarginContainer/VBox/HBoxContainer"]
+layout_mode = 2
+text = "Menu"
+
+[node name="RestartLevelButton" type="Button" parent="HUD/MarginContainer/VBox/HBoxContainer"]
+layout_mode = 2
+text = "Retry Level"
+
+[node name="StateChartDebugger" parent="HUD/MarginContainer/VBox" instance=ExtResource("2_xgv26")]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
 enabled = false
+initial_node_to_watch = NodePath("../../../../Player/StateChart")
 
-[node name="Cloud10" type="Sprite2D" parent="Level1" index="0"]
+[node name="MenuPanelContainer" type="PanelContainer" parent="HUD"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_outo8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MenuPanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="HUD/MenuPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Menu"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Resume"
+
+[node name="ExitToMainScreenButton" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Go To Main Screen"
+
+[node name="QuitButton" type="Button" parent="HUD/MenuPanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(190, 50)
+layout_mode = 2
+text = "QUIT
+"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("4_lf6xp")
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+unique_name_in_owner = true
+position = Vector2(1380, 925)
+script = ExtResource("5_viexl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_qrfrj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_djn3v")
+}
+
+[node name="CharacterSprite" type="Sprite2D" parent="Player"]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(-24, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_i2vsp")
+centered = false
+offset = Vector2(-48, -128)
+hframes = 9
+vframes = 5
+frame = 36
+region_rect = Rect2(32, 65, 128, 191)
+
+[node name="JumpAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("7_qal5o")
+
+[node name="HitAudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("8_de32c")
+
+[node name="WalkAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+stream = SubResource("AudioStreamPlaylist_p50u2")
+
+[node name="CheckPlayerMovement" type="Node" parent="Player"]
+script = ExtResource("11_lebpp")
+
+[node name="MoveCharacterBack" type="Node" parent="Player"]
+script = ExtResource("12_tn7j2")
+
+[node name="HandleCharacterOrientation" type="Node" parent="Player"]
+script = ExtResource("13_swiwk")
+
+[node name="MovePlayerToNextLevel" type="Node" parent="Player"]
+script = ExtResource("14_8n2nq")
+
+[node name="HandleStateChart" type="Node" parent="Player"]
+script = ExtResource("15_gc6yx")
+
+[node name="StateChart" type="Node" parent="Player"]
+script = ExtResource("6_dctyc")
+initial_expression_properties = {
+"in_control": true,
+"shoved_back": false
+}
+
+[node name="ParallelState" type="Node" parent="Player/StateChart"]
+script = ExtResource("17_s00me")
+
+[node name="CompoundState" type="Node" parent="Player/StateChart/ParallelState"]
+script = ExtResource("7_pj6af")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Player/StateChart/ParallelState/CompoundState"]
+script = ExtResource("19_5m0q4")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"idle"
+
+[node name="ToWalk" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Idle"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../Walk")
+guard = ExtResource("21_x5knf")
+delay_in_seconds = "0.0"
+
+[node name="ToJump" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Idle"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../Jump")
+guard = SubResource("Resource_jye0k")
+delay_in_seconds = "0.0"
+
+[node name="Walk" type="Node" parent="Player/StateChart/ParallelState/CompoundState"]
+script = ExtResource("19_5m0q4")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"walk"
+
+[node name="ToIdle" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../Idle")
+guard = ExtResource("27_4txm2")
+delay_in_seconds = "0.0"
+
+[node name="ToShovedBack" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../ShovedBack")
+guard = ExtResource("28_klcg7")
+delay_in_seconds = "0.0"
+
+[node name="ToJump" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Walk"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../Jump")
+guard = ExtResource("29_gjttr")
+delay_in_seconds = "0.0"
+
+[node name="ShovedBack" type="Node" parent="Player/StateChart/ParallelState/CompoundState"]
+script = ExtResource("19_5m0q4")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"shoved_back"
+
+[node name="ToWalk" type="Node" parent="Player/StateChart/ParallelState/CompoundState/ShovedBack"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../Walk")
+guard = ExtResource("21_x5knf")
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="Player/StateChart/ParallelState/CompoundState/ShovedBack"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../Idle")
+guard = ExtResource("27_4txm2")
+delay_in_seconds = "0.0"
+
+[node name="ToJump" type="Node" parent="Player/StateChart/ParallelState/CompoundState/ShovedBack"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../Jump")
+guard = ExtResource("29_gjttr")
+delay_in_seconds = "0.0"
+
+[node name="Jump" type="Node" parent="Player/StateChart/ParallelState/CompoundState"]
+script = ExtResource("19_5m0q4")
+animation_player = NodePath("../../../../AnimationPlayer")
+animation_name = &"jump"
+
+[node name="ToWalk" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Jump"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../Walk")
+guard = ExtResource("21_x5knf")
+delay_in_seconds = "0.0"
+
+[node name="ToShovedBack" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Jump"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../ShovedBack")
+guard = ExtResource("28_klcg7")
+delay_in_seconds = "0.0"
+
+[node name="ToIdle" type="Node" parent="Player/StateChart/ParallelState/CompoundState/Jump"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../Idle")
+guard = ExtResource("27_4txm2")
+delay_in_seconds = "0.0"
+
+[node name="PlayerControlState" type="Node" parent="Player/StateChart/ParallelState"]
+script = ExtResource("7_pj6af")
+initial_state = NodePath("InControlState")
+
+[node name="InControlState" type="Node" parent="Player/StateChart/ParallelState/PlayerControlState"]
+script = ExtResource("8_baikm")
+
+[node name="ToNotInControl" type="Node" parent="Player/StateChart/ParallelState/PlayerControlState/InControlState"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../NotInControlState")
+guard = SubResource("Resource_6xw2g")
+delay_in_seconds = "0.0"
+
+[node name="NotInControlState" type="Node" parent="Player/StateChart/ParallelState/PlayerControlState"]
+script = ExtResource("8_baikm")
+
+[node name="ToInControl" type="Node" parent="Player/StateChart/ParallelState/PlayerControlState/NotInControlState"]
+script = ExtResource("9_b4vxr")
+to = NodePath("../../InControlState")
+guard = ExtResource("31_dlnke")
+delay_in_seconds = "0.0"
+
+[node name="Level1" parent="." instance=ExtResource("32_mxu2j")]
+
+[node name="Cloud10" type="Sprite2D" parent="Level1"]
 position = Vector2(478, 669.5)
 texture = ExtResource("4_m5q0d")
 
-[node name="Cloud11" type="Sprite2D" parent="Level1" index="1"]
+[node name="Cloud11" type="Sprite2D" parent="Level1"]
 position = Vector2(1453, 552.5)
 texture = ExtResource("5_g8esh")
 
-[node name="Cloud12" type="Sprite2D" parent="Level1" index="2"]
+[node name="Cloud12" type="Sprite2D" parent="Level1"]
 position = Vector2(1120, 743)
 texture = ExtResource("6_7d6tb")
 
-[node name="TinyShroomBrown" type="Sprite2D" parent="Level1" index="3"]
+[node name="TinyShroomBrown" type="Sprite2D" parent="Level1"]
 position = Vector2(1565, 975)
 texture = ExtResource("13_lr3as")
 
-[node name="Bush" type="Sprite2D" parent="Level1" index="4"]
+[node name="Bush" type="Sprite2D" parent="Level1"]
 position = Vector2(748, 974)
 texture = ExtResource("3_mkp0v")
 
-[node name="PlantPurple" type="Sprite2D" parent="Level1" index="6"]
+[node name="PlantPurple" type="Sprite2D" parent="Level1"]
 position = Vector2(1478, 974)
 texture = ExtResource("8_oxhmv")
 
-[node name="Cloud4" type="Sprite2D" parent="Level2" index="0"]
-position = Vector2(504, 666.5)
-texture = ExtResource("4_m5q0d")
-
-[node name="Cloud5" type="Sprite2D" parent="Level2" index="1"]
-position = Vector2(1479, 549.5)
-texture = ExtResource("5_g8esh")
-
-[node name="Cloud6" type="Sprite2D" parent="Level2" index="2"]
-position = Vector2(1131, 386.5)
-texture = ExtResource("6_7d6tb")
-
-[node name="TallShroomRed" type="Sprite2D" parent="Level2" index="3"]
-position = Vector2(1134, 975)
-texture = ExtResource("10_yy02j")
-
-[node name="TallShroomTan" type="Sprite2D" parent="Level2" index="4"]
-position = Vector2(1236, 974)
-texture = ExtResource("11_1qji1")
-
-[node name="TallShroomBrown" type="Sprite2D" parent="Level2" index="5"]
-position = Vector2(598, 974)
-texture = ExtResource("12_hn464")
-
-[node name="TinyShroomBrown" type="Sprite2D" parent="Level2" index="6"]
-position = Vector2(1158, 974)
-texture = ExtResource("13_lr3as")
-
-[node name="TinyShroomRed" type="Sprite2D" parent="Level2" index="7"]
-position = Vector2(519, 974)
-texture = ExtResource("14_w23bc")
-
-[node name="TinyShroomTan" type="Sprite2D" parent="Level2" index="8"]
-position = Vector2(634, 974)
-texture = ExtResource("15_ni0c7")
+[node name="Level2" parent="." instance=ExtResource("39_gy14y")]
 
 [node name="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="0"]
 text = "Freeze!"
@@ -212,137 +578,186 @@ visible = false
 [node name="Label" parent="Level2/LevelHUD/LevelCompleted/HBoxContainer" index="0"]
 theme_override_font_sizes/font_size = 64
 
-[node name="Level3" type="Node2D" parent="." index="6"]
+[node name="Cloud4" type="Sprite2D" parent="Level2"]
+position = Vector2(504, 666.5)
+texture = ExtResource("4_m5q0d")
+
+[node name="Cloud5" type="Sprite2D" parent="Level2"]
+position = Vector2(1479, 549.5)
+texture = ExtResource("5_g8esh")
+
+[node name="Cloud6" type="Sprite2D" parent="Level2"]
+position = Vector2(1131, 386.5)
+texture = ExtResource("6_7d6tb")
+
+[node name="TallShroomRed" type="Sprite2D" parent="Level2"]
+position = Vector2(1134, 975)
+texture = ExtResource("10_yy02j")
+
+[node name="TallShroomTan" type="Sprite2D" parent="Level2"]
+position = Vector2(1236, 974)
+texture = ExtResource("11_1qji1")
+
+[node name="TallShroomBrown" type="Sprite2D" parent="Level2"]
+position = Vector2(598, 974)
+texture = ExtResource("12_hn464")
+
+[node name="TinyShroomBrown" type="Sprite2D" parent="Level2"]
+position = Vector2(1158, 974)
+texture = ExtResource("13_lr3as")
+
+[node name="TinyShroomRed" type="Sprite2D" parent="Level2"]
+position = Vector2(519, 974)
+texture = ExtResource("14_w23bc")
+
+[node name="TinyShroomTan" type="Sprite2D" parent="Level2"]
+position = Vector2(634, 974)
+texture = ExtResource("15_ni0c7")
+
+[node name="SignRight" type="Sprite2D" parent="Level2"]
+position = Vector2(1850, 940)
+scale = Vector2(2, 2)
+texture = ExtResource("45_yw8di")
+
+[node name="Label" type="Label" parent="Level2/SignRight"]
+offset_left = -29.0
+offset_top = -22.0
+offset_right = 27.0
+offset_bottom = 2.0
+text = "Next"
+label_settings = SubResource("LabelSettings_o2k8l")
+
+[node name="Level3" type="Node2D" parent="."]
 position = Vector2(3840, 0)
 script = ExtResource("2_c6q71")
 
-[node name="Bush" type="Sprite2D" parent="Level3" index="0"]
+[node name="Bush" type="Sprite2D" parent="Level3"]
 position = Vector2(1161, 973)
 texture = ExtResource("3_mkp0v")
 
-[node name="Cloud7" type="Sprite2D" parent="Level3" index="1"]
+[node name="Cloud7" type="Sprite2D" parent="Level3"]
 position = Vector2(412, 651.5)
 texture = ExtResource("4_m5q0d")
 
-[node name="Cloud8" type="Sprite2D" parent="Level3" index="2"]
+[node name="Cloud8" type="Sprite2D" parent="Level3"]
 position = Vector2(1387, 534.5)
 texture = ExtResource("5_g8esh")
 
-[node name="Cloud9" type="Sprite2D" parent="Level3" index="3"]
+[node name="Cloud9" type="Sprite2D" parent="Level3"]
 position = Vector2(1054, 725)
 texture = ExtResource("6_7d6tb")
 
-[node name="Cactus" type="Sprite2D" parent="Level3" index="4"]
+[node name="Cactus" type="Sprite2D" parent="Level3"]
 position = Vector2(123, 973)
 texture = ExtResource("18_dcwaf")
 
-[node name="Plant" type="Sprite2D" parent="Level3" index="5"]
+[node name="Plant" type="Sprite2D" parent="Level3"]
 position = Vector2(515, 975)
 texture = ExtResource("7_jl0he")
 
-[node name="Plant2" type="Sprite2D" parent="Level3" index="6"]
+[node name="Plant2" type="Sprite2D" parent="Level3"]
 position = Vector2(949, 975)
 texture = ExtResource("7_jl0he")
 
-[node name="Punisher" parent="Level3" index="7" instance=ExtResource("3_j54pm")]
+[node name="Punisher" parent="Level3" instance=ExtResource("3_j54pm")]
 
-[node name="FenceStaticBody2D" parent="Level3" index="8" instance=ExtResource("4_mi7ic")]
+[node name="FenceStaticBody2D" parent="Level3" instance=ExtResource("4_mi7ic")]
 position = Vector2(558, 976)
 
-[node name="FenceStaticBody2D2" parent="Level3" index="9" instance=ExtResource("4_mi7ic")]
+[node name="FenceStaticBody2D2" parent="Level3" instance=ExtResource("4_mi7ic")]
 
-[node name="FenceStaticBody2D3" parent="Level3" index="10" instance=ExtResource("4_mi7ic")]
+[node name="FenceStaticBody2D3" parent="Level3" instance=ExtResource("4_mi7ic")]
 position = Vector2(1286, 976)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Level3" index="11"]
-position = Vector2(1763, 946)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Level3"]
+position = Vector2(1706, 946)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_puma4")
 animation = &"check"
 
-[node name="StateChart" type="Node" parent="Level3" index="12"]
+[node name="StateChart" type="Node" parent="Level3"]
 script = ExtResource("6_dctyc")
 
-[node name="CompoundState" type="Node" parent="Level3/StateChart" index="0"]
+[node name="CompoundState" type="Node" parent="Level3/StateChart"]
 script = ExtResource("7_pj6af")
 initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="Level3/StateChart/CompoundState" index="0"]
+[node name="IdleState" type="Node" parent="Level3/StateChart/CompoundState"]
 script = ExtResource("8_baikm")
 
-[node name="ToGoState" type="Node" parent="Level3/StateChart/CompoundState/IdleState" index="0"]
+[node name="ToGoState" type="Node" parent="Level3/StateChart/CompoundState/IdleState"]
 script = ExtResource("9_b4vxr")
 to = NodePath("../../GoState")
 event = &"started"
 delay_in_seconds = "0.0"
 
-[node name="GoState" type="Node" parent="Level3/StateChart/CompoundState" index="1"]
+[node name="GoState" type="Node" parent="Level3/StateChart/CompoundState"]
 script = ExtResource("7_pj6af")
 initial_state = NodePath("1State")
 
-[node name="1State" type="Node" parent="Level3/StateChart/CompoundState/GoState" index="0"]
+[node name="1State" type="Node" parent="Level3/StateChart/CompoundState/GoState"]
 script = ExtResource("8_baikm")
 
-[node name="Transition" type="Node" parent="Level3/StateChart/CompoundState/GoState/1State" index="0"]
+[node name="Transition" type="Node" parent="Level3/StateChart/CompoundState/GoState/1State"]
 script = ExtResource("9_b4vxr")
 to = NodePath("../../2State")
 delay_in_seconds = "1.1"
 
-[node name="2State" type="Node" parent="Level3/StateChart/CompoundState/GoState" index="1"]
+[node name="2State" type="Node" parent="Level3/StateChart/CompoundState/GoState"]
 script = ExtResource("8_baikm")
 
-[node name="Transition" type="Node" parent="Level3/StateChart/CompoundState/GoState/2State" index="0"]
+[node name="Transition" type="Node" parent="Level3/StateChart/CompoundState/GoState/2State"]
 script = ExtResource("9_b4vxr")
 to = NodePath("../../3State")
 delay_in_seconds = "0.7
 "
 
-[node name="3State" type="Node" parent="Level3/StateChart/CompoundState/GoState" index="2"]
+[node name="3State" type="Node" parent="Level3/StateChart/CompoundState/GoState"]
 script = ExtResource("8_baikm")
 
-[node name="Transition" type="Node" parent="Level3/StateChart/CompoundState/GoState/3State" index="0"]
+[node name="Transition" type="Node" parent="Level3/StateChart/CompoundState/GoState/3State"]
 script = ExtResource("9_b4vxr")
 to = NodePath("../../SoleilState")
 delay_in_seconds = "1.0"
 
-[node name="SoleilState" type="Node" parent="Level3/StateChart/CompoundState/GoState" index="3"]
+[node name="SoleilState" type="Node" parent="Level3/StateChart/CompoundState/GoState"]
 script = ExtResource("8_baikm")
 
-[node name="Transition" type="Node" parent="Level3/StateChart/CompoundState/GoState/SoleilState" index="0"]
+[node name="Transition" type="Node" parent="Level3/StateChart/CompoundState/GoState/SoleilState"]
 script = ExtResource("9_b4vxr")
 to = NodePath("../../CheckState")
 delay_in_seconds = "0.8"
 
-[node name="CheckState" type="Node" parent="Level3/StateChart/CompoundState/GoState" index="4"]
+[node name="CheckState" type="Node" parent="Level3/StateChart/CompoundState/GoState"]
 script = ExtResource("8_baikm")
 
-[node name="Transition" type="Node" parent="Level3/StateChart/CompoundState/GoState/CheckState" index="0"]
+[node name="Transition" type="Node" parent="Level3/StateChart/CompoundState/GoState/CheckState"]
 script = ExtResource("9_b4vxr")
 to = NodePath("../../1State")
 delay_in_seconds = "1.0"
 
-[node name="ToEndState" type="Node" parent="Level3/StateChart/CompoundState/GoState" index="5"]
+[node name="ToEndState" type="Node" parent="Level3/StateChart/CompoundState/GoState"]
 script = ExtResource("9_b4vxr")
 to = NodePath("../../EndedState")
 event = &"ended"
 delay_in_seconds = "0.0"
 
-[node name="ToIdleState" type="Node" parent="Level3/StateChart/CompoundState/GoState" index="6"]
+[node name="ToIdleState" type="Node" parent="Level3/StateChart/CompoundState/GoState"]
 script = ExtResource("9_b4vxr")
 to = NodePath("../../IdleState")
 event = &"idled"
 delay_in_seconds = "0.0"
 
-[node name="EndedState" type="Node" parent="Level3/StateChart/CompoundState" index="2"]
+[node name="EndedState" type="Node" parent="Level3/StateChart/CompoundState"]
 script = ExtResource("8_baikm")
 
-[node name="ToIdleState" type="Node" parent="Level3/StateChart/CompoundState/EndedState" index="0"]
+[node name="ToIdleState" type="Node" parent="Level3/StateChart/CompoundState/EndedState"]
 script = ExtResource("9_b4vxr")
 to = NodePath("../../IdleState")
 event = &"idled"
 delay_in_seconds = "0.0"
 
-[node name="LevelHUD" type="Control" parent="Level3" index="13"]
+[node name="LevelHUD" type="Control" parent="Level3"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 3
 anchors_preset = 15
@@ -354,7 +769,7 @@ offset_bottom = 1081.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Level3/LevelHUD" index="0"]
+[node name="PanelContainer" type="PanelContainer" parent="Level3/LevelHUD"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 1
 anchors_preset = 5
@@ -368,90 +783,88 @@ grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="Instructions" type="VBoxContainer" parent="Level3/LevelHUD/PanelContainer" index="0"]
+[node name="Instructions" type="VBoxContainer" parent="Level3/LevelHUD/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="1Instruction" type="HBoxContainer" parent="Level3/LevelHUD/PanelContainer/Instructions" index="0"]
+[node name="1Instruction" type="HBoxContainer" parent="Level3/LevelHUD/PanelContainer/Instructions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/1Instruction" index="0"]
+[node name="Label" type="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/1Instruction"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1..."
 
-[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/PanelContainer/Instructions/1Instruction" index="1"]
+[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/PanelContainer/Instructions/1Instruction"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("10_vh7pl")
 
-[node name="2Instruction" type="HBoxContainer" parent="Level3/LevelHUD/PanelContainer/Instructions" index="1"]
+[node name="2Instruction" type="HBoxContainer" parent="Level3/LevelHUD/PanelContainer/Instructions"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/2Instruction" index="0"]
+[node name="Label" type="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/2Instruction"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "2..."
 
-[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/PanelContainer/Instructions/2Instruction" index="1"]
+[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/PanelContainer/Instructions/2Instruction"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("10_vh7pl")
 
-[node name="3Instruction" type="HBoxContainer" parent="Level3/LevelHUD/PanelContainer/Instructions" index="2"]
+[node name="3Instruction" type="HBoxContainer" parent="Level3/LevelHUD/PanelContainer/Instructions"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/3Instruction" index="0"]
+[node name="Label" type="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/3Instruction"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "3..."
 
-[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/PanelContainer/Instructions/3Instruction" index="1"]
+[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/PanelContainer/Instructions/3Instruction"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("10_vh7pl")
 
-[node name="SoleilInstruction" type="HBoxContainer" parent="Level3/LevelHUD/PanelContainer/Instructions" index="3"]
+[node name="SoleilInstruction" type="HBoxContainer" parent="Level3/LevelHUD/PanelContainer/Instructions"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/SoleilInstruction" index="0"]
+[node name="Label" type="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/SoleilInstruction"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Soleil!
 "
 
-[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/PanelContainer/Instructions/SoleilInstruction" index="1"]
+[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/PanelContainer/Instructions/SoleilInstruction"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("11_yu1rw")
 
-[node name="CheckInstruction" type="HBoxContainer" parent="Level3/LevelHUD/PanelContainer/Instructions" index="4"]
+[node name="CheckInstruction" type="HBoxContainer" parent="Level3/LevelHUD/PanelContainer/Instructions"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="0"]
+[node name="Label" type="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/CheckInstruction"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Freeze!"
 
-[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="1"]
+[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/PanelContainer/Instructions/CheckInstruction"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("12_4ua1a")
 
-[node name="LevelCompleted" type="VBoxContainer" parent="Level3/LevelHUD" index="1"]
+[node name="LevelCompleted" type="VBoxContainer" parent="Level3/LevelHUD"]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -466,11 +879,11 @@ offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Level3/LevelHUD/LevelCompleted" index="0"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Level3/LevelHUD/LevelCompleted"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Level3/LevelHUD/LevelCompleted/HBoxContainer2" index="0"]
+[node name="Label" type="Label" parent="Level3/LevelHUD/LevelCompleted/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -480,21 +893,21 @@ label_settings = ExtResource("12_1nka1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/LevelCompleted/HBoxContainer2" index="1"]
+[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/LevelCompleted/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = ExtResource("13_dbxho")
 
-[node name="AnnounceCommands" type="Node" parent="Level3" index="14"]
+[node name="AnnounceCommands" type="Node" parent="Level3"]
 script = ExtResource("14_58v6t")
 
-[node name="TriggerEnterLevel" parent="Level3" index="15" instance=ExtResource("15_wsjvw")]
+[node name="TriggerEnterLevel" parent="Level3" instance=ExtResource("15_wsjvw")]
 position = Vector2(150, 990)
 
-[node name="StartingLineArea2D" type="Area2D" parent="Level3" index="16"]
+[node name="StartingLineArea2D" type="Area2D" parent="Level3"]
 position = Vector2(282, 943)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level3/StartingLineArea2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level3/StartingLineArea2D"]
 position = Vector2(44, -3)
 rotation = 3.14159
 scale = Vector2(4.61429, 2.53186)
@@ -502,72 +915,104 @@ shape = SubResource("RectangleShape2D_saorr")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="LollipopBaseBrown" type="Sprite2D" parent="Level3/StartingLineArea2D" index="1"]
+[node name="LollipopBaseBrown" type="Sprite2D" parent="Level3/StartingLineArea2D"]
 position = Vector2(-2, 34)
 texture = ExtResource("16_i4ik2")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="LollipopFruitGreen" type="Sprite2D" parent="Level3/StartingLineArea2D" index="2"]
+[node name="LollipopFruitGreen" type="Sprite2D" parent="Level3/StartingLineArea2D"]
 position = Vector2(-2, -37)
 texture = ExtResource("17_cpf7h")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="DetectStartingLineReached" type="Node" parent="Level3/StartingLineArea2D" index="3"]
+[node name="DetectStartingLineReached" type="Node" parent="Level3/StartingLineArea2D"]
 script = ExtResource("18_grqcs")
 
-[node name="FinishLineArea2D" type="Area2D" parent="Level3" index="17"]
+[node name="FinishLineArea2D" type="Area2D" parent="Level3"]
 position = Vector2(1570, 939)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level3/FinishLineArea2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level3/FinishLineArea2D"]
 position = Vector2(39, -3)
 scale = Vector2(-4.61429, -2.53186)
 shape = SubResource("RectangleShape2D_7xdvd")
 metadata/_edit_lock_ = true
 
-[node name="LollipopBaseBrown" type="Sprite2D" parent="Level3/FinishLineArea2D" index="1"]
+[node name="LollipopBaseBrown" type="Sprite2D" parent="Level3/FinishLineArea2D"]
 position = Vector2(-2, 34)
 texture = ExtResource("16_i4ik2")
 metadata/_edit_lock_ = true
 
-[node name="LollipopFruitGreen" type="Sprite2D" parent="Level3/FinishLineArea2D" index="2"]
+[node name="LollipopFruitGreen" type="Sprite2D" parent="Level3/FinishLineArea2D"]
 position = Vector2(-2, -37)
 texture = ExtResource("19_iltav")
 metadata/_edit_lock_ = true
 
-[node name="DetectFinishLineReached" type="Node" parent="Level3/FinishLineArea2D" index="3"]
+[node name="DetectFinishLineReached" type="Node" parent="Level3/FinishLineArea2D"]
 script = ExtResource("20_cs7gh")
 
-[node name="RightWall" parent="Level3" index="18" instance=ExtResource("21_4uqd7")]
+[node name="RightWall" parent="Level3" instance=ExtResource("21_4uqd7")]
 
-[node name="LeftWall" parent="Level3" index="19" instance=ExtResource("21_4uqd7")]
+[node name="LeftWall" parent="Level3" instance=ExtResource("21_4uqd7")]
 position = Vector2(35, 540)
 
-[node name="Floor" parent="Level3" index="20" instance=ExtResource("22_7cj8y")]
+[node name="Floor" parent="Level3" instance=ExtResource("22_7cj8y")]
 
-[node name="ExitLevelTrigger2D" parent="Level3" index="21" instance=ExtResource("15_wsjvw")]
+[node name="ExitLevelTrigger2D" parent="Level3" instance=ExtResource("15_wsjvw")]
 
-[node name="StartingPosition" type="Node2D" parent="Level3" index="22"]
+[node name="StartingPosition" type="Node2D" parent="Level3"]
 position = Vector2(189, 996)
 script = ExtResource("23_c3c3s")
 
-[node name="WinAudioStreamPlayer" type="AudioStreamPlayer" parent="Level3" index="23"]
+[node name="WinAudioStreamPlayer" type="AudioStreamPlayer" parent="Level3"]
 stream = ExtResource("24_q8aeq")
 volume_db = -3.239
 
-[node name="GameAudioStreamPlayer" type="AudioStreamPlayer" parent="Level3" index="24"]
+[node name="GameAudioStreamPlayer" type="AudioStreamPlayer" parent="Level3"]
 process_mode = 1
 stream = ExtResource("25_tlmyq")
 script = ExtResource("26_pi6j3")
 
-[node name="BindPlayerCheckState" type="Node" parent="Level3" index="25"]
+[node name="BindPlayerCheckState" type="Node" parent="Level3"]
 script = ExtResource("27_wv6do")
 
-[node name="PlantPurple" type="Sprite2D" parent="Level3" index="26"]
+[node name="SignExit" type="Sprite2D" parent="Level3"]
+position = Vector2(1820, 936)
+scale = Vector2(2, 2)
+texture = ExtResource("73_upjhe")
+
+[node name="PlantPurple" type="Sprite2D" parent="Level3"]
 position = Vector2(1820, 974)
 texture = ExtResource("8_oxhmv")
 
+[node name="GameController" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("70_magbt")
+
+[node name="BgAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("71_q7muf")
+volume_db = -13.0
+autoplay = true
+
+[connection signal="button_up" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" method="release_focus"]
+[connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/MenuButton" to="HUD/MenuPanelContainer" method="_on_menu_button_pressed"]
+[connection signal="button_up" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" method="release_focus"]
+[connection signal="pressed" from="HUD/MarginContainer/VBox/HBoxContainer/RestartLevelButton" to="GameController" method="reset_current_level"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/Resume" to="HUD/MenuPanelContainer" method="resume"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/ExitToMainScreenButton" to="HUD/MenuPanelContainer" method="_on_exit_to_main_screen_button_pressed"]
+[connection signal="pressed" from="HUD/MenuPanelContainer/VBoxContainer/QuitButton" to="HUD/MenuPanelContainer" method="_on_quit_button_pressed"]
+[connection signal="jumping" from="Player" to="Player/JumpAudioStreamPlayer2D" method="play"]
+[connection signal="player_has_moved" from="Player/CheckPlayerMovement" to="Player/MoveCharacterBack" method="_on_check_player_movement_player_has_moved"]
+[connection signal="end_move_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_end_move_back"]
+[connection signal="player_is_moved_back" from="Player/MoveCharacterBack" to="Player/HandleStateChart" method="_on_move_character_back_player_is_moved_back"]
+[connection signal="state_entered" from="Player/StateChart/ParallelState/CompoundState/Walk" to="Player/WalkAudioStreamPlayer2D" method="play"]
+[connection signal="state_exited" from="Player/StateChart/ParallelState/CompoundState/Walk" to="Player/WalkAudioStreamPlayer2D" method="stop"]
+[connection signal="state_physics_processing" from="Player/StateChart/ParallelState/CompoundState/Walk" to="Player/HandleCharacterOrientation" method="_on_walk_state_physics_processing"]
+[connection signal="state_entered" from="Player/StateChart/ParallelState/CompoundState/ShovedBack" to="Player/HitAudioStreamPlayer2D2" method="play"]
+[connection signal="state_physics_processing" from="Player/StateChart/ParallelState/CompoundState/Jump" to="Player/HandleCharacterOrientation" method="_on_jump_state_physics_processing"]
+[connection signal="state_physics_processing" from="Player/StateChart/ParallelState/PlayerControlState/InControlState" to="Player" method="_on_in_control_state_state_physics_processing"]
+[connection signal="state_physics_processing" from="Player/StateChart/ParallelState/PlayerControlState/NotInControlState" to="Player/MovePlayerToNextLevel" method="_on_not_in_control_state_state_physics_processing"]
 [connection signal="level_entered" from="Level3" to="Level3/Punisher" method="_on_level_entered"]
 [connection signal="level_entered" from="Level3" to="Level3/LeftWall" method="turn_off"]
 [connection signal="level_entered" from="Level3" to="Level3/BindPlayerCheckState" method="_on_level_entered"]
@@ -615,6 +1060,8 @@ texture = ExtResource("8_oxhmv")
 [connection signal="body_entered" from="Level3/FinishLineArea2D" to="Level3/FinishLineArea2D/DetectFinishLineReached" method="_on_finish_line_area_2d_body_entered"]
 [connection signal="finished_line_reached" from="Level3/FinishLineArea2D/DetectFinishLineReached" to="Level3/AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
 [connection signal="target_group_entered" from="Level3/ExitLevelTrigger2D" to="GameController" method="load_snow_world"]
+[connection signal="move_to_next_level" from="GameController" to="Camera2D" method="_on_game_controller_move_to_next_level"]
+[connection signal="move_to_next_level" from="GameController" to="Player/MovePlayerToNextLevel" method="do"]
 
 [editable path="Level1"]
 [editable path="Level2"]

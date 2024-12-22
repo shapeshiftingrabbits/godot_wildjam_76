@@ -15,4 +15,9 @@ func do():
 
 
 func _on_trigger_2d_target_group_entered() -> void:
-	current_node.unfreeze()
+	if current_node && is_instance_valid(current_node):
+		current_node.unfreeze()
+	else:
+		current_node = null
+
+	

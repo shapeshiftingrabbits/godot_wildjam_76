@@ -39,4 +39,5 @@ func reset_current_level() -> void:
 
 
 func load_snow_world():
+	await get_tree().create_timer(1.0).timeout
 	get_tree().change_scene_to_file("res://scenes/snow_world.tscn")
