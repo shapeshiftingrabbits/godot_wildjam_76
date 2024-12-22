@@ -143,6 +143,30 @@ size = Vector2(20, 60)
 [node name="StateChartDebugger" parent="HUD/MarginContainer/VBox" index="1"]
 enabled = false
 
+[node name="Cloud10" type="Sprite2D" parent="Level1" index="0"]
+position = Vector2(478, 669.5)
+texture = ExtResource("4_m5q0d")
+
+[node name="Cloud11" type="Sprite2D" parent="Level1" index="1"]
+position = Vector2(1453, 552.5)
+texture = ExtResource("5_g8esh")
+
+[node name="Cloud12" type="Sprite2D" parent="Level1" index="2"]
+position = Vector2(1120, 743)
+texture = ExtResource("6_7d6tb")
+
+[node name="TinyShroomBrown" type="Sprite2D" parent="Level1" index="3"]
+position = Vector2(1565, 975)
+texture = ExtResource("13_lr3as")
+
+[node name="Bush" type="Sprite2D" parent="Level1" index="4"]
+position = Vector2(748, 974)
+texture = ExtResource("3_mkp0v")
+
+[node name="PlantPurple" type="Sprite2D" parent="Level1" index="6"]
+position = Vector2(1478, 974)
+texture = ExtResource("8_oxhmv")
+
 [node name="Cloud4" type="Sprite2D" parent="Level2" index="0"]
 position = Vector2(504, 666.5)
 texture = ExtResource("4_m5q0d")
@@ -592,4 +616,5 @@ texture = ExtResource("8_oxhmv")
 [connection signal="finished_line_reached" from="Level3/FinishLineArea2D/DetectFinishLineReached" to="Level3/AnnounceCommands" method="_on_detect_finish_line_reached_finished_line_reached"]
 [connection signal="target_group_entered" from="Level3/ExitLevelTrigger2D" to="GameController" method="load_snow_world"]
 
+[editable path="Level1"]
 [editable path="Level2"]
