@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cvpnwunomn7ab"]
+[gd_scene load_steps=37 format=3 uid="uid://cvpnwunomn7ab"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_emc6c"]
 [ext_resource type="Texture2D" uid="uid://dgpy8sey60xjr" path="res://textures/character_femaleAdventurer_sheetHD.png" id="2_qktxg"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://biqwgtxxx2ee5" path="res://textures/flagYellow.png" id="8_ey3b7"]
 [ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="9_v5y0r"]
 [ext_resource type="Texture2D" uid="uid://bp0suvr8wupj8" path="res://textures/star.png" id="10_6wwc8"]
+[ext_resource type="LabelSettings" uid="uid://dxmn2mb0ej3id" path="res://label_settings.tres" id="11_5i8tb"]
 [ext_resource type="Script" path="res://scripts/announce_commands.gd" id="11_6c0ij"]
 [ext_resource type="PackedScene" uid="uid://p2et6u5v7uqr" path="res://prefabs/trigger_2d.tscn" id="12_2uwtg"]
 [ext_resource type="Texture2D" uid="uid://cd053hfja0sbd" path="res://textures/lollipopBaseBrown.png" id="13_0vmyl"]
@@ -321,7 +322,6 @@ size_flags_horizontal = 8
 texture = ExtResource("9_v5y0r")
 
 [node name="LevelCompleted" type="VBoxContainer" parent="LevelHUD"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -337,16 +337,20 @@ grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="LevelHUD/LevelCompleted"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="LevelHUD/LevelCompleted/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+size_flags_horizontal = 3
+size_flags_vertical = 1
 text = "Level Completed !"
+label_settings = ExtResource("11_5i8tb")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="LevelHUD/LevelCompleted/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
 texture = ExtResource("10_6wwc8")
 
 [node name="AnnounceCommands" type="Node" parent="."]

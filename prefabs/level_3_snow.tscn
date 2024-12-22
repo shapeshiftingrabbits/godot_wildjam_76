@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://4xrlcemn4wmf"]
+[gd_scene load_steps=49 format=3 uid="uid://4xrlcemn4wmf"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_mmqnj"]
 [ext_resource type="PackedScene" uid="uid://dy6rfphsyvehp" path="res://prefabs/punisher.tscn" id="2_kkl4b"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://biqwgtxxx2ee5" path="res://textures/flagYellow.png" id="9_o7heh"]
 [ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="10_6fmdw"]
 [ext_resource type="Texture2D" uid="uid://bp0suvr8wupj8" path="res://textures/star.png" id="11_0nqdi"]
+[ext_resource type="LabelSettings" uid="uid://dxmn2mb0ej3id" path="res://label_settings.tres" id="11_jajku"]
 [ext_resource type="Script" path="res://scripts/announce_commands.gd" id="12_vletw"]
 [ext_resource type="PackedScene" uid="uid://p2et6u5v7uqr" path="res://prefabs/trigger_2d.tscn" id="13_t6jor"]
 [ext_resource type="Texture2D" uid="uid://ca4mhp54dh5ts" path="res://textures/caneRed.png" id="14_ag3c8"]
@@ -34,39 +35,39 @@
 [ext_resource type="PackedScene" uid="uid://pyvemhdel8lv" path="res://prefabs/ice_zone_trigger_2d.tscn" id="28_somww"]
 [ext_resource type="Texture2D" uid="uid://bal7nwxcf3h86" path="res://textures/spikeTop.png" id="31_1a7ga"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0phsj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_82c46"]
 atlas = ExtResource("3_t1x8v")
 region = Rect2(0, 256, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h00rt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_frvc6"]
 atlas = ExtResource("3_t1x8v")
 region = Rect2(960, 0, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6rwg1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt425"]
 atlas = ExtResource("3_t1x8v")
 region = Rect2(1152, 0, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yjvmt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcper"]
 atlas = ExtResource("3_t1x8v")
 region = Rect2(576, 0, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fe2oc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_skxex"]
 atlas = ExtResource("3_t1x8v")
 region = Rect2(0, 0, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xs82v"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioa0n"]
 atlas = ExtResource("3_t1x8v")
 region = Rect2(1536, 0, 192, 256)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n1fkq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x21y7"]
 atlas = ExtResource("3_t1x8v")
 region = Rect2(1536, 0, 192, 256)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_puma4"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_uhdmb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0phsj")
+"texture": SubResource("AtlasTexture_82c46")
 }],
 "loop": true,
 "name": &"1",
@@ -74,7 +75,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h00rt")
+"texture": SubResource("AtlasTexture_frvc6")
 }],
 "loop": true,
 "name": &"2",
@@ -82,7 +83,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6rwg1")
+"texture": SubResource("AtlasTexture_tt425")
 }],
 "loop": true,
 "name": &"3",
@@ -90,7 +91,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yjvmt")
+"texture": SubResource("AtlasTexture_wcper")
 }],
 "loop": true,
 "name": &"check",
@@ -98,7 +99,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fe2oc")
+"texture": SubResource("AtlasTexture_skxex")
 }],
 "loop": true,
 "name": &"idle",
@@ -106,7 +107,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xs82v")
+"texture": SubResource("AtlasTexture_ioa0n")
 }],
 "loop": true,
 "name": &"jump",
@@ -114,17 +115,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n1fkq")
+"texture": SubResource("AtlasTexture_x21y7")
 }],
 "loop": true,
 "name": &"soleil",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_saorr"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1ybg"]
 size = Vector2(18.8854, 60)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xdvd"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vykc"]
 size = Vector2(20, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dviuj"]
@@ -149,7 +150,7 @@ position = Vector2(73, 1082)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1763, 946)
 scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_puma4")
+sprite_frames = SubResource("SpriteFrames_uhdmb")
 animation = &"check"
 
 [node name="StateChart" type="Node" parent="."]
@@ -358,18 +359,23 @@ offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="LevelHUD/LevelCompleted"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="LevelHUD/LevelCompleted"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="LevelHUD/LevelCompleted/HBoxContainer"]
+[node name="Label" type="Label" parent="LevelHUD/LevelCompleted/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 64
 text = "Level Completed !"
+label_settings = ExtResource("11_jajku")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="LevelHUD/LevelCompleted/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="LevelHUD/LevelCompleted/HBoxContainer2"]
 layout_mode = 2
+size_flags_horizontal = 8
 texture = ExtResource("11_0nqdi")
 
 [node name="AnnounceCommands" type="Node" parent="."]
@@ -388,7 +394,7 @@ position = Vector2(282, 943)
 position = Vector2(44, -3)
 rotation = 3.14159
 scale = Vector2(4.61429, 2.53186)
-shape = SubResource("RectangleShape2D_saorr")
+shape = SubResource("RectangleShape2D_m1ybg")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -413,7 +419,7 @@ position = Vector2(1570, 939)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLineArea2D"]
 position = Vector2(39, -3)
 scale = Vector2(-4.61429, -2.53186)
-shape = SubResource("RectangleShape2D_7xdvd")
+shape = SubResource("RectangleShape2D_3vykc")
 metadata/_edit_lock_ = true
 
 [node name="LollipopBaseBrown" type="Sprite2D" parent="FinishLineArea2D"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dgda0gpbolspv"]
+[gd_scene load_steps=53 format=3 uid="uid://dgda0gpbolspv"]
 
 [ext_resource type="PackedScene" uid="uid://bq3882tkp8hwx" path="res://scenes/prototype.tscn" id="1_r7qus"]
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="2_c6q71"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bfhqg7srheg2a" path="res://textures/tallShroom_red.png" id="10_yy02j"]
 [ext_resource type="Texture2D" uid="uid://bko1qx1xw6d3h" path="res://textures/tallShroom_tan.png" id="11_1qji1"]
 [ext_resource type="Texture2D" uid="uid://biqwgtxxx2ee5" path="res://textures/flagYellow.png" id="11_yu1rw"]
+[ext_resource type="LabelSettings" uid="uid://dxmn2mb0ej3id" path="res://label_settings.tres" id="12_1nka1"]
 [ext_resource type="Texture2D" uid="uid://c7ww3a6n54whc" path="res://textures/flagRed.png" id="12_4ua1a"]
 [ext_resource type="Texture2D" uid="uid://cbv73rb0lqn6j" path="res://textures/tallShroom_brown.png" id="12_hn464"]
 [ext_resource type="Texture2D" uid="uid://bp0suvr8wupj8" path="res://textures/star.png" id="13_dbxho"]
@@ -180,6 +181,12 @@ texture = ExtResource("15_ni0c7")
 
 [node name="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="0"]
 text = "Freeze!"
+
+[node name="LevelCompleted" parent="Level2/LevelHUD" index="1"]
+visible = false
+
+[node name="Label" parent="Level2/LevelHUD/LevelCompleted/HBoxContainer" index="0"]
+theme_override_font_sizes/font_size = 64
 
 [node name="Level3" type="Node2D" parent="." index="6"]
 position = Vector2(3840, 0)
@@ -435,18 +442,23 @@ offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Level3/LevelHUD/LevelCompleted" index="0"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Level3/LevelHUD/LevelCompleted" index="0"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="Level3/LevelHUD/LevelCompleted/HBoxContainer" index="0"]
+[node name="Label" type="Label" parent="Level3/LevelHUD/LevelCompleted/HBoxContainer2" index="0"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 64
 text = "Level Completed !"
+label_settings = ExtResource("12_1nka1")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/LevelCompleted/HBoxContainer" index="1"]
+[node name="TextureRect" type="TextureRect" parent="Level3/LevelHUD/LevelCompleted/HBoxContainer2" index="1"]
 layout_mode = 2
+size_flags_horizontal = 8
 texture = ExtResource("13_dbxho")
 
 [node name="AnnounceCommands" type="Node" parent="Level3" index="14"]
