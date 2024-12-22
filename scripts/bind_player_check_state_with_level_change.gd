@@ -6,7 +6,7 @@ class_name BindPlayerCheckState
 
 var check_player_movement: CheckPlayerMovement
 
-func _ready() -> void:
+func _ready() -> void: 
 	var player = get_tree().get_nodes_in_group(&"player").front()
 	check_player_movement = player.find_child("CheckPlayerMovement")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://ccbnm76xut6pw"]
+[gd_scene load_steps=83 format=3 uid="uid://ccbnm76xut6pw"]
 
 [ext_resource type="PackedScene" uid="uid://bgg8k4ggocfnh" path="res://prefabs/bg.tscn" id="1_ljhea"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_rgxb2"]
@@ -56,6 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://bal7nwxcf3h86" path="res://textures/spikeTop.png" id="49_2bea3"]
 [ext_resource type="AudioStream" uid="uid://khkpkakhgenh" path="res://audio/Children_Game_Music/WAV/SFX_Complete.wav" id="50_l28s2"]
 [ext_resource type="AudioStream" uid="uid://b76m01fh00qfl" path="res://audio/prompts/prompt_1.ogg" id="51_7uvmw"]
+[ext_resource type="Texture2D" uid="uid://c6k4so6c8s88s" path="res://textures/houseBeigeAlt.png" id="51_535bb"]
 [ext_resource type="Script" path="res://scripts/audio_player.gd" id="52_688ue"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0phsj"]
@@ -757,18 +758,6 @@ texture = ExtResource("7_axioq")
 position = Vector2(1315, 480.5)
 texture = ExtResource("8_1c46p")
 
-[node name="AwningGreenRed" type="Sprite2D" parent="Level3"]
-position = Vector2(1271, 623)
-texture = ExtResource("27_nt8wh")
-
-[node name="AwningGreenRed2" type="Sprite2D" parent="Level3"]
-position = Vector2(1203, 623)
-texture = ExtResource("27_nt8wh")
-
-[node name="AwningGreenRed3" type="Sprite2D" parent="Level3"]
-position = Vector2(1134, 623)
-texture = ExtResource("27_nt8wh")
-
 [node name="Rock2" type="Sprite2D" parent="Level3"]
 position = Vector2(107, 975)
 texture = ExtResource("13_a33ec")
@@ -1120,6 +1109,25 @@ disabled = true
 position = Vector2(189, 996)
 script = ExtResource("45_pjle8")
 
+[node name="HouseBeigeAlt" type="Sprite2D" parent="Level3"]
+texture_repeat = 2
+position = Vector2(1205, 842)
+texture = ExtResource("51_535bb")
+region_enabled = true
+region_rect = Rect2(0, 0, 220, 500)
+
+[node name="AwningGreenRed" type="Sprite2D" parent="Level3"]
+position = Vector2(1271, 623)
+texture = ExtResource("27_nt8wh")
+
+[node name="AwningGreenRed2" type="Sprite2D" parent="Level3"]
+position = Vector2(1203, 623)
+texture = ExtResource("27_nt8wh")
+
+[node name="AwningGreenRed3" type="Sprite2D" parent="Level3"]
+position = Vector2(1134, 623)
+texture = ExtResource("27_nt8wh")
+
 [node name="SpikeGroup" type="Node2D" parent="Level3"]
 position = Vector2(1723, 999)
 
@@ -1267,6 +1275,7 @@ autoplay = true
 [connection signal="reset" from="Level3" to="Level3/LevelHUD/LevelCompleted" method="hide"]
 [connection signal="reset" from="Level3" to="Level3/AnnounceCommands" method="reset_game"]
 [connection signal="reset" from="Level3" to="Level3/StartingPosition" method="do"]
+[connection signal="reset" from="Level3" to="Level3/SpikeGroup/SpikeRigidBody2D" method="reset"]
 [connection signal="reset" from="Level3" to="Level3/CPUParticles2D" method="set_emitting" binds= [false]]
 [connection signal="state_entered" from="Level3/StateChart/CompoundState/IdleState" to="Level3/LevelHUD/PanelContainer" method="hide"]
 [connection signal="state_entered" from="Level3/StateChart/CompoundState/IdleState" to="Level3/LevelHUD/PanelContainer/Instructions/1Instruction" method="hide"]
