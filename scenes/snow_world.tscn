@@ -1,11 +1,24 @@
-[gd_scene load_steps=18 format=3 uid="uid://ccbnm76xut6pw"]
+[gd_scene load_steps=31 format=3 uid="uid://ccbnm76xut6pw"]
 
+[ext_resource type="PackedScene" uid="uid://bgg8k4ggocfnh" path="res://prefabs/bg.tscn" id="1_ljhea"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_rgxb2"]
 [ext_resource type="Script" path="res://scripts/menu_controller.gd" id="2_pdeji"]
 [ext_resource type="PackedScene" uid="uid://bce2mls8dw31g" path="res://prefabs/level_1_snow.tscn" id="2_wjndn"]
 [ext_resource type="Script" path="res://scripts/camera_panning.gd" id="3_87lte"]
 [ext_resource type="PackedScene" uid="uid://cnjfaqxwgwsat" path="res://prefabs/player.tscn" id="4_3oesl"]
+[ext_resource type="Texture2D" uid="uid://ccaibyk4jvqoy" path="res://textures/cloud1.png" id="6_6tqkr"]
+[ext_resource type="Texture2D" uid="uid://dwxlrwiyko577" path="res://textures/cloud2.png" id="7_axioq"]
+[ext_resource type="Texture2D" uid="uid://duu6cclnhjmm6" path="res://textures/cloud3.png" id="8_1c46p"]
+[ext_resource type="Texture2D" uid="uid://ck04mbbc5paj" path="res://textures/plant.png" id="10_268e5"]
+[ext_resource type="Texture2D" uid="uid://lf7ms54wvvd8" path="res://textures/plantAlt.png" id="11_v5c4f"]
+[ext_resource type="Texture2D" uid="uid://bqxxffl85igfh" path="res://textures/plantPurple.png" id="12_rokvk"]
+[ext_resource type="Texture2D" uid="uid://d0emw17eg7xn2" path="res://textures/rock.png" id="13_a33ec"]
+[ext_resource type="Texture2D" uid="uid://brp7ef08d5l3o" path="res://textures/rockAlt.png" id="14_1rrqu"]
+[ext_resource type="Texture2D" uid="uid://we8hum3k0jqr" path="res://textures/snowBallBigGround.png" id="15_6m7oc"]
+[ext_resource type="Texture2D" uid="uid://d13acmih5ptdr" path="res://textures/pineSaplingAlt.png" id="16_8e0s8"]
 [ext_resource type="Script" path="res://scripts/bind_player_movement_with_level_entering.gd" id="16_ed3n1"]
+[ext_resource type="Texture2D" uid="uid://be1r3dwvcom6e" path="res://textures/pineSapling.png" id="17_fe336"]
+[ext_resource type="Texture2D" uid="uid://kp1fexai0xo" path="res://textures/awningGreenRed.png" id="27_nt8wh"]
 [ext_resource type="PackedScene" uid="uid://cvpnwunomn7ab" path="res://prefabs/level_2.tscn" id="32_ihpeh"]
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="33_fvviu"]
 [ext_resource type="AudioStream" uid="uid://cvyls5vue40r" path="res://audio/Children_Game_Music/WAV/Song_Exploration_01_Loop.wav" id="34_j351h"]
@@ -19,6 +32,8 @@
 [ext_resource type="PackedScene" uid="uid://4xrlcemn4wmf" path="res://prefabs/level_3_snow.tscn" id="42_c4ask"]
 
 [node name="GameRoot" type="Node2D"]
+
+[node name="Bg" parent="." instance=ExtResource("1_ljhea")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -107,9 +122,76 @@ script = ExtResource("3_87lte")
 
 [node name="Player" parent="." instance=ExtResource("4_3oesl")]
 
+[node name="CharacterSprite" parent="Player" index="2"]
+z_index = 1
+
 [node name="Level1" parent="." instance=ExtResource("2_wjndn")]
 
+[node name="Cloud1" type="Sprite2D" parent="Level1"]
+position = Vector2(564, 238)
+texture = ExtResource("6_6tqkr")
+
+[node name="Cloud2" type="Sprite2D" parent="Level1"]
+position = Vector2(694, 638)
+texture = ExtResource("7_axioq")
+
+[node name="Cloud3" type="Sprite2D" parent="Level1"]
+position = Vector2(1330, 512)
+texture = ExtResource("8_1c46p")
+
+[node name="Plant" type="Sprite2D" parent="Level1"]
+position = Vector2(479, 973)
+texture = ExtResource("10_268e5")
+
+[node name="PlantAlt" type="Sprite2D" parent="Level1"]
+position = Vector2(513, 978)
+texture = ExtResource("11_v5c4f")
+
+[node name="PlantPurple" type="Sprite2D" parent="Level1"]
+position = Vector2(1749, 975)
+texture = ExtResource("12_rokvk")
+
+[node name="Rock" type="Sprite2D" parent="Level1"]
+position = Vector2(436, 973)
+texture = ExtResource("13_a33ec")
+
+[node name="RockAlt" type="Sprite2D" parent="Level1"]
+position = Vector2(1345, 976)
+texture = ExtResource("14_1rrqu")
+
+[node name="SnowBallBigGround" type="Sprite2D" parent="Level1"]
+position = Vector2(1619, 974)
+texture = ExtResource("15_6m7oc")
+
+[node name="PineSaplingAlt" type="Sprite2D" parent="Level1"]
+position = Vector2(1380, 977)
+texture = ExtResource("16_8e0s8")
+
+[node name="PineSapling" type="Sprite2D" parent="Level1"]
+position = Vector2(1423, 974)
+texture = ExtResource("17_fe336")
+
 [node name="Level2" parent="." instance=ExtResource("32_ihpeh")]
+
+[node name="Cloud4" type="Sprite2D" parent="Level2"]
+position = Vector2(409, 539)
+texture = ExtResource("6_6tqkr")
+
+[node name="Cloud5" type="Sprite2D" parent="Level2"]
+position = Vector2(696, 688)
+texture = ExtResource("7_axioq")
+
+[node name="Cloud6" type="Sprite2D" parent="Level2"]
+position = Vector2(1287, 561.5)
+texture = ExtResource("8_1c46p")
+
+[node name="Rock" type="Sprite2D" parent="Level2"]
+position = Vector2(192, 975)
+texture = ExtResource("13_a33ec")
+
+[node name="RockAlt" type="Sprite2D" parent="Level2"]
+position = Vector2(1589, 974)
+texture = ExtResource("14_1rrqu")
 
 [node name="Label" parent="Level2/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="0"]
 text = "Freeze!"
@@ -141,10 +223,42 @@ texture = ExtResource("36_5tuxo")
 
 [node name="Level3" parent="." instance=ExtResource("42_c4ask")]
 
+[node name="Cloud7" type="Sprite2D" parent="Level3"]
+position = Vector2(549, 206.5)
+texture = ExtResource("6_6tqkr")
+
+[node name="Cloud8" type="Sprite2D" parent="Level3"]
+position = Vector2(679, 606.5)
+texture = ExtResource("7_axioq")
+
+[node name="Cloud9" type="Sprite2D" parent="Level3"]
+position = Vector2(1315, 480.5)
+texture = ExtResource("8_1c46p")
+
+[node name="AwningGreenRed" type="Sprite2D" parent="Level3"]
+position = Vector2(1271, 623)
+texture = ExtResource("27_nt8wh")
+
+[node name="AwningGreenRed2" type="Sprite2D" parent="Level3"]
+position = Vector2(1203, 623)
+texture = ExtResource("27_nt8wh")
+
+[node name="AwningGreenRed3" type="Sprite2D" parent="Level3"]
+position = Vector2(1134, 623)
+texture = ExtResource("27_nt8wh")
+
+[node name="Rock2" type="Sprite2D" parent="Level3"]
+position = Vector2(107, 975)
+texture = ExtResource("13_a33ec")
+
+[node name="RockAlt2" type="Sprite2D" parent="Level3"]
+position = Vector2(1803, 976)
+texture = ExtResource("14_1rrqu")
+
 [node name="Label" parent="Level3/LevelHUD/PanelContainer/Instructions/CheckInstruction" index="0"]
 text = "Freeze!"
 
-[node name="ExitLevelTrigger2D" parent="Level3" index="13"]
+[node name="ExitLevelTrigger2D" parent="Level3" index="21"]
 disabled = true
 
 [node name="GameController" type="Node" parent="."]
